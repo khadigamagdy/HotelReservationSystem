@@ -6,24 +6,20 @@ namespace HotelReservationSystem.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string FullName { get; set; }
+        public int UserId { get; set; }
+
+        public User User { get; set; } = null!;
 
         [Required]
         [MaxLength(50)]
-        public string NationalIdOrPassport { get; set; }
-
-        [EmailAddress]
-        [MaxLength(100)]
-        public string? Email { get; set; }
+        public string NationalIdOrPassport { get; set; } = string.Empty;
 
         [Required]
         [Phone]
         [MaxLength(20)]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
 
-        public List<Reservation> Reservations { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
             = new List<Reservation>();
     }
 }

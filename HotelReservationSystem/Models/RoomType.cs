@@ -9,7 +9,7 @@ namespace HotelReservationSystem.Models
 
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal BasePricePerNight { get; set; }
@@ -20,6 +20,7 @@ namespace HotelReservationSystem.Models
         [MaxLength(500)]
         public string? Description { get; set; }
 
-        public List<Room> Rooms { get; set; } = new List<Room>();
+        public ICollection<Room> Rooms { get; set; }
+            = new List<Room>();
     }
 }
