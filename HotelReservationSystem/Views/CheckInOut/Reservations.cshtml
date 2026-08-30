@@ -1,0 +1,227 @@
+﻿@using HotelReservationSystem.Models
+
+@{
+    ViewData["Title"] = "Check-In / Check-Out";
+
+    var checkInReservations =
+        ViewBag.CheckInReservations as IEnumerable<Reservation>
+        ?? Enumerable.Empty<Reservation>();
+
+    var checkOutReservations =
+        ViewBag.CheckOutReservations as IEnumerable<Reservation>
+        ?? Enumerable.Empty<Reservation>();
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Check-In / Check-Out</h2>
+            <p class="text-muted">
+                Manage guest arrivals and departures.
+            </p>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <!-- ========================= -->
+    <!-- Check-In Reservations -->
+    <!-- ========================= -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <h4 class="mb-0">Reservations Ready for Check-In</h4>
+        </div>
+
+        <div class="card-body">
+
+            @if (!checkInReservations.Any())
+            {
+                <div class="alert alert-info mb-0">
+                    There are no reservations ready for check-in.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Reservation</th>
+                                <th>Guest</th>
+                                <th>Room</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Total Price</th>
+                                <th>Payment Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var reservation in checkInReservations)
+                            {
+                                <tr>
+
+                                    <td>
+                                        #@reservation.Id
+                                    </td>
+
+                                    <td>
+                                        @reservation.Guest?.User?.FullName
+                                    </td>
+
+                                    <td>
+                                        @reservation.Room?.RoomNumber
+                                    </td>
+
+                                    <td>
+                                        @reservation.CheckInDate.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @reservation.CheckOutDate.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @reservation.TotalPrice.ToString("N2") EGP
+                                    </td>
+
+                                    <td>
+                                        @reservation.PaymentStatus
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="CheckInOut"
+                                           asp-action="CheckIn"
+                                           asp-route-id="@reservation.Id"
+                                           class="btn btn-success btn-sm">
+                                            Check In
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Check-Out Reservations -->
+    <!-- ========================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+            <h4 class="mb-0">Reservations Ready for Check-Out</h4>
+        </div>
+
+        <div class="card-body">
+
+            @if (!checkOutReservations.Any())
+            {
+                <div class="alert alert-info mb-0">
+                    There are no guests ready for check-out.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Reservation</th>
+                                <th>Guest</th>
+                                <th>Room</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Total Price</th>
+                                <th>Payment Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var reservation in checkOutReservations)
+                            {
+                                <tr>
+
+                                    <td>
+                                        #@reservation.Id
+                                    </td>
+
+                                    <td>
+                                        @reservation.Guest?.User?.FullName
+                                    </td>
+
+                                    <td>
+                                        @reservation.Room?.RoomNumber
+                                    </td>
+
+                                    <td>
+                                        @reservation.CheckInDate.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @reservation.CheckOutDate.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @reservation.TotalPrice.ToString("N2") EGP
+                                    </td>
+
+                                    <td>
+                                        @reservation.PaymentStatus
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="CheckInOut"
+                                           asp-action="CheckOut"
+                                           asp-route-id="@reservation.Id"
+                                           class="btn btn-primary btn-sm">
+                                            Check Out
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

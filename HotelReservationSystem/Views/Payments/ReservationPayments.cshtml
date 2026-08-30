@@ -1,0 +1,125 @@
+﻿
+@model IEnumerable<HotelReservationSystem.Models.Payment>
+
+@{
+    ViewData["Title"] = "Reservation Payments";
+
+    var reservationId = ViewBag.ReservationId;
+    var totalPaid = ViewBag.TotalPaid ?? 0;
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Reservation Payments</h2>
+            <p class="text-muted mb-0">
+                Reservation #@reservationId
+            </p>
+        </div>
+
+        <a asp-controller="Payments"
+           asp-action="Create"
+           asp-route-reservationId="@reservationId"
+           class="btn btn-primary">
+            Add Payment
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h5>Total Paid</h5>
+                    <h3>@totalPaid EGP</h3>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Number of Payments</h5>
+                    <h3>@Model.Count()</h3>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    No payments have been recorded for this reservation yet.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Paid At</th>
+                                <th>Recorded By</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var payment in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        #@payment.Id
+                                    </td>
+
+                                    <td>
+                                        @payment.Amount EGP
+                                    </td>
+
+                                    <td>
+                                        @payment.Method
+                                    </td>
+
+                                    <td>
+                                        @payment.PaidAt.ToLocalTime()
+                                    </td>
+
+                                    <td>
+                                        @(payment.RecordedByUser?.FullName ?? "System")
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="Payments"
+                                           asp-action="PaymentDetails"
+                                           asp-route-id="@payment.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Details
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

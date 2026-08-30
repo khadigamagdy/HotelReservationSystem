@@ -20,49 +20,81 @@ build_property.TargetFrameworkVersion = v10.0
 build_property.EntryPointFilePath = 
 build_property.RootNamespace = HotelReservationSystem
 build_property.RootNamespace = HotelReservationSystem
-build_property.ProjectDir = C:\Users\ghopa\source\repos\HotelReservationSystem-master\HotelReservationSystem\
+build_property.ProjectDir = D:\c#\ITI\FinalProject\HotelReservationSystem\HotelReservationSystem\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ghopa\source\repos\HotelReservationSystem-master\HotelReservationSystem
+build_property.MSBuildProjectDirectory = D:\c#\ITI\FinalProject\HotelReservationSystem\HotelReservationSystem
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Account/Login.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Account/Register.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Home/Index.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/CheckInOut/CheckIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJbk91dFxDaGVja0luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/CheckInOut/CheckOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJbk91dFxDaGVja091dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/CheckInOut/CheckoutConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJbk91dFxDaGVja291dENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/CheckInOut/Reservations.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJbk91dFxSZXNlcnZhdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Home/Privacy.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Shared/Error.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Payments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Payments/PaymentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudHNcUGF5bWVudERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Payments/ReservationPayments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudHNcUmVzZXJ2YXRpb25QYXltZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/_ViewImports.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/_ViewStart.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ghopa/source/repos/HotelReservationSystem-master/HotelReservationSystem/Views/Shared/_Layout.cshtml]
+[D:/c\#/ITI/FinalProject/HotelReservationSystem/HotelReservationSystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-q613whmmv3
