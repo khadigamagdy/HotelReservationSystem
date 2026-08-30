@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HotelReservationSystem.Models.Entities.Room>
+
+<h1>Rooms</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Add Room
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room</th>
+            <th>Floor</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Amenities</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.RoomNumber</td>
+
+                <td>@room.FloorNumber</td>
+
+                <td>@room.RoomType.Name</td>
+
+                <td>
+                    @room.RoomType.BasePricePerNight EGP
+                </td>
+
+                <td>@room.Status</td>
+
+                <td>
+                    @foreach (var ra in room.RoomAmenities)
+                    {
+                        <span>@ra.Amenity.Name</span>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@room.Id">
+                        Details
+                    </a>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@room.Id">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@room.Id">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

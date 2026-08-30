@@ -1,0 +1,78 @@
+﻿@model HotelReservationSystem.Models.ViewModels.RoomCreateViewModel
+
+<h1>Create Room</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="RoomNumber"></label>
+
+        <input asp-for="RoomNumber"
+               class="form-control" />
+
+        <span asp-validation-for="RoomNumber"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FloorNumber"></label>
+
+        <input asp-for="FloorNumber"
+               class="form-control"
+               type="number" />
+    </div>
+
+    <div class="mb-3">
+        <label>Room Type</label>
+
+        <select asp-for="RoomTypeId"
+                class="form-control">
+
+            <option value="">
+                -- Select Room Type --
+            </option>
+
+            @foreach (var type in Model.RoomTypes)
+            {
+                <option value="@type.Id">
+                    @type.Name
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+
+        <label>Amenities</label>
+
+        @foreach (var amenity in Model.Amenities)
+        {
+            <div>
+                <input type="checkbox"
+                       name="AmenityIds"
+                       value="@amenity.Id" />
+
+                <label>
+                    @amenity.Name
+                </label>
+            </div>
+        }
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Create Room
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

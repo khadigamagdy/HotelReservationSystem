@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HotelReservationSystem.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HotelReservationSystem.Models
+namespace HotelReservationSystem.Models.Entities
 {
     public class Reservation
     {

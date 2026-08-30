@@ -1,4 +1,4 @@
-﻿namespace HotelReservationSystem.Models
+﻿namespace HotelReservationSystem.Enums
 {
     public enum BookingStatus
     {

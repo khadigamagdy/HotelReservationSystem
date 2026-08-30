@@ -1,0 +1,43 @@
+﻿@model HotelReservationSystem.Models.Entities.RoomType
+
+<h1>Create Room Type</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BasePricePerNight"></label>
+        <input asp-for="BasePricePerNight"
+               class="form-control"
+               type="number"
+               step="0.01" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Capacity"></label>
+        <input asp-for="Capacity"
+               class="form-control"
+               type="number" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"
+                  class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Create
+    </button>
+
+    <a asp-action="Index">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
