@@ -1,0 +1,60 @@
+﻿@model HotelReservationSystem.ViewModels.MyReservationsViewModel
+@{
+    ViewData["Title"] = "My Reservations";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <h3 class="mb-4 text-center">My Reservations</h3>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        @if (!Model.Reservations.Any())
+        {
+            <div class="alert alert-info text-center">You have no reservations yet.</div>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Room</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Total Price</th>
+                        <th>Payment Status</th>
+                        <th>Booking Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td>@reservation.Room.RoomNumber</td>
+                            <td>@reservation.CheckInDate.ToShortDateString()</td>
+                            <td>@reservation.CheckOutDate.ToShortDateString()</td>
+                            <td>@reservation.TotalPrice.ToString("C")</td>
+                            <td>@reservation.PaymentStatus</td>
+                            <td>@reservation.BookingStatus</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                                @if (reservation.BookingStatus == HotelReservationSystem.Models.BookingStatus.Booked)
+                                {
+                                    <a asp-action="Cancel" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-danger">Cancel</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

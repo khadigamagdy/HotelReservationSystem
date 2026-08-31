@@ -1,0 +1,37 @@
+﻿@model HotelReservationSystem.Models.Reservation
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4">Reservation #@Model.Id</h3>
+
+                <dl class="row">
+                    <dt class="col-sm-5">Room</dt>
+                    <dd class="col-sm-7">@Model.Room.RoomNumber (@Model.Room.RoomType.Name)</dd>
+
+                    <dt class="col-sm-5">Check-in</dt>
+                    <dd class="col-sm-7">@Model.CheckInDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-5">Check-out</dt>
+                    <dd class="col-sm-7">@Model.CheckOutDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-5">Total Price</dt>
+                    <dd class="col-sm-7">@Model.TotalPrice.ToString("C")</dd>
+
+                    <dt class="col-sm-5">Payment Status</dt>
+                    <dd class="col-sm-7">@Model.PaymentStatus</dd>
+
+                    <dt class="col-sm-5">Booking Status</dt>
+                    <dd class="col-sm-7">@Model.BookingStatus</dd>
+                </dl>
+
+                <a asp-action="MyReservations" class="btn btn-secondary w-100">Back to My Reservations</a>
+            </div>
+        </div>
+    </div>
+</div>
+
