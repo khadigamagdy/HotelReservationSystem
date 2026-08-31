@@ -1,0 +1,42 @@
+﻿@model HotelReservationSystem.ViewModels.AvailableRoomsViewModel
+@{
+    ViewData["Title"] = "Available Rooms";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <h3 class="mb-4 text-center">
+            Available Rooms (@Model.CheckInDate.ToShortDateString() - @Model.CheckOutDate.ToShortDateString())
+        </h3>
+
+        @if (!Model.AvailableRooms.Any())
+        {
+            <div class="alert alert-info text-center">No rooms available for the selected dates.</div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var room in Model.AvailableRooms)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Room @room.RoomNumber</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@room.RoomType.Name</h6>
+                                <p class="card-text">Capacity: @room.RoomType.Capacity guests</p>
+                                <p class="card-text fw-bold">@room.RoomType.BasePricePerNight.ToString("C") / night</p>
+                                <a asp-action="Create"
+                                   asp-route-roomId="@room.Id"
+                                   asp-route-checkIn="@Model.CheckInDate.ToString("yyyy-MM-dd")"
+                                   asp-route-checkOut="@Model.CheckOutDate.ToString("yyyy-MM-dd")"
+                                   class="btn btn-primary w-100">
+                                    Book this room
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
