@@ -1,6 +1,8 @@
 ﻿using HotelReservationSystem.Data;
+using HotelReservationSystem.Enums;
 using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
+using HotelReservationSystem.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservationSystem.Repositories

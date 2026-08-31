@@ -1,5 +1,6 @@
 ﻿using HotelReservationSystem.Models;
 using HotelReservationSystem.ViewModels;
+using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.Interfaces
 {

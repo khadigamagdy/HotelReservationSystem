@@ -1,4 +1,5 @@
-﻿using HotelReservationSystem.Models;
+﻿using HotelReservationSystem.Enums;
+using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.Interfaces
 {

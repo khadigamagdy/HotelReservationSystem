@@ -1,4 +1,5 @@
-﻿using HotelReservationSystem.Interfaces;
+﻿using HotelReservationSystem.Enums;
+using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
 using HotelReservationSystem.ViewModels;
 using Microsoft.AspNetCore.Authentication;

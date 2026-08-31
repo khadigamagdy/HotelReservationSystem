@@ -46,7 +46,7 @@
                             <td>@reservation.BookingStatus</td>
                             <td>
                                 <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-primary">Details</a>
-                                @if (reservation.BookingStatus == HotelReservationSystem.Models.BookingStatus.Booked)
+                                @if (reservation.BookingStatus == HotelReservationSystem.Enums.BookingStatus.Booked)
                                 {
                                     <a asp-action="Cancel" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-danger">Cancel</a>
                                 }

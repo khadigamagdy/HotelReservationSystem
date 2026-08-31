@@ -1,6 +1,7 @@
 using HotelReservationSystem.Data;
 using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
+using HotelReservationSystem.Models.Entities;
 using HotelReservationSystem.Repositories;
 using HotelReservationSystem.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
