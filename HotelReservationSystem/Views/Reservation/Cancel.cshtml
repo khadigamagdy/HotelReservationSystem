@@ -1,0 +1,26 @@
+﻿@model HotelReservationSystem.Models.Reservation
+@{
+    ViewData["Title"] = "Cancel Reservation";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4">Cancel Reservation #@Model.Id</h3>
+
+                <p class="text-center">
+                    Are you sure you want to cancel your reservation for
+                    Room @Model.Room.RoomNumber (@Model.CheckInDate.ToShortDateString() - @Model.CheckOutDate.ToShortDateString())?
+                </p>
+
+                <form asp-controller="Reservations" asp-action="Cancel" asp-route-id="@Model.Id" method="post">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger">Yes, cancel my reservation</button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">No, go back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

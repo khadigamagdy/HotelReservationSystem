@@ -1,0 +1,42 @@
+﻿@model HotelReservationSystem.ViewModels.CreateReservationViewModel
+@{
+    ViewData["Title"] = "Confirm Reservation";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4">Confirm Your Reservation</h3>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <dl class="row">
+                    <dt class="col-sm-5">Room</dt>
+                    <dd class="col-sm-7">@Model.RoomNumber (@Model.RoomTypeName)</dd>
+
+                    <dt class="col-sm-5">Price per night</dt>
+                    <dd class="col-sm-7">@Model.BasePricePerNight.ToString("C")</dd>
+
+                    <dt class="col-sm-5">Check-in</dt>
+                    <dd class="col-sm-7">@Model.CheckInDate.ToShortDateString()</dd>
+
+                    <dt class="col-sm-5">Check-out</dt>
+                    <dd class="col-sm-7">@Model.CheckOutDate.ToShortDateString()</dd>
+                </dl>
+
+                <form asp-controller="Reservations" asp-action="Create" method="post">
+                    <input type="hidden" asp-for="RoomId" />
+                    <input type="hidden" asp-for="RoomNumber" />
+                    <input type="hidden" asp-for="RoomTypeName" />
+                    <input type="hidden" asp-for="BasePricePerNight" />
+                    <input type="hidden" asp-for="CheckInDate" />
+                    <input type="hidden" asp-for="CheckOutDate" />
+
+                    <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
