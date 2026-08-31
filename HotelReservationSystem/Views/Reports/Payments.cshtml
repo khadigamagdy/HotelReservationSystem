@@ -1,0 +1,267 @@
+﻿@model List<HotelReservationSystem.Models.Payment>
+
+@using HotelReservationSystem.Models
+
+@{
+    ViewData["Title"] = "Payments Report";
+
+    decimal totalRevenue =
+        Model.Sum(payment => payment.Amount);
+
+    int cashPayments =
+        Model.Count(payment =>
+            payment.Method == PaymentMethod.Cash);
+
+    int cardPayments =
+        Model.Count(payment =>
+            payment.Method == PaymentMethod.Card);
+
+    int onlinePayments =
+        Model.Count(payment =>
+            payment.Method == PaymentMethod.Online);
+}
+
+<style>
+    .report-page {
+        padding: 35px 0;
+    }
+
+    .report-header {
+        background: linear-gradient(135deg, #0f172a, #047857);
+        color: white;
+        padding: 32px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+    }
+
+        .report-header h1 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .report-header p {
+            color: #d1fae5;
+            margin: 0;
+        }
+
+    .summary-card {
+        height: 100%;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
+    }
+
+        .summary-card span {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .summary-card h3 {
+            color: #0f172a;
+            font-weight: 750;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+    .report-table-container {
+        margin-top: 25px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        overflow-x: auto;
+    }
+
+    .report-table {
+        width: 100%;
+        margin: 0;
+    }
+
+        .report-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .report-table td {
+            padding: 14px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+            white-space: nowrap;
+        }
+
+    .method-badge {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .method-Cash {
+        color: #15803d;
+        background: #dcfce7;
+    }
+
+    .method-Card {
+        color: #1d4ed8;
+        background: #dbeafe;
+    }
+
+    .method-Online {
+        color: #7e22ce;
+        background: #f3e8ff;
+    }
+
+    .amount-value {
+        color: #15803d;
+        font-weight: 700;
+    }
+
+    .back-link {
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        padding: 9px 15px;
+        text-decoration: none;
+    }
+
+        .back-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+        }
+</style>
+
+<div class="container report-page">
+    <div class="report-header">
+        <div class="d-flex justify-content-between
+                    align-items-center flex-wrap gap-3">
+
+            <div>
+                <h1>Payments Report</h1>
+
+                <p>
+                    Review all payments and hotel revenue.
+                </p>
+            </div>
+
+            <a asp-controller="Dashboard"
+               asp-action="Index"
+               class="back-link">
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Total Revenue</span>
+
+                <h3>
+                    @totalRevenue.ToString("N2")
+                    <small class="fs-6">EGP</small>
+                </h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Cash Payments</span>
+                <h3>@cashPayments</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Card Payments</span>
+                <h3>@cardPayments</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Online Payments</span>
+                <h3>@onlinePayments</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="report-table-container">
+        @if (Model.Count == 0)
+        {
+            <div class="text-center py-5 text-muted">
+                No payments were found.
+            </div>
+        }
+        else
+        {
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Reservation</th>
+                        <th>Guest</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Payment Date</th>
+                        <th>Recorded By</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var payment in Model)
+                    {
+                        <tr>
+                            <td>#@payment.Id</td>
+
+                            <td>
+                                #@payment.ReservationId
+                            </td>
+
+                            <td>
+                                @payment.Reservation
+                                .Guest.User.FullName
+                            </td>
+
+                            <td class="amount-value">
+                                @payment.Amount.ToString("N2") EGP
+                            </td>
+
+                            <td>
+                                <span class="method-badge method-@payment.Method">
+                                    @payment.Method
+                                </span>
+                            </td>
+
+                            <td>
+                                @payment.PaidAt
+                                .ToString("dd MMM yyyy, hh:mm tt")
+                            </td>
+
+                            <td>
+                                @if (payment.RecordedByUser != null)
+                                {
+                                    @payment.RecordedByUser.FullName
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Guest Online Payment
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

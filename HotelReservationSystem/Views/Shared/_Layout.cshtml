@@ -1,50 +1,277 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HotelReservationSystem</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Hotel Reservation System
+    </title>
+
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HotelReservationSystem.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/HotelReservationSystem.styles.css"
+          asp-append-version="true" />
+
+    <style>
+        body {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .hotel-navbar {
+            background: #0f172a;
+            min-height: 70px;
+            box-shadow: 0 6px 22px rgba(15, 23, 42, 0.18);
+        }
+
+            .hotel-navbar .navbar-brand {
+                color: white;
+                font-size: 21px;
+                font-weight: 750;
+            }
+
+                .hotel-navbar .navbar-brand:hover {
+                    color: #dbeafe;
+                }
+
+            .hotel-navbar .nav-link {
+                color: #cbd5e1;
+                font-weight: 550;
+                border-radius: 9px;
+                padding: 9px 12px;
+            }
+
+                .hotel-navbar .nav-link:hover {
+                    color: white;
+                    background: rgba(255, 255, 255, 0.09);
+                }
+
+            .hotel-navbar .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+
+            .hotel-navbar .navbar-toggler-icon {
+                filter: invert(1);
+            }
+
+        .user-name {
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+        }
+
+        .logout-button {
+            color: white;
+            background: #dc2626;
+            border: 0;
+            border-radius: 9px;
+            padding: 9px 15px;
+            font-weight: 600;
+        }
+
+            .logout-button:hover {
+                background: #b91c1c;
+            }
+
+        .login-link {
+            color: white;
+            text-decoration: none;
+            border: 1px solid #64748b;
+            border-radius: 9px;
+            padding: 8px 15px;
+        }
+
+        .register-link {
+            color: white;
+            background: #2563eb;
+            text-decoration: none;
+            border-radius: 9px;
+            padding: 9px 15px;
+        }
+
+            .login-link:hover,
+            .register-link:hover {
+                color: white;
+                opacity: 0.9;
+            }
+
+        .hotel-footer {
+            margin-top: 50px;
+            padding: 24px 0;
+            color: #64748b;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelReservationSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg hotel-navbar">
+            <div class="container">
+                <a class="navbar-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    Hotel Reservation
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div id="mainNavbar"
+                     class="collapse navbar-collapse">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                        @if (User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Dashboard"
+                                   asp-action="Index">
+                                    Dashboard
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Reports
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Reports"
+                                           asp-action="Reservations">
+                                            Reservations
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Reports"
+                                           asp-action="Payments">
+                                            Payments
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Reports"
+                                           asp-action="Rooms">
+                                            Rooms
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Reports"
+                                           asp-action="Revenue">
+                                            Revenue
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="UserManagement"
+                                   asp-action="Index">
+                                    Users
+                                </a>
+                            </li>
+                        }
                     </ul>
+
+                    <div class="d-flex align-items-center gap-2">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <span class="user-name">
+                                Welcome, @User.Identity.Name
+                            </span>
+
+                            <form asp-controller="Account"
+                                  asp-action="Logout"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account"
+                               asp-action="Login"
+                               class="login-link">
+                                Login
+                            </a>
+
+                            <a asp-controller="Account"
+                               asp-action="Register"
+                               class="register-link">
+                                Register
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - HotelReservationSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="hotel-footer">
+        <div class="container text-center">
+            &copy; 2026 - Hotel Reservation System
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
