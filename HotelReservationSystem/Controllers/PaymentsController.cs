@@ -1,5 +1,7 @@
-﻿using HotelReservationSystem.Interfaces;
+using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
+using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -114,4 +116,6 @@ namespace HotelReservationSystem.Controllers
         }
     }
 }
+
+
 

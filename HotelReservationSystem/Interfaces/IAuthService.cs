@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models;
+using HotelReservationSystem.Models;
 using HotelReservationSystem.ViewModels;
 using HotelReservationSystem.Models.Entities;
 
@@ -11,3 +11,4 @@ namespace HotelReservationSystem.Interfaces
         Task<AuthResult> RegisterReceptionistAsync(CreateStaffViewModel model, int createdByUserId);
     }
 }
+

@@ -1,0 +1,265 @@
+@model HotelReservationSystem.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Manager Dashboard";
+}
+
+<style>
+    .dashboard-page {
+        padding: 35px 0;
+    }
+
+    .dashboard-header {
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        color: white;
+        border-radius: 22px;
+        padding: 35px;
+        margin-bottom: 28px;
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.18);
+    }
+
+    .dashboard-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-header p {
+        color: #cbd5e1;
+        margin: 0;
+    }
+
+    .dashboard-card {
+        height: 100%;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 24px;
+        transition: 0.25s;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .card-label {
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .card-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+
+    .card-value {
+        color: #0f172a;
+        font-size: 30px;
+        font-weight: 750;
+        margin: 0;
+    }
+
+    .icon-blue {
+        background: #dbeafe;
+    }
+
+    .icon-green {
+        background: #dcfce7;
+    }
+
+    .icon-red {
+        background: #fee2e2;
+    }
+
+    .icon-orange {
+        background: #ffedd5;
+    }
+
+    .icon-purple {
+        background: #f3e8ff;
+    }
+
+    .icon-yellow {
+        background: #fef9c3;
+    }
+
+    .reports-section {
+        margin-top: 35px;
+        background: white;
+        padding: 28px;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    .reports-section h3 {
+        color: #0f172a;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .report-link {
+        display: block;
+        padding: 16px 18px;
+        border-radius: 14px;
+        background: #f8fafc;
+        color: #1e293b;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+        transition: 0.2s;
+    }
+
+    .report-link:hover {
+        background: #1e3a8a;
+        color: white;
+        transform: translateX(4px);
+    }
+</style>
+
+<div class="container dashboard-page">
+    <div class="dashboard-header">
+        <h1>Manager Dashboard</h1>
+        <p>
+            Monitor rooms, reservations, payments and hotel performance.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Total Rooms</span>
+                    <span class="card-icon icon-blue">??</span>
+                </div>
+                <p class="card-value">@Model.TotalRooms</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Available Rooms</span>
+                    <span class="card-icon icon-green">?</span>
+                </div>
+                <p class="card-value">@Model.AvailableRooms</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Occupied Rooms</span>
+                    <span class="card-icon icon-red">??</span>
+                </div>
+                <p class="card-value">@Model.OccupiedRooms</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Maintenance</span>
+                    <span class="card-icon icon-orange">?</span>
+                </div>
+                <p class="card-value">@Model.MaintenanceRooms</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Total Reservations</span>
+                    <span class="card-icon icon-purple">??</span>
+                </div>
+                <p class="card-value">@Model.TotalReservations</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Checked-In Guests</span>
+                    <span class="card-icon icon-blue">??</span>
+                </div>
+                <p class="card-value">@Model.CheckedInGuests</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Pending Payments</span>
+                    <span class="card-icon icon-yellow">??</span>
+                </div>
+                <p class="card-value">@Model.PendingPayments</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="card-top">
+                    <span class="card-label">Total Revenue</span>
+                    <span class="card-icon icon-green">??</span>
+                </div>
+                <p class="card-value">
+                    @Model.TotalRevenue.ToString("N2")
+                    <small class="fs-6">EGP</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="reports-section">
+        <h3>Reports</h3>
+
+        <div class="row g-3">
+            <div class="col-md-6 col-xl-3">
+                <a asp-controller="Reports"
+                   asp-action="Reservations"
+                   class="report-link">
+                    Reservations Report ?
+                </a>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <a asp-controller="Reports"
+                   asp-action="Payments"
+                   class="report-link">
+                    Payments Report ?
+                </a>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <a asp-controller="Reports"
+                   asp-action="Rooms"
+                   class="report-link">
+                    Rooms Report ?
+                </a>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <a asp-controller="Reports"
+                   asp-action="Revenue"
+                   class="report-link">
+                    Revenue Report ?
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

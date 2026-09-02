@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models;
+using HotelReservationSystem.Models;
 using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.ViewModels
@@ -8,3 +8,4 @@ namespace HotelReservationSystem.ViewModels
         public IEnumerable<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Enums;
+using HotelReservationSystem.Enums;
 using HotelReservationSystem.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
@@ -50,3 +50,4 @@ namespace HotelReservationSystem.ViewModels
             = new();
     }
 }
+

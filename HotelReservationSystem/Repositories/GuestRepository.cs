@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Interfaces;
+using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using HotelReservationSystem.Data;
@@ -31,3 +31,4 @@ namespace HotelReservationSystem.Repositories
     }
 
 }
+

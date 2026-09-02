@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Enums;
+using HotelReservationSystem.Enums;
 using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.Interfaces
@@ -15,3 +15,5 @@ namespace HotelReservationSystem.Interfaces
         Task SaveChangesAsync();
     }
 }
+
+

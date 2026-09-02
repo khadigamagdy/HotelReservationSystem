@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.Interfaces
 {
@@ -21,3 +21,4 @@ namespace HotelReservationSystem.Interfaces
         void Delete(int id);
     }
 }
+

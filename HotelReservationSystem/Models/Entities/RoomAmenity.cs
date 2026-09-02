@@ -1,4 +1,4 @@
-﻿namespace HotelReservationSystem.Models.Entities
+namespace HotelReservationSystem.Models.Entities
 {
     public class RoomAmenity
     {

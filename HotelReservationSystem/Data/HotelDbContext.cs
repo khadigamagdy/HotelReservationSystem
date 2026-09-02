@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservationSystem.Data

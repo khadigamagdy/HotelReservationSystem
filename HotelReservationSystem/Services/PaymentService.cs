@@ -1,5 +1,7 @@
-﻿using HotelReservationSystem.Interfaces;
+using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
+using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Enums;
 
 namespace HotelReservationSystem.Services
 {
@@ -103,3 +105,4 @@ namespace HotelReservationSystem.Services
         }
     }
 }
+

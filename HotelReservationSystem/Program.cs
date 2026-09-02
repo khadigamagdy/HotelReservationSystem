@@ -32,6 +32,8 @@ builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<ICheckInOutService, CheckInOutService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 
 // Password Hashing
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -104,3 +106,5 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.Run();
+
+

@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Enums;
+using HotelReservationSystem.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -47,3 +47,4 @@ namespace HotelReservationSystem.Models.Entities
             = new List<Payment>();
     }
 }
+

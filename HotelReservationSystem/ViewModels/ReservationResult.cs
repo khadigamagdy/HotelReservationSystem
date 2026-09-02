@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models;
+using HotelReservationSystem.Models;
 using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.ViewModels

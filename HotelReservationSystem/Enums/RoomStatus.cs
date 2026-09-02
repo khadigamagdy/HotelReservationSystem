@@ -1,4 +1,4 @@
-﻿namespace HotelReservationSystem.Enums
+namespace HotelReservationSystem.Enums
 {
     public enum RoomStatus
     {

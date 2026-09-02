@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models;
+using HotelReservationSystem.Models;
 using HotelReservationSystem.Models.Entities;
 
 namespace HotelReservationSystem.ViewModels
@@ -13,3 +13,4 @@ namespace HotelReservationSystem.ViewModels
         public static AuthResult Ok(User user) => new() { Success = true, User = user };
     }
 }
+

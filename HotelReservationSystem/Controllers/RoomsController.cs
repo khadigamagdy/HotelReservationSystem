@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Data;
+using HotelReservationSystem.Data;
 using HotelReservationSystem.Models.Entities;
 using HotelReservationSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -202,3 +202,4 @@ namespace HotelReservationSystem.Controllers
         }
     
 }
+

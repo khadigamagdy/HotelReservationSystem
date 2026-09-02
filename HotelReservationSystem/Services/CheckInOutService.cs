@@ -1,6 +1,7 @@
-﻿using HotelReservationSystem.Data;
+using HotelReservationSystem.Data;
 using HotelReservationSystem.Interfaces;
-using HotelReservationSystem.Models;
+using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservationSystem.Services
@@ -106,3 +107,5 @@ namespace HotelReservationSystem.Services
         }
     }
 }
+
+

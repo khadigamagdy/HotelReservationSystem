@@ -1,0 +1,279 @@
+@model List<HotelReservationSystem.ViewModels.RevenueReportViewModel>
+
+@{
+    ViewData["Title"] = "Revenue Report";
+
+    decimal totalRevenue =
+        Model.Sum(report => report.TotalRevenue);
+
+    int totalPayments =
+        Model.Sum(report => report.PaymentsCount);
+
+    decimal averageMonthlyRevenue =
+        Model.Count > 0
+            ? Model.Average(report => report.TotalRevenue)
+            : 0;
+
+    decimal highestRevenue =
+        Model.Count > 0
+            ? Model.Max(report => report.TotalRevenue)
+            : 0;
+}
+
+<style>
+    .report-page {
+        padding: 35px 0;
+    }
+
+    .report-header {
+        background: linear-gradient(135deg, #0f172a, #b45309);
+        color: white;
+        padding: 32px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+    }
+
+        .report-header h1 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .report-header p {
+            color: #fef3c7;
+            margin: 0;
+        }
+
+    .summary-card {
+        height: 100%;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
+    }
+
+        .summary-card span {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .summary-card h3 {
+            color: #0f172a;
+            font-weight: 750;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+    .revenue-container {
+        margin-top: 25px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .revenue-row {
+        margin-bottom: 22px;
+    }
+
+        .revenue-row:last-child {
+            margin-bottom: 0;
+        }
+
+    .revenue-info {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 8px;
+    }
+
+    .revenue-month {
+        color: #334155;
+        font-weight: 650;
+    }
+
+    .revenue-amount {
+        color: #15803d;
+        font-weight: 750;
+    }
+
+    .revenue-bar-background {
+        width: 100%;
+        height: 13px;
+        background: #f1f5f9;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .revenue-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #f59e0b, #16a34a);
+        border-radius: 20px;
+        min-width: 5px;
+    }
+
+    .report-table-container {
+        margin-top: 25px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        overflow-x: auto;
+    }
+
+    .report-table {
+        width: 100%;
+        margin: 0;
+    }
+
+        .report-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .report-table td {
+            padding: 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+    .back-link {
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        padding: 9px 15px;
+        text-decoration: none;
+    }
+
+        .back-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+        }
+</style>
+
+<div class="container report-page">
+    <div class="report-header">
+        <div class="d-flex justify-content-between
+                    align-items-center flex-wrap gap-3">
+
+            <div>
+                <h1>Revenue Report</h1>
+
+                <p>
+                    Track monthly hotel revenue and payment performance.
+                </p>
+            </div>
+
+            <a asp-controller="Dashboard"
+               asp-action="Index"
+               class="back-link">
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="summary-card">
+                <span>Total Revenue</span>
+
+                <h3>
+                    @totalRevenue.ToString("N2")
+                    <small class="fs-6">EGP</small>
+                </h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="summary-card">
+                <span>Total Payments</span>
+                <h3>@totalPayments</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="summary-card">
+                <span>Average Monthly Revenue</span>
+
+                <h3>
+                    @averageMonthlyRevenue.ToString("N2")
+                    <small class="fs-6">EGP</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="revenue-container text-center text-muted py-5">
+            No revenue data was found.
+        </div>
+    }
+    else
+    {
+        <div class="revenue-container">
+            <h4 class="fw-bold mb-4">Monthly Revenue Overview</h4>
+
+            @foreach (var report in Model)
+            {
+                decimal width =
+                highestRevenue > 0
+                ? report.TotalRevenue /
+                highestRevenue * 100
+                : 0;
+
+                <div class="revenue-row">
+                    <div class="revenue-info">
+                        <span class="revenue-month">
+                            @report.MonthName @report.Year
+                        </span>
+
+                        <span class="revenue-amount">
+                            @report.TotalRevenue.ToString("N2") EGP
+                        </span>
+                    </div>
+
+                    <div class="revenue-bar-background">
+                        <div class="revenue-bar"
+                             style="width: @width.ToString("0.##",
+                                                              System.Globalization.CultureInfo.InvariantCulture)%">
+                </div>
+            </div>
+        </div>
+                }
+        </div>
+
+        <div class="report-table-container">
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Payments Count</th>
+                        <th>Total Revenue</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var report in Model)
+                    {
+                        <tr>
+                            <td>@report.MonthName</td>
+                            <td>@report.Year</td>
+                            <td>@report.PaymentsCount</td>
+
+                            <td class="fw-bold text-success">
+                                @report.TotalRevenue.ToString("N2") EGP
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

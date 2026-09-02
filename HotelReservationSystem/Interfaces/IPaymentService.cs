@@ -1,5 +1,6 @@
-﻿
-using HotelReservationSystem.Models;
+
+using HotelReservationSystem.Models.Entities;
+using HotelReservationSystem.Enums;
 
 namespace HotelReservationSystem.Interfaces
 {
@@ -20,4 +21,6 @@ namespace HotelReservationSystem.Interfaces
         Task<decimal> GetTotalPaidAsync(int reservationId);
     }
 }
+
+
 

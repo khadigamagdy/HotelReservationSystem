@@ -1,4 +1,4 @@
-﻿using HotelReservationSystem.Models;
+using HotelReservationSystem.Models;
 using HotelReservationSystem.Models.Entities;
 using HotelReservationSystem.ViewModels;
 
@@ -14,3 +14,4 @@ namespace HotelReservationSystem.Interfaces
         Task<ReservationResult> CancelReservationAsync(int reservationId, int guestId);
     }
 }
+

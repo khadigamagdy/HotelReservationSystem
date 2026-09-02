@@ -1,0 +1,281 @@
+@model List<HotelReservationSystem.Models.Entities.Room>
+
+@using HotelReservationSystem.Models
+
+@{
+    ViewData["Title"] = "Rooms Report";
+
+    int totalRooms = Model.Count;
+
+    int availableRooms =
+        Model.Count(room =>
+            room.Status == RoomStatus.Available);
+
+    int occupiedRooms =
+        Model.Count(room =>
+            room.Status == RoomStatus.Occupied);
+
+    int maintenanceRooms =
+        Model.Count(room =>
+            room.Status == RoomStatus.Maintenance);
+}
+
+<style>
+    .report-page {
+        padding: 35px 0;
+    }
+
+    .report-header {
+        background: linear-gradient(135deg, #0f172a, #7c3aed);
+        color: white;
+        padding: 32px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+    }
+
+        .report-header h1 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .report-header p {
+            color: #ede9fe;
+            margin: 0;
+        }
+
+    .summary-card {
+        height: 100%;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
+    }
+
+        .summary-card span {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .summary-card h3 {
+            color: #0f172a;
+            font-weight: 750;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+    .report-table-container {
+        margin-top: 25px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        overflow-x: auto;
+    }
+
+    .report-table {
+        width: 100%;
+        margin: 0;
+    }
+
+        .report-table th {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .report-table td {
+            padding: 14px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+            white-space: nowrap;
+        }
+
+    .status-badge {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .status-Available {
+        color: #15803d;
+        background: #dcfce7;
+    }
+
+    .status-Occupied {
+        color: #b91c1c;
+        background: #fee2e2;
+    }
+
+    .status-Maintenance {
+        color: #b45309;
+        background: #fef3c7;
+    }
+
+    .room-number {
+        color: #1d4ed8;
+        font-weight: 750;
+    }
+
+    .back-link {
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        padding: 9px 15px;
+        text-decoration: none;
+    }
+
+        .back-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+        }
+</style>
+
+<div class="container report-page">
+    <div class="report-header">
+        <div class="d-flex justify-content-between
+                    align-items-center flex-wrap gap-3">
+
+            <div>
+                <h1>Rooms Report</h1>
+
+                <p>
+                    Monitor room availability, occupancy
+                    and maintenance status.
+                </p>
+            </div>
+
+            <a asp-controller="Dashboard"
+               asp-action="Index"
+               class="back-link">
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Total Rooms</span>
+                <h3>@totalRooms</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Available Rooms</span>
+                <h3>@availableRooms</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Occupied Rooms</span>
+                <h3>@occupiedRooms</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="summary-card">
+                <span>Maintenance</span>
+                <h3>@maintenanceRooms</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="report-table-container">
+        @if (Model.Count == 0)
+        {
+            <div class="text-center py-5 text-muted">
+                No rooms were found.
+            </div>
+        }
+        else
+        {
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Floor</th>
+                        <th>Room Type</th>
+                        <th>Capacity</th>
+                        <th>Price Per Night</th>
+                        <th>Status</th>
+                        <th>Created By</th>
+                        <th>Last Modified By</th>
+                        <th>Last Modified At</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var room in Model)
+                    {
+                        <tr>
+                            <td class="room-number">
+                                @room.RoomNumber
+                            </td>
+
+                            <td>
+                                @room.FloorNumber
+                            </td>
+
+                            <td>
+                                @room.RoomType.Name
+                            </td>
+
+                            <td>
+                                @(room.RoomType.Capacity) Guests
+                            </td>
+
+                            <td>
+                                @(room.RoomType.BasePricePerNight.ToString("N2")) EGP
+                            </td>
+
+                            <td>
+                                <span class="status-badge status-@room.Status">
+                                    @room.Status
+                                </span>
+                            </td>
+
+                            <td>
+                                @room.CreatedByUser.FullName
+                            </td>
+
+                            <td>
+                                @if (room.LastModifiedByUser != null)
+                                {
+                                    @room.LastModifiedByUser.FullName
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Not modified
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (room.LastModifiedAt.HasValue)
+                                {
+                                    @(room.LastModifiedAt.Value
+                                                            .ToString("dd MMM yyyy, hh:mm tt"))
+                                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
