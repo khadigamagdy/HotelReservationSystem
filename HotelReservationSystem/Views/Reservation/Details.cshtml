@@ -1,38 +1,286 @@
 @model HotelReservationSystem.Models.Entities.Reservation
+
 @{
     ViewData["Title"] = "Reservation Details";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Reservation #@Model.Id</h3>
+<div class="reservation-details-page">
 
-                <dl class="row">
-                    <dt class="col-sm-5">Room</dt>
-                    <dd class="col-sm-7">@Model.Room.RoomNumber (@Model.Room.RoomType.Name)</dd>
+    <div class="reservation-details-card">
 
-                    <dt class="col-sm-5">Check-in</dt>
-                    <dd class="col-sm-7">@Model.CheckInDate.ToShortDateString()</dd>
+        <!-- Header -->
+        <div class="reservation-details-header">
 
-                    <dt class="col-sm-5">Check-out</dt>
-                    <dd class="col-sm-7">@Model.CheckOutDate.ToShortDateString()</dd>
-
-                    <dt class="col-sm-5">Total Price</dt>
-                    <dd class="col-sm-7">@Model.TotalPrice.ToString("C")</dd>
-
-                    <dt class="col-sm-5">Payment Status</dt>
-                    <dd class="col-sm-7">@Model.PaymentStatus</dd>
-
-                    <dt class="col-sm-5">Booking Status</dt>
-                    <dd class="col-sm-7">@Model.BookingStatus</dd>
-                </dl>
-
-                <a asp-action="MyReservations" class="btn btn-secondary w-100">Back to My Reservations</a>
+            <div class="reservation-details-icon">
+                <i class="bi bi-calendar-check"></i>
             </div>
+
+            <span class="reservation-details-label">
+                MY RESERVATION
+            </span>
+
+            <h1>
+                Reservation #@Model.Id
+            </h1>
+
+            <p>
+                Review your booking details and reservation status.
+            </p>
+
         </div>
+
+
+        <!-- Reservation Information -->
+        <div class="reservation-details-section">
+
+            <div class="reservation-details-section-header">
+
+                <div class="reservation-details-section-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        BOOKING INFORMATION
+                    </span>
+
+                    <h2>
+                        Reservation Details
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="reservation-details-grid">
+
+                <!-- Room -->
+                <div class="reservation-details-item">
+
+                    <div class="reservation-details-item-icon">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Room
+                        </span>
+
+                        <strong>
+                            @Model.Room.RoomNumber
+                        </strong>
+
+                        <small>
+                            @Model.Room.RoomType.Name
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Check-In -->
+                <div class="reservation-details-item">
+
+                    <div class="reservation-details-item-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Check-In
+                        </span>
+
+                        <strong>
+                            @Model.CheckInDate.ToShortDateString()
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Check-Out -->
+                <div class="reservation-details-item">
+
+                    <div class="reservation-details-item-icon">
+                        <i class="bi bi-calendar-x"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Check-Out
+                        </span>
+
+                        <strong>
+                            @Model.CheckOutDate.ToShortDateString()
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Total Price -->
+                <div class="reservation-details-item">
+
+                    <div class="reservation-details-item-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Price
+                        </span>
+
+                        <strong class="reservation-details-price">
+                            @Model.TotalPrice.ToString("C")
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Status Section -->
+        <div class="reservation-status-section">
+
+            <div class="reservation-status-header">
+
+                <div class="reservation-status-icon">
+                    <i class="bi bi-activity"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        RESERVATION STATUS
+                    </span>
+
+                    <h2>
+                        Current Status
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="reservation-status-grid">
+
+                <!-- Payment Status -->
+                <div class="reservation-status-card">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong class="reservation-payment-status payment-@Model.PaymentStatus">
+
+                        @if (Model.PaymentStatus.ToString() == "Paid")
+                        {
+                            <i class="bi bi-check-circle"></i>
+                        }
+                        else if (Model.PaymentStatus.ToString() == "PartiallyPaid")
+                        {
+                            <i class="bi bi-hourglass-split"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-exclamation-circle"></i>
+                        }
+
+                        @Model.PaymentStatus
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Booking Status -->
+                <div class="reservation-status-card">
+
+                    <span>
+                        Booking Status
+                    </span>
+
+                    <strong class="reservation-booking-status status-@Model.BookingStatus">
+
+                        @if (Model.BookingStatus.ToString() == "Booked")
+                        {
+                            <i class="bi bi-calendar-check"></i>
+                        }
+                        else if (Model.BookingStatus.ToString() == "CheckedIn")
+                        {
+                            <i class="bi bi-person-check"></i>
+                        }
+                        else if (Model.BookingStatus.ToString() == "CheckedOut")
+                        {
+                            <i class="bi bi-check2-all"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-circle"></i>
+                        }
+
+                        @Model.BookingStatus
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Information -->
+        <div class="reservation-details-info">
+
+            <div class="reservation-info-icon">
+                <i class="bi bi-info-circle"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Reservation Information
+                </strong>
+
+                <p>
+                    Keep your reservation details available when
+                    checking in at the hotel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Back -->
+        <div class="reservation-details-actions">
+
+            <a asp-action="MyReservations"
+               class="reservation-details-back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to My Reservations
+
+            </a>
+
+        </div>
+
     </div>
+
 </div>
-
-

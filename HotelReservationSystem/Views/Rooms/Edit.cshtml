@@ -4,111 +4,314 @@
     ViewData["Title"] = "Edit Room";
 }
 
-<h1>Edit Room</h1>
+<div class="room-edit-page">
 
-<hr />
+    <div class="room-edit-card">
 
-<div class="row">
-    <div class="col-md-6">
+        <!-- Header -->
+        <div class="room-edit-header">
 
-        <form asp-action="Edit" method="post">
+            <div class="room-edit-icon">
+                <i class="bi bi-pencil-square"></i>
+            </div>
+
+            <span class="room-edit-label">
+                ROOM MANAGEMENT
+            </span>
+
+            <h1>
+                Edit Room
+            </h1>
+
+            <p>
+                Update the room information, status, type
+                and available amenities.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
+        <form asp-action="Edit"
+              method="post">
 
             <div asp-validation-summary="ModelOnly"
-                 class="text-danger"></div>
-
-            <input type="hidden" asp-for="Id" />
-
-            <div class="mb-3">
-                <label asp-for="RoomNumber" class="form-label"></label>
-                <input asp-for="RoomNumber" class="form-control" />
-                <span asp-validation-for="RoomNumber"
-                      class="text-danger"></span>
+                 class="room-edit-validation">
             </div>
 
-            <div class="mb-3">
-                <label asp-for="FloorNumber" class="form-label"></label>
-                <input asp-for="FloorNumber"
-                       class="form-control"
-                       type="number" />
-                <span asp-validation-for="FloorNumber"
-                      class="text-danger"></span>
+            <input type="hidden"
+                   asp-for="Id" />
+
+
+            <!-- Room Information -->
+            <div class="room-edit-section">
+
+                <div class="room-edit-section-title">
+
+                    <div class="room-edit-section-icon">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ROOM INFORMATION
+                        </span>
+
+                        <h2>
+                            Basic Details
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    <!-- Room Number -->
+                    <div class="col-md-6">
+
+                        <div class="room-edit-form-group">
+
+                            <label asp-for="RoomNumber">
+                                Room Number
+                            </label>
+
+                            <div class="room-edit-input-wrapper">
+
+                                <i class="bi bi-door-open"></i>
+
+                                <input asp-for="RoomNumber"
+                                       class="room-edit-input"
+                                       placeholder="Enter room number" />
+
+                            </div>
+
+                            <span asp-validation-for="RoomNumber"
+                                  class="room-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Floor -->
+                    <div class="col-md-6">
+
+                        <div class="room-edit-form-group">
+
+                            <label asp-for="FloorNumber">
+                                Floor Number
+                            </label>
+
+                            <div class="room-edit-input-wrapper">
+
+                                <i class="bi bi-layers"></i>
+
+                                <input asp-for="FloorNumber"
+                                       class="room-edit-input"
+                                       type="number"
+                                       placeholder="Enter floor number" />
+
+                            </div>
+
+                            <span asp-validation-for="FloorNumber"
+                                  class="room-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Room Type -->
+                    <div class="col-md-6">
+
+                        <div class="room-edit-form-group">
+
+                            <label asp-for="RoomTypeId">
+                                Room Type
+                            </label>
+
+                            <div class="room-edit-input-wrapper">
+
+                                <i class="bi bi-house-door"></i>
+
+                                <select asp-for="RoomTypeId"
+                                        class="room-edit-select">
+
+                                    <option value="">
+                                        -- Select Room Type --
+                                    </option>
+
+                                    @foreach (var type in Model.RoomTypes)
+                                    {
+                                        <option value="@type.Id">
+                                            @type.Name
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="RoomTypeId"
+                                  class="room-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+                    <div class="col-md-6">
+
+                        <div class="room-edit-form-group">
+
+                            <label asp-for="Status">
+                                Room Status
+                            </label>
+
+                            <div class="room-edit-input-wrapper">
+
+                                <i class="bi bi-activity"></i>
+
+                                <select asp-for="Status"
+                                        class="room-edit-select">
+
+                                    @foreach (var status in Enum.GetValues<HotelReservationSystem.Enums.RoomStatus>())
+                                    {
+                                        <option value="@status">
+                                            @status
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="Status"
+                                  class="room-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <label asp-for="RoomTypeId" class="form-label">
-                    Room Type
-                </label>
 
-                <select asp-for="RoomTypeId"
-                        class="form-select">
+            <!-- Amenities -->
+            <div class="room-edit-section">
 
-                    <option value="">-- Select Room Type --</option>
+                <div class="room-edit-section-title">
 
-                    @foreach (var type in Model.RoomTypes)
-                    {
-                        <option value="@type.Id">
-                            @type.Name
-                        </option>
-                    }
+                    <div class="room-edit-section-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
 
-                </select>
+                    <div>
 
-                <span asp-validation-for="RoomTypeId"
-                      class="text-danger"></span>
-            </div>
+                        <span>
+                            ROOM FEATURES
+                        </span>
 
-            <div class="mb-3">
-                <label asp-for="Status" class="form-label"></label>
+                        <h2>
+                            Amenities
+                        </h2>
 
-                <select asp-for="Status"
-                        class="form-select">
+                        <p>
+                            Select the amenities available in this room.
+                        </p>
 
-                    @foreach (var status in Enum.GetValues<HotelReservationSystem.Enums.RoomStatus>())
-                    {
-                        <option value="@status">
-                            @status
-                        </option>
-                    }
+                    </div>
 
-                </select>
+                </div>
 
-                <span asp-validation-for="Status"
-                      class="text-danger"></span>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label">Amenities</label>
-
-                @foreach (var amenity in Model.Amenities)
+                @if (Model.Amenities != null && Model.Amenities.Any())
                 {
-                    <div class="form-check">
-                        <input class="form-check-input"
-                               type="checkbox"
-                               name="AmenityIds"
-                               value="@amenity.Id"
-                        @(Model.AmenityIds.Contains(amenity.Id) ? "checked" : "") />
+                    <div class="room-edit-amenities-grid">
 
-                        <label class="form-check-label">
-                            @amenity.Name
-                        </label>
+                        @foreach (var amenity in Model.Amenities)
+                        {
+                            <label class="room-edit-amenity-option">
+
+                                <input type="checkbox"
+                                       name="AmenityIds"
+                                       value="@amenity.Id"
+                                @(Model.AmenityIds.Contains(amenity.Id)
+                                    ? "checked"
+                                    : "") />
+
+                                <span class="room-edit-amenity-check">
+                                    <i class="bi bi-check-lg"></i>
+                                </span>
+
+                                <span class="room-edit-amenity-icon">
+                                    <i class="bi bi-stars"></i>
+                                </span>
+
+                                <span class="room-edit-amenity-name">
+                                    @amenity.Name
+                                </span>
+
+                            </label>
+                        }
+
                     </div>
                 }
+                else
+                {
+                    <div class="room-edit-no-amenities">
+
+                        <i class="bi bi-info-circle"></i>
+
+                        <span>
+                            No amenities have been added yet.
+                        </span>
+
+                    </div>
+                }
+
             </div>
 
-            <button type="submit"
-                    class="btn btn-primary">
-                Save Changes
-            </button>
 
-            <a asp-action="Index"
-               class="btn btn-secondary">
-                Cancel
-            </a>
+            <!-- Actions -->
+            <div class="room-edit-actions">
+
+                <button type="submit"
+                        class="room-edit-save-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Save Changes
+
+                </button>
+
+
+                <a asp-action="Index"
+                   class="room-edit-cancel-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
 
         </form>
 
     </div>
+
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

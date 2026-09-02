@@ -1,43 +1,277 @@
 @model IEnumerable<HotelReservationSystem.Models.Entities.RoomType>
 
-<h1>Room Types</h1>
+@{
+    ViewData["Title"] = "Room Types";
+}
 
-<a asp-action="Create" class="btn btn-primary">
-    Add Room Type
-</a>
+<div class="roomtypes-management-page">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price Per Night</th>
-            <th>Capacity</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
+    <!-- Header -->
+    <div class="roomtypes-management-header">
 
-    <tbody>
-        @foreach (var type in Model)
+        <div class="roomtypes-management-heading">
+
+            <span class="roomtypes-management-label">
+                ROOM TYPE MANAGEMENT
+            </span>
+
+            <h1>
+                Room Types
+            </h1>
+
+            <p>
+                Manage room categories, pricing, guest capacity
+                and descriptions.
+            </p>
+
+        </div>
+
+        <a asp-action="Create"
+           class="roomtypes-management-add-btn">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add Room Type
+
+        </a>
+
+    </div>
+
+
+    <!-- Room Types Table -->
+    <div class="roomtypes-management-table-card">
+
+        <div class="roomtypes-management-table-header">
+
+            <div class="roomtypes-management-table-title">
+
+                <div class="roomtypes-management-table-icon">
+                    <i class="bi bi-house-door"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        ROOM CATEGORIES
+                    </span>
+
+                    <h2>
+                        All Room Types
+                    </h2>
+
+                    <p>
+                        View and manage all room types available in the hotel.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="roomtypes-management-count">
+
+                <strong>
+                    @Model.Count()
+                </strong>
+
+                <span>
+                    Room Types
+                </span>
+
+            </div>
+
+        </div>
+
+
+        @if (!Model.Any())
         {
-            <tr>
-                <td>@type.Name</td>
-                <td>@type.BasePricePerNight</td>
-                <td>@type.Capacity</td>
-                <td>@type.Description</td>
+            <div class="roomtypes-management-empty">
 
-                <td>
-                    <a asp-action="Edit"
-                       asp-route-id="@type.Id">
-                        Edit
-                    </a>
+                <div class="roomtypes-management-empty-icon">
+                    <i class="bi bi-house-x"></i>
+                </div>
 
-                    <a asp-action="Delete"
-                       asp-route-id="@type.Id">
-                        Delete
-                    </a>
-                </td>
-            </tr>
+                <span>
+                    NO ROOM TYPES YET
+                </span>
+
+                <h3>
+                    No Room Types Found
+                </h3>
+
+                <p>
+                    There are currently no room types registered
+                    in the system.
+                </p>
+
+                <a asp-action="Create"
+                   class="roomtypes-management-empty-btn">
+
+                    <i class="bi bi-plus-lg"></i>
+
+                    Add Your First Room Type
+
+                </a>
+
+            </div>
         }
-    </tbody>
-</table>
+        else
+        {
+            <div class="table-responsive">
+
+                <table class="roomtypes-management-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Room Type
+                            </th>
+
+                            <th>
+                                Price / Night
+                            </th>
+
+                            <th>
+                                Capacity
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th class="text-end">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var type in Model)
+                        {
+                            <tr>
+
+                                <!-- Name -->
+                                <td>
+
+                                    <div class="roomtypes-management-name">
+
+                                        <div class="roomtypes-management-name-icon">
+                                            <i class="bi bi-house-door"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <span>
+                                                ROOM TYPE
+                                            </span>
+
+                                            <strong>
+                                                @type.Name
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Price -->
+                                <td>
+
+                                    <strong class="roomtypes-management-price">
+
+                                        @type.BasePricePerNight.ToString("N2")
+
+                                        <small>
+                                            EGP
+                                        </small>
+
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- Capacity -->
+                                <td>
+
+                                    <span class="roomtypes-management-capacity">
+
+                                        <i class="bi bi-people"></i>
+
+                                        @type.Capacity
+
+                                        <small>
+                                            Guests
+                                        </small>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Description -->
+                                <td>
+
+                                    @if (!string.IsNullOrWhiteSpace(type.Description))
+                                    {
+                                        <span class="roomtypes-management-description">
+                                            @type.Description
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="roomtypes-management-no-description">
+                                            No description
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- Actions -->
+                                <td>
+
+                                    <div class="roomtypes-management-actions">
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@type.Id"
+                                           class="roomtypes-management-edit-btn">
+
+                                            <i class="bi bi-pencil-square"></i>
+
+                                            Edit
+
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@type.Id"
+                                           class="roomtypes-management-delete-btn">
+
+                                            <i class="bi bi-trash3"></i>
+
+                                            Delete
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,67 +1,238 @@
 @model HotelReservationSystem.ViewModels.RegisterViewModel
+
 @{
     ViewData["Title"] = "Register";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Create a Guest Account</h3>
+<div class="auth-page">
 
-                <form asp-controller="Account" asp-action="Register" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="auth-card register-card">
 
-                    <div class="mb-3">
-                        <label asp-for="FullName" class="form-label"></label>
-                        <input asp-for="FullName" class="form-control" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
+        <!-- Header -->
+        <div class="auth-header">
 
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" autocomplete="username" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" class="form-control" autocomplete="new-password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="NationalIdOrPassport" class="form-label"></label>
-                        <input asp-for="NationalIdOrPassport" class="form-control" />
-                        <span asp-validation-for="NationalIdOrPassport" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Phone" class="form-label"></label>
-                        <input asp-for="Phone" class="form-control" />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Register</button>
-                </form>
-
-                <p class="text-center mt-3 mb-0">
-                    Already have an account? <a asp-action="Login">Login here</a>
-                </p>
+            <div class="auth-icon">
+                <i class="bi bi-person-plus"></i>
             </div>
+
+            <span class="auth-label">
+                JOIN LUXORA HOTEL
+            </span>
+
+            <h1>Create Account</h1>
+
+            <p>
+                Create your guest account and start enjoying
+                a comfortable and memorable hotel experience.
+            </p>
+
         </div>
+
+
+        <!-- Register Form -->
+        <form asp-controller="Account"
+              asp-action="Register"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="auth-validation">
+            </div>
+
+
+            <!-- Full Name -->
+            <div class="auth-form-group">
+
+                <label asp-for="FullName">
+                    Full Name
+                </label>
+
+                <div class="auth-input-wrapper">
+
+                    <i class="bi bi-person"></i>
+
+                    <input asp-for="FullName"
+                           class="auth-input"
+                           placeholder="Enter your full name" />
+
+                </div>
+
+                <span asp-validation-for="FullName"
+                      class="auth-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="auth-form-group">
+
+                <label asp-for="Email">
+                    Email Address
+                </label>
+
+                <div class="auth-input-wrapper">
+
+                    <i class="bi bi-envelope"></i>
+
+                    <input asp-for="Email"
+                           class="auth-input"
+                           autocomplete="username"
+                           placeholder="Enter your email address" />
+
+                </div>
+
+                <span asp-validation-for="Email"
+                      class="auth-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Passwords -->
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="auth-form-group">
+
+                        <label asp-for="Password">
+                            Password
+                        </label>
+
+                        <div class="auth-input-wrapper">
+
+                            <i class="bi bi-lock"></i>
+
+                            <input asp-for="Password"
+                                   class="auth-input"
+                                   autocomplete="new-password"
+                                   placeholder="Create password" />
+
+                        </div>
+
+                        <span asp-validation-for="Password"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="auth-form-group">
+
+                        <label asp-for="ConfirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="auth-input-wrapper">
+
+                            <i class="bi bi-lock-fill"></i>
+
+                            <input asp-for="ConfirmPassword"
+                                   class="auth-input"
+                                   autocomplete="new-password"
+                                   placeholder="Confirm password" />
+
+                        </div>
+
+                        <span asp-validation-for="ConfirmPassword"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- National ID / Passport -->
+            <div class="auth-form-group">
+
+                <label asp-for="NationalIdOrPassport">
+                    National ID / Passport
+                </label>
+
+                <div class="auth-input-wrapper">
+
+                    <i class="bi bi-card-text"></i>
+
+                    <input asp-for="NationalIdOrPassport"
+                           class="auth-input"
+                           placeholder="Enter your ID or passport number" />
+
+                </div>
+
+                <span asp-validation-for="NationalIdOrPassport"
+                      class="auth-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Phone -->
+            <div class="auth-form-group">
+
+                <label asp-for="Phone">
+                    Phone Number
+                </label>
+
+                <div class="auth-input-wrapper">
+
+                    <i class="bi bi-telephone"></i>
+
+                    <input asp-for="Phone"
+                           class="auth-input"
+                           placeholder="Enter your phone number" />
+
+                </div>
+
+                <span asp-validation-for="Phone"
+                      class="auth-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Register Button -->
+            <button type="submit"
+                    class="auth-submit-btn">
+
+                <i class="bi bi-person-check"></i>
+
+                Create Guest Account
+
+            </button>
+
+        </form>
+
+
+        <!-- Login -->
+        <div class="auth-footer">
+
+            <span>
+                Already have an account?
+            </span>
+
+            <a asp-action="Login">
+                Sign in
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
     </div>
+
 </div>
 
+
 @section Scripts {
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
 }

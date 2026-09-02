@@ -1,43 +1,240 @@
 @model HotelReservationSystem.ViewModels.AvailableRoomsViewModel
+
 @{
     ViewData["Title"] = "Available Rooms";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-10">
-        <h3 class="mb-4 text-center">
-            Available Rooms (@Model.CheckInDate.ToShortDateString() - @Model.CheckOutDate.ToShortDateString())
-        </h3>
+<div class="available-rooms-page">
 
-        @if (!Model.AvailableRooms.Any())
-        {
-            <div class="alert alert-info text-center">No rooms available for the selected dates.</div>
-        }
-        else
-        {
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach (var room in Model.AvailableRooms)
-                {
-                    <div class="col">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">Room @room.RoomNumber</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">@room.RoomType.Name</h6>
-                                <p class="card-text">Capacity: @room.RoomType.Capacity guests</p>
-                                <p class="card-text fw-bold">@room.RoomType.BasePricePerNight.ToString("C") / night</p>
+    <!-- Header -->
+    <div class="available-rooms-header">
+
+        <div class="available-rooms-heading">
+
+            <span class="available-rooms-label">
+                LUXORA HOTEL
+            </span>
+
+            <h1>
+                Find Your Perfect Room
+            </h1>
+
+            <p>
+                Choose from our available rooms and enjoy
+                a comfortable and memorable stay.
+            </p>
+
+        </div>
+
+        <div class="available-rooms-date">
+
+            <i class="bi bi-calendar-check"></i>
+
+            <div>
+                <span>
+                    Your Stay
+                </span>
+
+                <strong>
+                    @Model.CheckInDate.ToShortDateString()
+                    –
+                    @Model.CheckOutDate.ToShortDateString()
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    @if (!Model.AvailableRooms.Any())
+    {
+        <!-- Empty State -->
+        <div class="available-rooms-empty">
+
+            <div class="available-rooms-empty-icon">
+                <i class="bi bi-door-closed"></i>
+            </div>
+
+            <span class="available-rooms-empty-label">
+                NO ROOMS AVAILABLE
+            </span>
+
+            <h2>
+                No Rooms Available
+            </h2>
+
+            <p>
+                Unfortunately, there are no rooms available
+                for the selected dates.
+                Please try different dates.
+            </p>
+
+            <a asp-controller="Room"
+               asp-action="Index"
+               class="available-rooms-back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Browse Rooms
+
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <!-- Results Header -->
+        <div class="available-rooms-results-header">
+
+            <div>
+
+                <span class="available-results-label">
+                    AVAILABLE FOR YOUR STAY
+                </span>
+
+                <h2>
+                    Choose Your Room
+                </h2>
+
+            </div>
+
+            <div class="available-results-count">
+
+                <strong>
+                    @Model.AvailableRooms.Count()
+                </strong>
+
+                <span>
+                    Rooms Available
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Room Cards -->
+        <div class="row g-4">
+
+            @foreach (var room in Model.AvailableRooms)
+            {
+                <div class="col-md-6 col-xl-4">
+
+                    <div class="available-room-card">
+
+                        <!-- Room Icon -->
+                        <div class="available-room-image">
+
+                            <div class="available-room-icon">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+
+                            <span class="available-room-badge">
+                                <i class="bi bi-check-circle"></i>
+                                Available
+                            </span>
+
+                        </div>
+
+
+                        <!-- Room Content -->
+                        <div class="available-room-content">
+
+                            <div class="available-room-title">
+
+                                <div>
+
+                                    <span class="available-room-type-label">
+                                        ROOM
+                                    </span>
+
+                                    <h3>
+                                        @room.RoomNumber
+                                    </h3>
+
+                                </div>
+
+                                <div class="available-room-star">
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                            </div>
+
+
+                            <div class="available-room-type">
+
+                                <i class="bi bi-house-door"></i>
+
+                                <span>
+                                    @room.RoomType.Name
+                                </span>
+
+                            </div>
+
+
+                            <div class="available-room-features">
+
+                                <div class="available-room-feature">
+
+                                    <i class="bi bi-people"></i>
+
+                                    <span>
+                                        @room.RoomType.Capacity Guests
+                                    </span>
+
+                                </div>
+
+                                <div class="available-room-feature">
+
+                                    <i class="bi bi-moon-stars"></i>
+
+                                    <span>
+                                        Per Night
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="available-room-footer">
+
+                                <div class="available-room-price">
+
+                                    <strong>
+                                        @room.RoomType.BasePricePerNight.ToString("C")
+                                    </strong>
+
+                                    <span>
+                                        / night
+                                    </span>
+
+                                </div>
+
+
                                 <a asp-action="Create"
                                    asp-route-roomId="@room.Id"
                                    asp-route-checkIn="@Model.CheckInDate.ToString("yyyy-MM-dd")"
                                    asp-route-checkOut="@Model.CheckOutDate.ToString("yyyy-MM-dd")"
-                                   class="btn btn-primary w-100">
-                                    Book this room
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-    </div>
-</div>
+                                   class="available-room-book-btn">
 
+                                    Book This Room
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

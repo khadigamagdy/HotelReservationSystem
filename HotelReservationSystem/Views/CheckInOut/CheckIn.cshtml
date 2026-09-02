@@ -4,130 +4,219 @@
     ViewData["Title"] = "Check-In Guest";
 }
 
-<div class="container mt-4">
+<div class="checkin-page">
 
-    <div class="row justify-content-center">
+    <div class="checkin-card">
 
-        <div class="col-md-8">
+        <!-- Header -->
+        <div class="checkin-header">
 
-            <div class="card shadow-sm">
+            <div class="checkin-icon">
+                <i class="bi bi-box-arrow-in-right"></i>
+            </div>
 
-                <div class="card-header">
-                    <h3 class="mb-0">Guest Check-In</h3>
+            <span class="checkin-label">
+                FRONT DESK
+            </span>
+
+            <h1>Guest Check-In</h1>
+
+            <p>
+                Review the reservation details carefully before
+                confirming the guest's check-in.
+            </p>
+
+        </div>
+
+
+        <!-- Information -->
+        <div class="reservation-info-card">
+
+            <div class="reservation-info-title">
+                <i class="bi bi-calendar-check"></i>
+
+                <div>
+                    <h3>Reservation Details</h3>
+                    <span>Review guest and booking information</span>
+                </div>
+            </div>
+
+
+            <div class="reservation-details-grid">
+
+                <!-- Reservation ID -->
+                <div class="reservation-detail">
+
+                    <span>
+                        Reservation ID
+                    </span>
+
+                    <strong>
+                        #@Model.Id
+                    </strong>
+
                 </div>
 
-                <div class="card-body">
 
-                    <div class="alert alert-info">
-                        Please review the reservation details before confirming check-in.
-                    </div>
+                <!-- Guest Name -->
+                <div class="reservation-detail">
 
-                    <div class="row mb-3">
+                    <span>
+                        Guest Name
+                    </span>
 
-                        <div class="col-md-6">
-                            <strong>Reservation ID</strong>
-                            <p>#@Model.Id</p>
-                        </div>
+                    <strong>
+                        @Model.Guest?.User?.FullName
+                    </strong>
 
-                        <div class="col-md-6">
-                            <strong>Guest Name</strong>
-                            <p>
-                                @Model.Guest?.User?.FullName
-                            </p>
-                        </div>
+                </div>
 
-                    </div>
 
-                    <div class="row mb-3">
+                <!-- Room Number -->
+                <div class="reservation-detail">
 
-                        <div class="col-md-6">
-                            <strong>Room Number</strong>
-                            <p>
-                                @Model.Room?.RoomNumber
-                            </p>
-                        </div>
+                    <span>
+                        Room Number
+                    </span>
 
-                        <div class="col-md-6">
-                            <strong>Room Type</strong>
-                            <p>
-                                @Model.Room?.RoomType?.Name
-                            </p>
-                        </div>
+                    <strong>
+                        @Model.Room?.RoomNumber
+                    </strong>
 
-                    </div>
+                </div>
 
-                    <div class="row mb-3">
 
-                        <div class="col-md-6">
-                            <strong>Check-In Date</strong>
-                            <p>
-                                @Model.CheckInDate.ToString("dd/MM/yyyy")
-                            </p>
-                        </div>
+                <!-- Room Type -->
+                <div class="reservation-detail">
 
-                        <div class="col-md-6">
-                            <strong>Check-Out Date</strong>
-                            <p>
-                                @Model.CheckOutDate.ToString("dd/MM/yyyy")
-                            </p>
-                        </div>
+                    <span>
+                        Room Type
+                    </span>
 
-                    </div>
+                    <strong>
+                        @Model.Room?.RoomType?.Name
+                    </strong>
 
-                    <div class="row mb-4">
+                </div>
 
-                        <div class="col-md-6">
-                            <strong>Total Price</strong>
-                            <p>
-                                @Model.TotalPrice.ToString("N2") EGP
-                            </p>
-                        </div>
 
-                        <div class="col-md-6">
-                            <strong>Payment Status</strong>
-                            <p>
-                                @Model.PaymentStatus
-                            </p>
-                        </div>
+                <!-- Check-In -->
+                <div class="reservation-detail">
 
-                    </div>
+                    <span>
+                        Check-In Date
+                    </span>
 
-                    <div class="alert alert-warning">
-                        <strong>Important:</strong>
-                        Confirming check-in will mark the reservation as
-                        <strong>Checked In</strong> and the room as
-                        <strong>Occupied</strong>.
-                    </div>
+                    <strong>
+                        @Model.CheckInDate.ToString("dd/MM/yyyy")
+                    </strong>
 
-                    <form asp-controller="CheckInOut"
-                          asp-action="CheckIn"
-                          asp-route-id="@Model.Id"
-                          method="post">
+                </div>
 
-                        @Html.AntiForgeryToken()
 
-                        <div class="d-flex gap-2">
+                <!-- Check-Out -->
+                <div class="reservation-detail">
 
-                            <button type="submit"
-                                    class="btn btn-success">
-                                Confirm Check-In
-                            </button>
+                    <span>
+                        Check-Out Date
+                    </span>
 
-                            <a asp-controller="CheckInOut"
-                               asp-action="Reservations"
-                               class="btn btn-secondary">
-                                Cancel
-                            </a>
+                    <strong>
+                        @Model.CheckOutDate.ToString("dd/MM/yyyy")
+                    </strong>
 
-                        </div>
+                </div>
 
-                    </form>
+
+                <!-- Total Price -->
+                <div class="reservation-detail">
+
+                    <span>
+                        Total Price
+                    </span>
+
+                    <strong class="price-value">
+                        @Model.TotalPrice.ToString("N2") EGP
+                    </strong>
+
+                </div>
+
+
+                <!-- Payment Status -->
+                <div class="reservation-detail">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong class="payment-status">
+                        @Model.PaymentStatus
+                    </strong>
 
                 </div>
 
             </div>
 
         </div>
+
+
+        <!-- Important Notice -->
+        <div class="checkin-warning">
+
+            <div class="warning-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Important
+                </strong>
+
+                <p>
+                    Confirming check-in will mark the reservation as
+                    <strong>Checked In</strong> and the room as
+                    <strong>Occupied</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Actions -->
+        <form asp-controller="CheckInOut"
+              asp-action="CheckIn"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div class="checkin-actions">
+
+                <button type="submit"
+                        class="checkin-confirm-btn">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Confirm Check-In
+
+                </button>
+
+
+                <a asp-controller="CheckInOut"
+                   asp-action="Reservations"
+                   class="checkin-cancel-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
 

@@ -4,46 +4,82 @@
     ViewData["Title"] = "Create Amenity";
 }
 
-<h1>Create Amenity</h1>
+<div class="management-page">
 
-<h4>Amenity</h4>
-<hr />
+    <div class="management-card">
 
-<div class="row">
+        <!-- Header -->
+        <div class="management-header">
 
-    ```
-    <div class="col-md-6">
+            <div class="management-icon">
+                <i class="bi bi-plus-circle"></i>
+            </div>
 
+            <span class="management-label">
+                HOTEL MANAGEMENT
+            </span>
+
+            <h1>Create Amenity</h1>
+
+            <p>
+                Add a new amenity to make your hotel rooms
+                more comfortable and convenient for guests.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
         <form asp-action="Create" method="post">
 
             <div asp-validation-summary="ModelOnly"
-                 class="text-danger">
+                 class="management-validation">
             </div>
 
-            <div class="form-group mb-3">
 
-                <label asp-for="Name"
-                       class="control-label">
+            <!-- Amenity Name -->
+            <div class="management-form-group">
+
+                <label asp-for="Name">
+                    Amenity Name
                 </label>
 
-                <input asp-for="Name"
-                       class="form-control" />
+                <div class="management-input-wrapper">
+
+                    <i class="bi bi-stars"></i>
+
+                    <input asp-for="Name"
+                           class="management-input"
+                           placeholder="Enter amenity name" />
+
+                </div>
 
                 <span asp-validation-for="Name"
-                      class="text-danger">
+                      class="management-field-error">
                 </span>
 
             </div>
 
-            <div class="form-group">
 
-                <input type="submit"
-                       value="Create"
-                       class="btn btn-primary" />
+            <!-- Actions -->
+            <div class="management-actions">
+
+                <button type="submit"
+                        class="management-primary-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Create Amenity
+
+                </button>
 
                 <a asp-action="Index"
-                   class="btn btn-secondary">
+                   class="management-secondary-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
                     Back to List
+
                 </a>
 
             </div>
@@ -51,13 +87,14 @@
         </form>
 
     </div>
-    ```
 
 </div>
 
+
 @section Scripts {
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
 
+}

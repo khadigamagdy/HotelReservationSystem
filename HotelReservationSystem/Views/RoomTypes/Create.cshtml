@@ -1,42 +1,229 @@
 @model HotelReservationSystem.Models.Entities.RoomType
 
-<h1>Create Room Type</h1>
+@{
+    ViewData["Title"] = "Create Room Type";
+}
 
-<form asp-action="Create" method="post">
+<div class="roomtype-management-page">
 
-    <div class="mb-3">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name"></span>
+    <div class="roomtype-management-card">
+
+        <!-- Header -->
+        <div class="roomtype-management-header">
+
+            <div class="roomtype-management-icon">
+                <i class="bi bi-house-add"></i>
+            </div>
+
+            <span class="roomtype-management-label">
+                ROOM TYPE MANAGEMENT
+            </span>
+
+            <h1>
+                Create Room Type
+            </h1>
+
+            <p>
+                Add a new room type and define its pricing,
+                capacity and description.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
+        <form asp-action="Create"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="roomtype-management-validation">
+            </div>
+
+
+            <!-- Basic Information -->
+            <div class="roomtype-management-section">
+
+                <div class="roomtype-management-section-title">
+
+                    <div class="roomtype-management-section-icon">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ROOM TYPE INFORMATION
+                        </span>
+
+                        <h2>
+                            Basic Details
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    <!-- Name -->
+                    <div class="col-12">
+
+                        <div class="roomtype-management-form-group">
+
+                            <label asp-for="Name">
+                                Room Type Name
+                            </label>
+
+                            <div class="roomtype-management-input-wrapper">
+
+                                <i class="bi bi-house-door"></i>
+
+                                <input asp-for="Name"
+                                       class="roomtype-management-input"
+                                       placeholder="Enter room type name" />
+
+                            </div>
+
+                            <span asp-validation-for="Name"
+                                  class="roomtype-management-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Price -->
+                    <div class="col-md-6">
+
+                        <div class="roomtype-management-form-group">
+
+                            <label asp-for="BasePricePerNight">
+                                Price Per Night
+                            </label>
+
+                            <div class="roomtype-management-input-wrapper">
+
+                                <i class="bi bi-cash-stack"></i>
+
+                                <input asp-for="BasePricePerNight"
+                                       class="roomtype-management-input"
+                                       type="number"
+                                       step="0.01"
+                                       placeholder="Enter price per night" />
+
+                                <span class="roomtype-management-currency">
+                                    EGP
+                                </span>
+
+                            </div>
+
+                            <span asp-validation-for="BasePricePerNight"
+                                  class="roomtype-management-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Capacity -->
+                    <div class="col-md-6">
+
+                        <div class="roomtype-management-form-group">
+
+                            <label asp-for="Capacity">
+                                Guest Capacity
+                            </label>
+
+                            <div class="roomtype-management-input-wrapper">
+
+                                <i class="bi bi-people"></i>
+
+                                <input asp-for="Capacity"
+                                       class="roomtype-management-input"
+                                       type="number"
+                                       placeholder="Number of guests" />
+
+                                <span class="roomtype-management-suffix">
+                                    Guests
+                                </span>
+
+                            </div>
+
+                            <span asp-validation-for="Capacity"
+                                  class="roomtype-management-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Description -->
+                    <div class="col-12">
+
+                        <div class="roomtype-management-form-group">
+
+                            <label asp-for="Description">
+                                Description
+                            </label>
+
+                            <div class="roomtype-management-textarea-wrapper">
+
+                                <i class="bi bi-card-text"></i>
+
+                                <textarea asp-for="Description"
+                                          class="roomtype-management-textarea"
+                                          rows="5"
+                                          placeholder="Describe this room type..."></textarea>
+
+                            </div>
+
+                            <span asp-validation-for="Description"
+                                  class="roomtype-management-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="roomtype-management-actions">
+
+                <button type="submit"
+                        class="roomtype-management-primary-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Create Room Type
+
+                </button>
+
+
+                <a asp-action="Index"
+                   class="roomtype-management-secondary-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
     </div>
 
-    <div class="mb-3">
-        <label asp-for="BasePricePerNight"></label>
-        <input asp-for="BasePricePerNight"
-               class="form-control"
-               type="number"
-               step="0.01" />
-    </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Capacity"></label>
-        <input asp-for="Capacity"
-               class="form-control"
-               type="number" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"
-                  class="form-control"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-        Create
-    </button>
-
-    <a asp-action="Index">Cancel</a>
-</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

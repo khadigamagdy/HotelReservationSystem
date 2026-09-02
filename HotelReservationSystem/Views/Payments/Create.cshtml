@@ -1,99 +1,82 @@
-
+id="q7m2kx"
 @using HotelReservationSystem.Models
 
 @{
     ViewData["Title"] = "Add Payment";
+
     var reservationId = ViewBag.ReservationId;
     var totalPaid = ViewBag.TotalPaid ?? 0;
 }
 
-<div class="container mt-5">
+<div class="payment-page">
 
-    <div class="row justify-content-center">
+    <div class="payment-card">
 
-        <div class="col-md-7">
+        <!-- Header -->
+        <div class="payment-header">
 
-            <div class="card shadow">
+            <div class="payment-icon">
+                <i class="bi bi-credit-card"></i>
+            </div>
 
-                <div class="card-header">
-                    <h3 class="mb-0">Add Payment</h3>
+            <span class="payment-label">
+                PAYMENT MANAGEMENT
+            </span>
+
+            <h1>
+                Add Payment
+            </h1>
+
+            <p>
+                Record a payment for the selected reservation
+                and keep the guest's account up to date.
+            </p>
+
+        </div>
+
+
+        <!-- Reservation Summary -->
+        <div class="payment-summary">
+
+            <div class="payment-summary-item">
+
+                <div class="payment-summary-icon">
+                    <i class="bi bi-calendar-check"></i>
                 </div>
 
-                <div class="card-body">
+                <div>
 
-                    <div class="alert alert-light border">
-                        <strong>Reservation ID:</strong>
-                        @reservationId
-                    </div>
+                    <span>
+                        Reservation
+                    </span>
 
-                    <div class="alert alert-info">
-                        <strong>Total Paid:</strong>
+                    <strong>
+                        #@reservationId
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-summary-divider"></div>
+
+
+            <div class="payment-summary-item">
+
+                <div class="payment-summary-icon">
+                    <i class="bi bi-cash-stack"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Paid
+                    </span>
+
+                    <strong class="payment-paid-value">
                         @totalPaid EGP
-                    </div>
-
-                    <form asp-controller="Payments"
-                          asp-action="Create"
-                          method="post">
-
-                        @Html.AntiForgeryToken()
-
-                        <input type="hidden"
-                               name="reservationId"
-                               value="@reservationId" />
-
-                        <div class="mb-3">
-
-                            <label for="amount"
-                                   class="form-label">
-                                Payment Amount
-                            </label>
-
-                            <input type="number"
-                                   id="amount"
-                                   name="amount"
-                                   class="form-control"
-                                   min="0.01"
-                                   step="0.01"
-                                   required />
-
-                            <span class="text-danger">
-                                @Html.ValidationMessage("amount")
-                            </span>
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="method"
-                                   class="form-label">
-                                Payment Method
-                            </label>
-
-                            <select id="method"
-                                    name="method"
-                                    class="form-select"
-                                    asp-items="Html.GetEnumSelectList<PaymentMethod>()">
-                            </select>
-
-                        </div>
-
-                        <div class="d-flex gap-2">
-
-                            <button type="submit"
-                                    class="btn btn-primary">
-                                Add Payment
-                            </button>
-
-                            <a asp-controller="Payments"
-                               asp-action="ReservationPayments"
-                               asp-route-reservationId="@reservationId"
-                               class="btn btn-secondary">
-                                Back
-                            </a>
-
-                        </div>
-
-                    </form>
+                    </strong>
 
                 </div>
 
@@ -101,8 +84,99 @@
 
         </div>
 
+
+        <!-- Payment Form -->
+        <form asp-controller="Payments"
+              asp-action="Create"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="reservationId"
+                   value="@reservationId" />
+
+
+            <div class="payment-form-group">
+
+                <label for="amount">
+                    Payment Amount
+                </label>
+
+                <div class="payment-input-wrapper">
+
+                    <i class="bi bi-cash"></i>
+
+                    <input type="number"
+                           id="amount"
+                           name="amount"
+                           class="payment-input"
+                           min="0.01"
+                           step="0.01"
+                           placeholder="Enter payment amount"
+                           required />
+
+                    <span class="payment-currency">
+                        EGP
+                    </span>
+
+                </div>
+
+                <span class="payment-field-error">
+                    @Html.ValidationMessage("amount")
+                </span>
+
+            </div>
+
+
+            <div class="payment-form-group">
+
+                <label for="method">
+                    Payment Method
+                </label>
+
+                <div class="payment-input-wrapper">
+
+                    <i class="bi bi-wallet2"></i>
+
+                    <select id="method"
+                            name="method"
+                            class="payment-select"
+                            asp-items="Html.GetEnumSelectList<PaymentMethod>()">
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="payment-actions">
+
+                <button type="submit"
+                        class="payment-submit-btn">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Add Payment
+
+                </button>
+
+                <a asp-controller="Payments"
+                   asp-action="ReservationPayments"
+                   asp-route-reservationId="@reservationId"
+                   class="payment-back-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back
+
+                </a>
+
+            </div>
+
+        </form>
+
     </div>
 
 </div>
-
-

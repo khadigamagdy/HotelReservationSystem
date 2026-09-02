@@ -21,247 +21,382 @@
             payment.Method == PaymentMethod.Online);
 }
 
-<style>
-    .report-page {
-        padding: 35px 0;
-    }
+<div class="payments-report-page">
 
-    .report-header {
-        background: linear-gradient(135deg, #0f172a, #047857);
-        color: white;
-        padding: 32px;
-        border-radius: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
-    }
+    <!-- Report Header -->
+    <div class="payments-report-header">
 
-        .report-header h1 {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        <div class="payments-report-heading">
 
-        .report-header p {
-            color: #d1fae5;
-            margin: 0;
-        }
+            <span class="payments-report-label">
+                HOTEL ANALYTICS
+            </span>
 
-    .summary-card {
-        height: 100%;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
-    }
+            <h1>
+                Payments Report
+            </h1>
 
-        .summary-card span {
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
-        }
+            <p>
+                Review payment activity, transaction methods
+                and hotel revenue in detail.
+            </p>
 
-        .summary-card h3 {
-            color: #0f172a;
-            font-weight: 750;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
+        </div>
 
-    .report-table-container {
-        margin-top: 25px;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-        overflow-x: auto;
-    }
 
-    .report-table {
-        width: 100%;
-        margin: 0;
-    }
+        <div class="payments-report-header-actions">
 
-        .report-table th {
-            background: #f1f5f9;
-            color: #334155;
-            padding: 14px;
-            border-bottom: 1px solid #e2e8f0;
-            white-space: nowrap;
-        }
-
-        .report-table td {
-            padding: 14px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-            white-space: nowrap;
-        }
-
-    .method-badge {
-        display: inline-block;
-        padding: 7px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .method-Cash {
-        color: #15803d;
-        background: #dcfce7;
-    }
-
-    .method-Card {
-        color: #1d4ed8;
-        background: #dbeafe;
-    }
-
-    .method-Online {
-        color: #7e22ce;
-        background: #f3e8ff;
-    }
-
-    .amount-value {
-        color: #15803d;
-        font-weight: 700;
-    }
-
-    .back-link {
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 10px;
-        padding: 9px 15px;
-        text-decoration: none;
-    }
-
-        .back-link:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.12);
-        }
-</style>
-
-<div class="container report-page">
-    <div class="report-header">
-        <div class="d-flex justify-content-between
-                    align-items-center flex-wrap gap-3">
-
-            <div>
-                <h1>Payments Report</h1>
-
-                <p>
-                    Review all payments and hotel revenue.
-                </p>
+            <div class="payments-report-icon">
+                <i class="bi bi-bar-chart-line"></i>
             </div>
 
             <a asp-controller="Dashboard"
                asp-action="Index"
-               class="back-link">
+               class="payments-report-back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
                 Back to Dashboard
+
             </a>
+
         </div>
+
     </div>
 
-    <div class="row g-3">
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Total Revenue</span>
 
-                <h3>
+    <!-- Summary -->
+    <div class="row g-4 payments-report-summary">
+
+        <!-- Total Revenue -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="payments-summary-card">
+
+                <div class="payments-summary-top">
+
+                    <span>
+                        Total Revenue
+                    </span>
+
+                    <div class="payments-summary-icon summary-green">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                </div>
+
+                <strong class="payments-summary-value">
                     @totalRevenue.ToString("N2")
-                    <small class="fs-6">EGP</small>
-                </h3>
+                    <small>EGP</small>
+                </strong>
+
+                <span class="payments-summary-description">
+                    Total recorded payments
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Cash Payments</span>
-                <h3>@cashPayments</h3>
+
+        <!-- Cash Payments -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="payments-summary-card">
+
+                <div class="payments-summary-top">
+
+                    <span>
+                        Cash Payments
+                    </span>
+
+                    <div class="payments-summary-icon summary-green">
+                        <i class="bi bi-cash"></i>
+                    </div>
+
+                </div>
+
+                <strong class="payments-summary-value">
+                    @cashPayments
+                </strong>
+
+                <span class="payments-summary-description">
+                    Cash transactions
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Card Payments</span>
-                <h3>@cardPayments</h3>
+
+        <!-- Card Payments -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="payments-summary-card">
+
+                <div class="payments-summary-top">
+
+                    <span>
+                        Card Payments
+                    </span>
+
+                    <div class="payments-summary-icon summary-blue">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+
+                </div>
+
+                <strong class="payments-summary-value">
+                    @cardPayments
+                </strong>
+
+                <span class="payments-summary-description">
+                    Card transactions
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Online Payments</span>
-                <h3>@onlinePayments</h3>
+
+        <!-- Online Payments -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="payments-summary-card">
+
+                <div class="payments-summary-top">
+
+                    <span>
+                        Online Payments
+                    </span>
+
+                    <div class="payments-summary-icon summary-purple">
+                        <i class="bi bi-globe2"></i>
+                    </div>
+
+                </div>
+
+                <strong class="payments-summary-value">
+                    @onlinePayments
+                </strong>
+
+                <span class="payments-summary-description">
+                    Online transactions
+                </span>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="report-table-container">
+
+    <!-- Payments Table -->
+    <div class="payments-report-table-card">
+
+        <div class="payments-report-table-header">
+
+            <div class="payments-report-table-title">
+
+                <div class="payments-report-table-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div>
+
+                    <span class="payments-report-table-label">
+                        TRANSACTION HISTORY
+                    </span>
+
+                    <h2>
+                        All Payments
+                    </h2>
+
+                    <p>
+                        Detailed record of all hotel payment transactions.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="payments-report-count">
+                @Model.Count
+                <span>Payments</span>
+            </div>
+
+        </div>
+
+
         @if (Model.Count == 0)
         {
-            <div class="text-center py-5 text-muted">
-                No payments were found.
+            <div class="payments-report-empty">
+
+                <div class="payments-report-empty-icon">
+                    <i class="bi bi-receipt-cutoff"></i>
+                </div>
+
+                <h3>
+                    No Payments Found
+                </h3>
+
+                <p>
+                    There are currently no payment transactions
+                    available in the system.
+                </p>
+
             </div>
         }
         else
         {
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>Payment ID</th>
-                        <th>Reservation</th>
-                        <th>Guest</th>
-                        <th>Amount</th>
-                        <th>Method</th>
-                        <th>Payment Date</th>
-                        <th>Recorded By</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
 
-                <tbody>
-                    @foreach (var payment in Model)
-                    {
+                <table class="payments-report-table">
+
+                    <thead>
+
                         <tr>
-                            <td>#@payment.Id</td>
-
-                            <td>
-                                #@payment.ReservationId
-                            </td>
-
-                            <td>
-                                @payment.Reservation
-                                .Guest.User.FullName
-                            </td>
-
-                            <td class="amount-value">
-                                @payment.Amount.ToString("N2") EGP
-                            </td>
-
-                            <td>
-                                <span class="method-badge method-@payment.Method">
-                                    @payment.Method
-                                </span>
-                            </td>
-
-                            <td>
-                                @payment.PaidAt
-                                .ToString("dd MMM yyyy, hh:mm tt")
-                            </td>
-
-                            <td>
-                                @if (payment.RecordedByUser != null)
-                                {
-                                    @payment.RecordedByUser.FullName
-                                }
-                                else
-                                {
-                                    <span class="text-muted">
-                                        Guest Online Payment
-                                    </span>
-                                }
-                            </td>
+                            <th>Payment ID</th>
+                            <th>Reservation</th>
+                            <th>Guest</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Payment Date</th>
+                            <th>Recorded By</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var payment in Model)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    <span class="report-payment-id">
+                                        #@payment.Id
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="report-reservation-id">
+                                        #@payment.ReservationId
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="report-guest-cell">
+
+                                        <div class="report-guest-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+
+                                        <span>
+                                            @payment.Reservation
+                                            .Guest.User.FullName
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <strong class="report-amount-value">
+                                        @payment.Amount.ToString("N2") EGP
+                                    </strong>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="report-method-badge method-@payment.Method">
+
+                                        @if (payment.Method == PaymentMethod.Cash)
+                                        {
+                                            <i class="bi bi-cash"></i>
+                                        }
+                                        else if (payment.Method == PaymentMethod.Card)
+                                        {
+                                            <i class="bi bi-credit-card"></i>
+                                        }
+                                        else if (payment.Method == PaymentMethod.Online)
+                                        {
+                                            <i class="bi bi-globe2"></i>
+                                        }
+
+                                        @payment.Method
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="report-payment-date">
+
+                                        <i class="bi bi-clock"></i>
+
+                                        <span>
+                                            @payment.PaidAt
+                                            .ToString("dd MMM yyyy, hh:mm tt")
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    @if (payment.RecordedByUser != null)
+                                    {
+                                        <div class="report-recorded-user">
+
+                                            <div class="report-user-icon">
+                                                <i class="bi bi-person-check"></i>
+                                            </div>
+
+                                            <span>
+                                                @payment.RecordedByUser.FullName
+                                            </span>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="report-online-payment-user">
+
+                                            <i class="bi bi-globe2"></i>
+
+                                            Guest Online Payment
+
+                                        </span>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
+
     </div>
+
 </div>

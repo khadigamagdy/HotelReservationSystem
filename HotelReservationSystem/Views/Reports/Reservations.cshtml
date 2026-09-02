@@ -21,245 +21,422 @@
             HotelReservationSystem.Enums.BookingStatus.CheckedOut);
 }
 
-<style>
-    .report-page {
-        padding: 35px 0;
-    }
+<div class="reservations-report-page">
 
-    .report-header {
-        background: linear-gradient(135deg, #0f172a, #1d4ed8);
-        color: white;
-        padding: 32px;
-        border-radius: 20px;
-        margin-bottom: 25px;
-    }
+    <!-- Report Header -->
+    <div class="reservations-report-header">
 
-        .report-header h1 {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        <div class="reservations-report-heading">
 
-        .report-header p {
-            color: #cbd5e1;
-            margin: 0;
-        }
+            <span class="reservations-report-label">
+                HOTEL ANALYTICS
+            </span>
 
-    .summary-card {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 20px;
-        height: 100%;
-        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
-    }
+            <h1>
+                Reservations Report
+            </h1>
 
-        .summary-card span {
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
-        }
+            <p>
+                Review hotel reservations, guest stays and
+                current booking status in detail.
+            </p>
 
-        .summary-card h3 {
-            color: #0f172a;
-            font-weight: 750;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
+        </div>
 
-    .report-table-container {
-        margin-top: 25px;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-        overflow-x: auto;
-    }
+        <div class="reservations-report-icon">
+            <i class="bi bi-calendar2-check"></i>
+        </div>
 
-    .report-table {
-        width: 100%;
-        margin: 0;
-    }
-
-        .report-table th {
-            background: #f1f5f9;
-            color: #334155;
-            padding: 14px;
-            white-space: nowrap;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .report-table td {
-            padding: 14px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-            white-space: nowrap;
-        }
-
-    .status-badge {
-        display: inline-block;
-        padding: 7px 11px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .status-Booked {
-        background: #dbeafe;
-        color: #1d4ed8;
-    }
-
-    .status-CheckedIn {
-        background: #dcfce7;
-        color: #15803d;
-    }
-
-    .status-CheckedOut {
-        background: #e2e8f0;
-        color: #475569;
-    }
-
-    .status-Cancelled {
-        background: #fee2e2;
-        color: #b91c1c;
-    }
-
-    .payment-Paid {
-        background: #dcfce7;
-        color: #15803d;
-    }
-
-    .payment-PartiallyPaid {
-        background: #fef3c7;
-        color: #b45309;
-    }
-
-    .payment-Unpaid {
-        background: #fee2e2;
-        color: #b91c1c;
-    }
-</style>
-
-<div class="container report-page">
-    <div class="report-header">
-        <h1>Reservations Report</h1>
-        <p>
-            Review all hotel reservations and their current status.
-        </p>
     </div>
 
-    <div class="row g-3">
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Total Reservations</span>
-                <h3>@totalReservations</h3>
+
+    <!-- Reservation Summary -->
+    <div class="row g-4 reservations-report-summary">
+
+        <!-- Total -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="reservations-summary-card">
+
+                <div class="reservations-summary-top">
+
+                    <span>
+                        Total Reservations
+                    </span>
+
+                    <div class="reservations-summary-icon summary-blue">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                </div>
+
+                <strong class="reservations-summary-value">
+                    @totalReservations
+                </strong>
+
+                <span class="reservations-summary-description">
+                    All hotel bookings
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Booked</span>
-                <h3>@bookedReservations</h3>
+
+        <!-- Booked -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="reservations-summary-card">
+
+                <div class="reservations-summary-top">
+
+                    <span>
+                        Booked
+                    </span>
+
+                    <div class="reservations-summary-icon summary-blue">
+                        <i class="bi bi-calendar-plus"></i>
+                    </div>
+
+                </div>
+
+                <strong class="reservations-summary-value">
+                    @bookedReservations
+                </strong>
+
+                <span class="reservations-summary-description">
+                    Confirmed bookings
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Checked In</span>
-                <h3>@checkedInReservations</h3>
+
+        <!-- Checked In -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="reservations-summary-card">
+
+                <div class="reservations-summary-top">
+
+                    <span>
+                        Checked In
+                    </span>
+
+                    <div class="reservations-summary-icon summary-green">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                </div>
+
+                <strong class="reservations-summary-value">
+                    @checkedInReservations
+                </strong>
+
+                <span class="reservations-summary-description">
+                    Guests currently staying
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Checked Out</span>
-                <h3>@checkedOutReservations</h3>
+
+        <!-- Checked Out -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="reservations-summary-card">
+
+                <div class="reservations-summary-top">
+
+                    <span>
+                        Checked Out
+                    </span>
+
+                    <div class="reservations-summary-icon summary-gray">
+                        <i class="bi bi-person-check-fill"></i>
+                    </div>
+
+                </div>
+
+                <strong class="reservations-summary-value">
+                    @checkedOutReservations
+                </strong>
+
+                <span class="reservations-summary-description">
+                    Completed stays
+                </span>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="report-table-container">
+
+    <!-- Reservations Table -->
+    <div class="reservations-report-table-card">
+
+        <div class="reservations-report-table-header">
+
+            <div class="reservations-report-table-title">
+
+                <div class="reservations-report-table-icon">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+
+                <div>
+
+                    <span class="reservations-table-label">
+                        RESERVATION HISTORY
+                    </span>
+
+                    <h2>
+                        All Reservations
+                    </h2>
+
+                    <p>
+                        Detailed overview of every hotel reservation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="reservations-report-count">
+
+                @Model.Count
+
+                <span>
+                    Reservations
+                </span>
+
+            </div>
+
+        </div>
+
+
         @if (Model.Count == 0)
         {
-            <div class="text-center py-5 text-muted">
-                No reservations were found.
+            <div class="reservations-report-empty">
+
+                <div class="reservations-report-empty-icon">
+                    <i class="bi bi-calendar-x"></i>
+                </div>
+
+                <h3>
+                    No Reservations Found
+                </h3>
+
+                <p>
+                    There are currently no reservations
+                    available in the system.
+                </p>
+
             </div>
         }
         else
         {
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Guest</th>
-                        <th>Room</th>
-                        <th>Room Type</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        <th>Total Price</th>
-                        <th>Paid</th>
-                        <th>Payment</th>
-                        <th>Booking</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
 
-                <tbody>
-                    @foreach (var reservation in Model)
-                    {
-                        decimal paidAmount =
-                        reservation.Payments.Sum(
-                        payment => payment.Amount);
+                <table class="reservations-report-table">
+
+                    <thead>
 
                         <tr>
-                            <td>#@reservation.Id</td>
-
-                            <td>
-                                @reservation.Guest.User.FullName
-                            </td>
-
-                            <td>
-                                @reservation.Room.RoomNumber
-                            </td>
-
-                            <td>
-                                @reservation.Room.RoomType.Name
-                            </td>
-
-                            <td>
-                                @reservation.CheckInDate
-                                .ToString("dd MMM yyyy")
-                            </td>
-
-                            <td>
-                                @reservation.CheckOutDate
-                                .ToString("dd MMM yyyy")
-                            </td>
-
-                            <td>
-                                @reservation.TotalPrice
-                                .ToString("N2") EGP
-                            </td>
-
-                            <td>
-                                @paidAmount.ToString("N2") EGP
-                            </td>
-
-                            <td>
-                                <span class="status-badge payment-@reservation.PaymentStatus">
-                                    @reservation.PaymentStatus
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="status-badge status-@reservation.BookingStatus">
-                                    @reservation.BookingStatus
-                                </span>
-                            </td>
+                            <th>ID</th>
+                            <th>Guest</th>
+                            <th>Room</th>
+                            <th>Room Type</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Total Price</th>
+                            <th>Paid</th>
+                            <th>Payment</th>
+                            <th>Booking</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-    </div>
-</div>
 
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var reservation in Model)
+                        {
+                            decimal paidAmount =
+                                reservation.Payments.Sum(
+                                    payment => payment.Amount);
+
+                            <tr>
+
+                                <!-- ID -->
+                                <td>
+
+                                    <span class="reservation-report-id">
+                                        #@reservation.Id
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Guest -->
+                                <td>
+
+                                    <div class="reservation-report-guest">
+
+                                        <div class="reservation-report-guest-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+
+                                        <span>
+                                            @reservation.Guest.User.FullName
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Room -->
+                                <td>
+
+                                    <span class="reservation-report-room">
+                                        <i class="bi bi-door-open"></i>
+                                        @reservation.Room.RoomNumber
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Room Type -->
+                                <td>
+
+                                    <span class="reservation-report-room-type">
+                                        @reservation.Room.RoomType.Name
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Check In -->
+                                <td>
+
+                                    <div class="reservation-report-date">
+
+                                        <i class="bi bi-calendar-event"></i>
+
+                                        <span>
+                                            @reservation.CheckInDate
+                                            .ToString("dd MMM yyyy")
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Check Out -->
+                                <td>
+
+                                    <div class="reservation-report-date">
+
+                                        <i class="bi bi-calendar-event"></i>
+
+                                        <span>
+                                            @reservation.CheckOutDate
+                                            .ToString("dd MMM yyyy")
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Total Price -->
+                                <td>
+
+                                    <strong class="reservation-report-price">
+                                        @reservation.TotalPrice
+                                        .ToString("N2") EGP
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- Paid -->
+                                <td>
+
+                                    <strong class="reservation-report-paid">
+                                        @paidAmount.ToString("N2") EGP
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- Payment Status -->
+                                <td>
+
+                                    <span class="reservation-status-badge payment-@reservation.PaymentStatus">
+
+                                        @if (reservation.PaymentStatus.ToString() == "Paid")
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+                                        }
+                                        else if (reservation.PaymentStatus.ToString() == "PartiallyPaid")
+                                        {
+                                            <i class="bi bi-hourglass-split"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        }
+
+                                        @reservation.PaymentStatus
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Booking Status -->
+                                <td>
+
+                                    <span class="reservation-status-badge status-@reservation.BookingStatus">
+
+                                        @if (reservation.BookingStatus.ToString() == "Booked")
+                                        {
+                                            <i class="bi bi-calendar-check"></i>
+                                        }
+                                        else if (reservation.BookingStatus.ToString() == "CheckedIn")
+                                        {
+                                            <i class="bi bi-person-check"></i>
+                                        }
+                                        else if (reservation.BookingStatus.ToString() == "CheckedOut")
+                                        {
+                                            <i class="bi bi-check2-all"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-x-circle"></i>
+                                        }
+
+                                        @reservation.BookingStatus
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</div>

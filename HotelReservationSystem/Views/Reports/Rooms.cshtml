@@ -20,262 +20,429 @@
             room.Status == RoomStatus.Maintenance);
 }
 
-<style>
-    .report-page {
-        padding: 35px 0;
-    }
+<div class="rooms-report-page">
 
-    .report-header {
-        background: linear-gradient(135deg, #0f172a, #7c3aed);
-        color: white;
-        padding: 32px;
-        border-radius: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
-    }
+    <!-- Report Header -->
+    <div class="rooms-report-header">
 
-        .report-header h1 {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        <div class="rooms-report-heading">
 
-        .report-header p {
-            color: #ede9fe;
-            margin: 0;
-        }
+            <span class="rooms-report-label">
+                HOTEL ANALYTICS
+            </span>
 
-    .summary-card {
-        height: 100%;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
-    }
+            <h1>
+                Rooms Report
+            </h1>
 
-        .summary-card span {
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
-        }
+            <p>
+                Monitor room availability, occupancy and
+                maintenance status across the hotel.
+            </p>
 
-        .summary-card h3 {
-            color: #0f172a;
-            font-weight: 750;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
+        </div>
 
-    .report-table-container {
-        margin-top: 25px;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-        overflow-x: auto;
-    }
 
-    .report-table {
-        width: 100%;
-        margin: 0;
-    }
+        <div class="rooms-report-header-actions">
 
-        .report-table th {
-            background: #f1f5f9;
-            color: #334155;
-            padding: 14px;
-            border-bottom: 1px solid #e2e8f0;
-            white-space: nowrap;
-        }
-
-        .report-table td {
-            padding: 14px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-            white-space: nowrap;
-        }
-
-    .status-badge {
-        display: inline-block;
-        padding: 7px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .status-Available {
-        color: #15803d;
-        background: #dcfce7;
-    }
-
-    .status-Occupied {
-        color: #b91c1c;
-        background: #fee2e2;
-    }
-
-    .status-Maintenance {
-        color: #b45309;
-        background: #fef3c7;
-    }
-
-    .room-number {
-        color: #1d4ed8;
-        font-weight: 750;
-    }
-
-    .back-link {
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 10px;
-        padding: 9px 15px;
-        text-decoration: none;
-    }
-
-        .back-link:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.12);
-        }
-</style>
-
-<div class="container report-page">
-    <div class="report-header">
-        <div class="d-flex justify-content-between
-                    align-items-center flex-wrap gap-3">
-
-            <div>
-                <h1>Rooms Report</h1>
-
-                <p>
-                    Monitor room availability, occupancy
-                    and maintenance status.
-                </p>
+            <div class="rooms-report-icon">
+                <i class="bi bi-door-open"></i>
             </div>
 
             <a asp-controller="Dashboard"
                asp-action="Index"
-               class="back-link">
+               class="rooms-report-back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
                 Back to Dashboard
+
             </a>
+
         </div>
+
     </div>
 
-    <div class="row g-3">
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Total Rooms</span>
-                <h3>@totalRooms</h3>
+
+    <!-- Room Summary -->
+    <div class="row g-4 rooms-report-summary">
+
+        <!-- Total Rooms -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="rooms-summary-card">
+
+                <div class="rooms-summary-top">
+
+                    <span>
+                        Total Rooms
+                    </span>
+
+                    <div class="rooms-summary-icon rooms-blue">
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                </div>
+
+                <strong class="rooms-summary-value">
+                    @totalRooms
+                </strong>
+
+                <span class="rooms-summary-description">
+                    Registered hotel rooms
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Available Rooms</span>
-                <h3>@availableRooms</h3>
+
+        <!-- Available -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="rooms-summary-card">
+
+                <div class="rooms-summary-top">
+
+                    <span>
+                        Available Rooms
+                    </span>
+
+                    <div class="rooms-summary-icon rooms-green">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                </div>
+
+                <strong class="rooms-summary-value">
+                    @availableRooms
+                </strong>
+
+                <span class="rooms-summary-description">
+                    Ready for guests
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Occupied Rooms</span>
-                <h3>@occupiedRooms</h3>
+
+        <!-- Occupied -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="rooms-summary-card">
+
+                <div class="rooms-summary-top">
+
+                    <span>
+                        Occupied Rooms
+                    </span>
+
+                    <div class="rooms-summary-icon rooms-red">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                </div>
+
+                <strong class="rooms-summary-value">
+                    @occupiedRooms
+                </strong>
+
+                <span class="rooms-summary-description">
+                    Currently occupied
+                </span>
+
             </div>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Maintenance</span>
-                <h3>@maintenanceRooms</h3>
+
+        <!-- Maintenance -->
+        <div class="col-md-6 col-xl-3">
+
+            <div class="rooms-summary-card">
+
+                <div class="rooms-summary-top">
+
+                    <span>
+                        Maintenance
+                    </span>
+
+                    <div class="rooms-summary-icon rooms-orange">
+                        <i class="bi bi-tools"></i>
+                    </div>
+
+                </div>
+
+                <strong class="rooms-summary-value">
+                    @maintenanceRooms
+                </strong>
+
+                <span class="rooms-summary-description">
+                    Rooms under maintenance
+                </span>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="report-table-container">
+
+    <!-- Rooms Table -->
+    <div class="rooms-report-table-card">
+
+        <div class="rooms-report-table-header">
+
+            <div class="rooms-report-table-title">
+
+                <div class="rooms-report-table-icon">
+                    <i class="bi bi-grid-1x2"></i>
+                </div>
+
+                <div>
+
+                    <span class="rooms-table-label">
+                        ROOM INVENTORY
+                    </span>
+
+                    <h2>
+                        All Hotel Rooms
+                    </h2>
+
+                    <p>
+                        Detailed overview of every room and its current status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="rooms-report-count">
+
+                @Model.Count
+
+                <span>
+                    Rooms
+                </span>
+
+            </div>
+
+        </div>
+
+
         @if (Model.Count == 0)
         {
-            <div class="text-center py-5 text-muted">
-                No rooms were found.
+            <div class="rooms-report-empty">
+
+                <div class="rooms-report-empty-icon">
+                    <i class="bi bi-door-closed"></i>
+                </div>
+
+                <h3>
+                    No Rooms Found
+                </h3>
+
+                <p>
+                    There are currently no rooms available
+                    in the system.
+                </p>
+
             </div>
         }
         else
         {
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>Room Number</th>
-                        <th>Floor</th>
-                        <th>Room Type</th>
-                        <th>Capacity</th>
-                        <th>Price Per Night</th>
-                        <th>Status</th>
-                        <th>Created By</th>
-                        <th>Last Modified By</th>
-                        <th>Last Modified At</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
 
-                <tbody>
-                    @foreach (var room in Model)
-                    {
+                <table class="rooms-report-table">
+
+                    <thead>
+
                         <tr>
-                            <td class="room-number">
-                                @room.RoomNumber
-                            </td>
-
-                            <td>
-                                @room.FloorNumber
-                            </td>
-
-                            <td>
-                                @room.RoomType.Name
-                            </td>
-
-                            <td>
-                                @(room.RoomType.Capacity) Guests
-                            </td>
-
-                            <td>
-                                @(room.RoomType.BasePricePerNight.ToString("N2")) EGP
-                            </td>
-
-                            <td>
-                                <span class="status-badge status-@room.Status">
-                                    @room.Status
-                                </span>
-                            </td>
-
-                            <td>
-                                @room.CreatedByUser.FullName
-                            </td>
-
-                            <td>
-                                @if (room.LastModifiedByUser != null)
-                                {
-                                    @room.LastModifiedByUser.FullName
-                                }
-                                else
-                                {
-                                    <span class="text-muted">
-                                        Not modified
-                                    </span>
-                                }
-                            </td>
-
-                            <td>
-                                @if (room.LastModifiedAt.HasValue)
-                                {
-                                    @(room.LastModifiedAt.Value
-                                                            .ToString("dd MMM yyyy, hh:mm tt"))
-                                                }
-                                else
-                                {
-                                    <span class="text-muted">—</span>
-                                }
-                            </td>
+                            <th>Room Number</th>
+                            <th>Floor</th>
+                            <th>Room Type</th>
+                            <th>Capacity</th>
+                            <th>Price Per Night</th>
+                            <th>Status</th>
+                            <th>Created By</th>
+                            <th>Last Modified By</th>
+                            <th>Last Modified At</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var room in Model)
+                        {
+                            <tr>
+
+                                <!-- Room Number -->
+                                <td>
+
+                                    <span class="rooms-report-number">
+                                        <i class="bi bi-door-open"></i>
+                                        @room.RoomNumber
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Floor -->
+                                <td>
+
+                                    <span class="rooms-report-floor">
+                                        <i class="bi bi-layers"></i>
+                                        @room.FloorNumber
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Room Type -->
+                                <td>
+
+                                    <strong class="rooms-report-type">
+                                        @room.RoomType.Name
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- Capacity -->
+                                <td>
+
+                                    <span class="rooms-report-capacity">
+
+                                        <i class="bi bi-people"></i>
+
+                                        @room.RoomType.Capacity Guests
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Price -->
+                                <td>
+
+                                    <strong class="rooms-report-price">
+                                        @room.RoomType.BasePricePerNight
+                                        .ToString("N2")
+                                        EGP
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- Status -->
+                                <td>
+
+                                    <span class="rooms-status-badge status-@room.Status">
+
+                                        @if (room.Status == RoomStatus.Available)
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+                                        }
+                                        else if (room.Status == RoomStatus.Occupied)
+                                        {
+                                            <i class="bi bi-person-fill"></i>
+                                        }
+                                        else if (room.Status == RoomStatus.Maintenance)
+                                        {
+                                            <i class="bi bi-tools"></i>
+                                        }
+
+                                        @room.Status
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Created By -->
+                                <td>
+
+                                    <div class="rooms-user-cell">
+
+                                        <div class="rooms-user-icon">
+                                            <i class="bi bi-person-plus"></i>
+                                        </div>
+
+                                        <span>
+                                            @room.CreatedByUser.FullName
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Last Modified By -->
+                                <td>
+
+                                    @if (room.LastModifiedByUser != null)
+                                    {
+                                        <div class="rooms-user-cell">
+
+                                            <div class="rooms-user-icon">
+                                                <i class="bi bi-person-gear"></i>
+                                            </div>
+
+                                            <span>
+                                                @room.LastModifiedByUser.FullName
+                                            </span>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="rooms-not-modified">
+                                            Not modified
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- Last Modified At -->
+                                <td>
+
+                                    @if (room.LastModifiedAt.HasValue)
+                                    {
+                                        <div class="rooms-modified-date">
+
+                                            <i class="bi bi-clock"></i>
+
+                                            <span>
+                                                @room.LastModifiedAt.Value
+                                                .ToString(
+                                                "dd MMM yyyy, hh:mm tt")
+                                            </span>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="rooms-not-modified">
+                                            —
+                                        </span>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
+
     </div>
+
 </div>

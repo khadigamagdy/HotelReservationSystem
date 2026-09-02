@@ -1,35 +1,137 @@
 @model HotelReservationSystem.ViewModels.SearchViewModel
+
 @{
     ViewData["Title"] = "Search Rooms";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Search Available Rooms</h3>
+<div class="search-rooms-page">
 
-                <form asp-controller="Reservation" asp-action="Search" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="search-rooms-card">
 
-                    <div class="mb-3">
-                        <label asp-for="CheckInDate" class="form-label"></label>
-                        <input asp-for="CheckInDate" class="form-control" />
-                        <span asp-validation-for="CheckInDate" class="text-danger"></span>
-                    </div>
+        <!-- Header -->
+        <div class="search-rooms-header">
 
-                    <div class="mb-3">
-                        <label asp-for="CheckOutDate" class="form-label"></label>
-                        <input asp-for="CheckOutDate" class="form-control" />
-                        <span asp-validation-for="CheckOutDate" class="text-danger"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Search</button>
-                </form>
+            <div class="search-rooms-icon">
+                <i class="bi bi-search"></i>
             </div>
+
+            <span class="search-rooms-label">
+                LUXORA HOTEL
+            </span>
+
+            <h1>
+                Find Your Perfect Room
+            </h1>
+
+            <p>
+                Select your check-in and check-out dates
+                to discover the rooms available for your stay.
+            </p>
+
         </div>
+
+
+        <!-- Search Form -->
+        <form asp-controller="Reservation"
+              asp-action="Search"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="search-rooms-validation">
+            </div>
+
+
+            <div class="search-rooms-form">
+
+                <!-- Check-In -->
+                <div class="search-date-group">
+
+                    <label asp-for="CheckInDate">
+                        Check-In Date
+                    </label>
+
+                    <div class="search-date-input">
+
+                        <i class="bi bi-calendar-check"></i>
+
+                        <input asp-for="CheckInDate"
+                               class="search-date-field" />
+
+                    </div>
+
+                    <span asp-validation-for="CheckInDate"
+                          class="search-field-error">
+                    </span>
+
+                </div>
+
+
+                <!-- Check-Out -->
+                <div class="search-date-group">
+
+                    <label asp-for="CheckOutDate">
+                        Check-Out Date
+                    </label>
+
+                    <div class="search-date-input">
+
+                        <i class="bi bi-calendar-x"></i>
+
+                        <input asp-for="CheckOutDate"
+                               class="search-date-field" />
+
+                    </div>
+
+                    <span asp-validation-for="CheckOutDate"
+                          class="search-field-error">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Information -->
+            <div class="search-rooms-info">
+
+                <div class="search-info-icon">
+                    <i class="bi bi-info-circle"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Choose Your Stay Dates
+                    </strong>
+
+                    <p>
+                        We'll show you the rooms available
+                        for the dates you select.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Submit -->
+            <button type="submit"
+                    class="search-rooms-btn">
+
+                <i class="bi bi-search"></i>
+
+                Search Available Rooms
+
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+        </form>
+
     </div>
+
 </div>
+
 
 @section Scripts {
     @{

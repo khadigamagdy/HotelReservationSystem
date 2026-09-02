@@ -20,266 +20,368 @@
             user.Role == UserRole.Manager);
 }
 
-<style>
-    .users-page {
-        padding: 35px 0;
-    }
+<div class="users-management-page">
 
-    .users-header {
-        background: linear-gradient(135deg, #0f172a, #be123c);
-        color: white;
-        border-radius: 20px;
-        padding: 32px;
-        margin-bottom: 25px;
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
-    }
+    <!-- Header -->
+    <div class="users-management-header">
 
-        .users-header h1 {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        <div class="users-management-heading">
 
-        .users-header p {
-            color: #ffe4e6;
-            margin: 0;
-        }
-
-    .summary-card {
-        height: 100%;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.06);
-    }
-
-        .summary-card span {
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .summary-card h3 {
-            color: #0f172a;
-            font-weight: 750;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
-
-    .users-table-container {
-        margin-top: 25px;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 22px;
-        overflow-x: auto;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-    }
-
-    .users-table {
-        width: 100%;
-    }
-
-        .users-table th {
-            padding: 14px;
-            background: #f1f5f9;
-            color: #334155;
-            white-space: nowrap;
-        }
-
-        .users-table td {
-            padding: 14px;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: middle;
-        }
-
-    .role-badge {
-        display: inline-block;
-        padding: 7px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .role-Guest {
-        color: #1d4ed8;
-        background: #dbeafe;
-    }
-
-    .role-Receptionist {
-        color: #7e22ce;
-        background: #f3e8ff;
-    }
-
-    .role-Manager {
-        color: #b91c1c;
-        background: #fee2e2;
-    }
-
-    .role-form {
-        display: flex;
-        gap: 8px;
-        min-width: 260px;
-    }
-
-    .role-select {
-        border: 1px solid #cbd5e1;
-        border-radius: 9px;
-        padding: 8px 10px;
-    }
-
-    .save-role-button {
-        border: 0;
-        border-radius: 9px;
-        padding: 8px 14px;
-        color: white;
-        background: #1d4ed8;
-        font-weight: 600;
-    }
-
-    .back-link {
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 10px;
-        padding: 9px 15px;
-        text-decoration: none;
-    }
-</style>
-
-<div class="container users-page">
-    <div class="users-header">
-        <div class="d-flex justify-content-between
-                    align-items-center flex-wrap gap-3">
+            <div class="users-management-icon">
+                <i class="bi bi-people"></i>
+            </div>
 
             <div>
-                <h1>User Management</h1>
+
+                <span class="users-management-label">
+                    LUXORA HOTEL
+                </span>
+
+                <h1>
+                    User Management
+                </h1>
 
                 <p>
                     View users and manage their system roles.
                 </p>
+
             </div>
 
-            <a asp-controller="Dashboard"
-               asp-action="Index"
-               class="back-link">
-                Back to Dashboard
-            </a>
         </div>
+
+        <a asp-controller="Dashboard"
+           asp-action="Index"
+           class="users-management-back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Dashboard
+
+        </a>
+
     </div>
 
+    <!-- Success Message -->
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
+        <div class="users-management-alert">
+
+            <i class="bi bi-check-circle"></i>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
         </div>
     }
 
-    <div class="row g-3">
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Total Users</span>
-                <h3>@totalUsers</h3>
+    <!-- Summary -->
+    <div class="users-management-summary">
+
+        <!-- Total Users -->
+        <div class="users-summary-card users-summary-total">
+
+            <div class="users-summary-top">
+
+                <span class="users-summary-label">
+                    Total Users
+                </span>
+
+                <div class="users-summary-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
             </div>
+
+            <div class="users-summary-value">
+                @totalUsers
+            </div>
+
+            <p class="users-summary-description">
+                Registered system users
+            </p>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Guests</span>
-                <h3>@guests</h3>
+        <!-- Guests -->
+        <div class="users-summary-card users-summary-guests">
+
+            <div class="users-summary-top">
+
+                <span class="users-summary-label">
+                    Guests
+                </span>
+
+                <div class="users-summary-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+
             </div>
+
+            <div class="users-summary-value">
+                @guests
+            </div>
+
+            <p class="users-summary-description">
+                Hotel guests
+            </p>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Receptionists</span>
-                <h3>@receptionists</h3>
+        <!-- Receptionists -->
+        <div class="users-summary-card users-summary-receptionists">
+
+            <div class="users-summary-top">
+
+                <span class="users-summary-label">
+                    Receptionists
+                </span>
+
+                <div class="users-summary-icon">
+                    <i class="bi bi-person-badge"></i>
+                </div>
+
             </div>
+
+            <div class="users-summary-value">
+                @receptionists
+            </div>
+
+            <p class="users-summary-description">
+                Front desk staff
+            </p>
+
         </div>
 
-        <div class="col-md-3">
-            <div class="summary-card">
-                <span>Managers</span>
-                <h3>@managers</h3>
+        <!-- Managers -->
+        <div class="users-summary-card users-summary-managers">
+
+            <div class="users-summary-top">
+
+                <span class="users-summary-label">
+                    Managers
+                </span>
+
+                <div class="users-summary-icon">
+                    <i class="bi bi-person-gear"></i>
+                </div>
+
             </div>
+
+            <div class="users-summary-value">
+                @managers
+            </div>
+
+            <p class="users-summary-description">
+                Hotel managers
+            </p>
+
         </div>
+
     </div>
 
-    <div class="users-table-container">
+    <!-- Users Table -->
+    <div class="users-management-table-card">
+
+        <div class="users-management-table-header">
+
+            <div>
+
+                <span class="users-management-table-label">
+                    SYSTEM USERS
+                </span>
+
+                <h2>
+                    All Users
+                </h2>
+
+            </div>
+
+            <div class="users-management-count">
+
+                <i class="bi bi-person-lines-fill"></i>
+
+                @totalUsers Users
+
+            </div>
+
+        </div>
+
         @if (Model.Count == 0)
         {
-            <div class="text-center py-5 text-muted">
-                No users were found.
+            <div class="users-management-empty">
+
+                <div class="users-management-empty-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h3>
+                    No Users Found
+                </h3>
+
+                <p>
+                    There are currently no users registered in the system.
+                </p>
+
             </div>
         }
         else
         {
-            <table class="users-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Current Role</th>
-                        <th>Created At</th>
-                        <th>Change Role</th>
-                    </tr>
-                </thead>
+            <div class="users-management-table-wrapper">
 
-                <tbody>
-                    @foreach (var user in Model)
-                    {
+                <table class="users-management-table">
+
+                    <thead>
+
                         <tr>
-                            <td>#@user.Id</td>
 
-                            <td class="fw-semibold">
-                                @user.FullName
-                            </td>
+                            <th>
+                                ID
+                            </th>
 
-                            <td>@user.Email</td>
+                            <th>
+                                Full Name
+                            </th>
 
-                            <td>
-                                <span class="role-badge role-@user.Role">
-                                    @user.Role
-                                </span>
-                            </td>
+                            <th>
+                                Email
+                            </th>
 
-                            <td>
-                                @user.CreatedAt
-                                .ToString("dd MMM yyyy")
-                            </td>
+                            <th>
+                                Current Role
+                            </th>
 
-                            <td>
-                                <form asp-action="ChangeRole"
-                                      method="post"
-                                      class="role-form">
+                            <th>
+                                Created At
+                            </th>
 
-                                    <input type="hidden"
-                                           name="id"
-                                           value="@user.Id" />
+                            <th>
+                                Change Role
+                            </th>
 
-                                    <select name="role"
-                                            class="role-select">
-
-                                        @foreach (UserRole role
-                                                                        in Enum.GetValues<UserRole>())
-                                        {
-                                            <option value="@role"
-                                                    selected="@(user.Role == role)">
-                                                @role
-                                            </option>
-                                        }
-                                    </select>
-
-                                    <button type="submit"
-                                            class="save-role-button">
-                                        Save
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
-                    }
-                </tbody>
-            </table>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    <span class="users-management-id">
+                                        #@user.Id
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <div class="users-management-name">
+
+                                        <div class="users-management-avatar">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+
+                                        <span>
+                                            @user.FullName
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <div class="users-management-email">
+
+                                        <i class="bi bi-envelope"></i>
+
+                                        @user.Email
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="user-role-badge role-@user.Role">
+
+                                        <i class="bi bi-shield-check"></i>
+
+                                        @user.Role
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <div class="users-management-date">
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                        @user.CreatedAt.ToString("dd MMM yyyy")
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <form asp-action="ChangeRole"
+                                          method="post"
+                                          class="users-role-form">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@user.Id" />
+
+                                        <div class="users-role-select-wrapper">
+
+                                            <i class="bi bi-shield"></i>
+
+                                            <select name="role"
+                                                    class="users-role-select">
+
+                                                @foreach (UserRole role
+                                                         in Enum.GetValues<UserRole>())
+                                                {
+                                                    <option value="@role"
+                                                            selected="@(user.Role == role)">
+                                                        @role
+                                                    </option>
+                                                }
+
+                                            </select>
+
+                                        </div>
+
+                                        <button type="submit"
+                                                class="users-save-role-btn">
+
+                                            <i class="bi bi-check-lg"></i>
+
+                                            Save
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
         }
+
     </div>
+
 </div>

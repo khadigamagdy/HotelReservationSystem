@@ -1,9 +1,286 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Card -->
+
+<div class="container mt-4">
+    <div class="hero-card">
+
+        ```
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                WELCOME TO LUXORA HOTEL
+            </span>
+
+            <h1 class="hero-title">
+                Experience Comfort.<br />
+                <span>Stay Extraordinary.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover a premium hotel experience where comfort,
+                elegance, and exceptional service come together.
+            </p>
+
+            <div class="hero-buttons">
+
+                <!-- Book a Room → Login -->
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="btn btn-primary-custom">
+                    Book a Room
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <!-- Explore Rooms -->
+                <a asp-controller="Room"
+                   asp-action="Index"
+                   class="btn btn-outline-custom">
+                    Explore Rooms
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+    ```
+
 </div>
 
+<!-- Why Choose Us -->
+
+<section class="features-section">
+
+    ```
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span>WHY CHOOSE US</span>
+
+            <h2>
+                Everything You Need for a Perfect Stay
+            </h2>
+
+            <p>
+                We make your stay comfortable, memorable,
+                and completely stress-free.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
+                    <h4>
+                        Luxury Rooms
+                    </h4>
+
+                    <p>
+                        Carefully designed rooms with modern facilities
+                        and exceptional comfort.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Card 2 -->
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h4>
+                        Secure Booking
+                    </h4>
+
+                    <p>
+                        Simple and secure reservation process designed
+                        to make booking effortless.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Card 3 -->
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-headset"></i>
+                    </div>
+
+                    <h4>
+                        24/7 Service
+                    </h4>
+
+                    <p>
+                        Our team is always ready to provide you with
+                        an exceptional hotel experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    ```
+
+</section>
+
+<!-- Statistics Cards -->
+
+<section class="stats-section">
+
+    ```
+    <div class="container">
+
+        <div class="row g-4 text-center">
+
+            <!-- Stat 1 -->
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                    <h3>
+                        50+
+                    </h3>
+
+                    <p>
+                        Luxury Rooms
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Stat 2 -->
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h3>
+                        1K+
+                    </h3>
+
+                    <p>
+                        Happy Guests
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Stat 3 -->
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+
+                    <h3>
+                        24/7
+                    </h3>
+
+                    <p>
+                        Guest Support
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Stat 4 -->
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+
+                    <h3>
+                        5★
+                    </h3>
+
+                    <p>
+                        Guest Experience
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    ```
+
+</section>
+
+<!-- Final CTA Card -->
+
+<div class="container mb-5">
+
+    ```
+    <div class="cta-card">
+
+        <span>
+            READY FOR YOUR NEXT STAY?
+        </span>
+
+        <h2>
+            Your Perfect Stay<br />
+            Starts Here.
+        </h2>
+
+        <!-- Find Your Room → Login -->
+        <a asp-controller="Account"
+           asp-action="Login"
+           class="btn btn-primary-custom">
+
+            Find Your Room
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+    ```
+
+</div>

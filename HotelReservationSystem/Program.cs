@@ -17,7 +17,10 @@ builder.Services.AddDbContext<HotelDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// =========================
 // Repositories
+// =========================
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
@@ -26,20 +29,31 @@ builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
+// =========================
 // Services
+// =========================
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<ICheckInOutService, CheckInOutService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 
+// =========================
 // Password Hashing
+// =========================
+
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+// =========================
 // Authentication
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+// =========================
+
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath = "/Account/Login";
@@ -49,22 +63,31 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+// =========================
 // Authorization
+// =========================
+
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Create default manager if one does not exist
+// =========================
+// Create Default Manager
+// =========================
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider
         .GetRequiredService<HotelDbContext>();
 
-    if (!context.Users.Any(u => u.Role == UserRole.Manager))
+    var manager = context.Users
+        .FirstOrDefault(user => user.Role == UserRole.Manager);
+
+    if (manager == null)
     {
         var passwordHasher = new PasswordHasher<User>();
 
-        var manager = new User
+        manager = new User
         {
             FullName = "Hotel Manager",
             Email = "manager@hotel.com",
@@ -80,7 +103,131 @@ using (var scope = app.Services.CreateScope())
         context.Users.Add(manager);
         context.SaveChanges();
     }
+
+    // =========================
+    // Seed Room Types
+    // =========================
+
+    var singleRoomType = context.RoomTypes
+        .FirstOrDefault(roomType => roomType.Name == "Single");
+
+    if (singleRoomType == null)
+    {
+        singleRoomType = new RoomType
+        {
+            Name = "Single",
+            BasePricePerNight = 1000,
+            Capacity = 1,
+            Description = "Comfortable room suitable for one guest."
+        };
+
+        context.RoomTypes.Add(singleRoomType);
+    }
+
+    var doubleRoomType = context.RoomTypes
+        .FirstOrDefault(roomType => roomType.Name == "Double");
+
+    if (doubleRoomType == null)
+    {
+        doubleRoomType = new RoomType
+        {
+            Name = "Double",
+            BasePricePerNight = 1500,
+            Capacity = 2,
+            Description = "Comfortable room suitable for two guests."
+        };
+
+        context.RoomTypes.Add(doubleRoomType);
+    }
+
+    var suiteRoomType = context.RoomTypes
+        .FirstOrDefault(roomType => roomType.Name == "Suite");
+
+    if (suiteRoomType == null)
+    {
+        suiteRoomType = new RoomType
+        {
+            Name = "Suite",
+            BasePricePerNight = 2500,
+            Capacity = 4,
+            Description = "Spacious suite suitable for families or groups."
+        };
+
+        context.RoomTypes.Add(suiteRoomType);
+    }
+
+    context.SaveChanges();
+
+    // =========================
+    // Seed Rooms
+    // =========================
+
+    if (!context.Rooms.Any(room => room.RoomNumber == "101"))
+    {
+        context.Rooms.Add(new Room
+        {
+            RoomNumber = "101",
+            FloorNumber = 1,
+            Status = RoomStatus.Available,
+            RoomTypeId = singleRoomType.Id,
+            CreatedByUserId = manager.Id
+        });
+    }
+
+    if (!context.Rooms.Any(room => room.RoomNumber == "102"))
+    {
+        context.Rooms.Add(new Room
+        {
+            RoomNumber = "102",
+            FloorNumber = 1,
+            Status = RoomStatus.Available,
+            RoomTypeId = singleRoomType.Id,
+            CreatedByUserId = manager.Id
+        });
+    }
+
+    if (!context.Rooms.Any(room => room.RoomNumber == "201"))
+    {
+        context.Rooms.Add(new Room
+        {
+            RoomNumber = "201",
+            FloorNumber = 2,
+            Status = RoomStatus.Available,
+            RoomTypeId = doubleRoomType.Id,
+            CreatedByUserId = manager.Id
+        });
+    }
+
+    if (!context.Rooms.Any(room => room.RoomNumber == "202"))
+    {
+        context.Rooms.Add(new Room
+        {
+            RoomNumber = "202",
+            FloorNumber = 2,
+            Status = RoomStatus.Available,
+            RoomTypeId = doubleRoomType.Id,
+            CreatedByUserId = manager.Id
+        });
+    }
+
+    if (!context.Rooms.Any(room => room.RoomNumber == "301"))
+    {
+        context.Rooms.Add(new Room
+        {
+            RoomNumber = "301",
+            FloorNumber = 3,
+            Status = RoomStatus.Available,
+            RoomTypeId = suiteRoomType.Id,
+            CreatedByUserId = manager.Id
+        });
+    }
+
+    context.SaveChanges();
 }
+
+// =========================
+// HTTP Request Pipeline
+// =========================
 
 if (!app.Environment.IsDevelopment())
 {
@@ -106,5 +253,3 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.Run();
-
-

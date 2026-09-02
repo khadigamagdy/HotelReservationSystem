@@ -12,56 +12,129 @@
         ?? Enumerable.Empty<Reservation>();
 }
 
-<div class="container mt-4">
+<div class="frontdesk-page">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Page Header -->
+    <div class="frontdesk-header">
+
         <div>
-            <h2>Check-In / Check-Out</h2>
-            <p class="text-muted">
-                Manage guest arrivals and departures.
+
+            <span class="frontdesk-label">
+                FRONT DESK MANAGEMENT
+            </span>
+
+            <h1>
+                Check-In / Check-Out
+            </h1>
+
+            <p>
+                Manage guest arrivals and departures
+                efficiently from one place.
             </p>
+
         </div>
+
+        <div class="frontdesk-header-icon">
+            <i class="bi bi-building-check"></i>
+        </div>
+
     </div>
 
+
+    <!-- Messages -->
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
+        <div class="frontdesk-alert frontdesk-alert-success">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
         </div>
     }
+
 
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="alert alert-danger">
-            @TempData["ErrorMessage"]
+        <div class="frontdesk-alert frontdesk-alert-danger">
+
+            <i class="bi bi-exclamation-circle-fill"></i>
+
+            <span>
+                @TempData["ErrorMessage"]
+            </span>
+
         </div>
     }
 
+
     <!-- ========================= -->
-    <!-- Check-In Reservations -->
+    <!-- Check-In -->
     <!-- ========================= -->
 
-    <div class="card shadow-sm mb-4">
+    <div class="frontdesk-section">
 
-        <div class="card-header">
-            <h4 class="mb-0">Reservations Ready for Check-In</h4>
+        <div class="frontdesk-section-header">
+
+            <div class="frontdesk-section-title">
+
+                <div class="frontdesk-section-icon checkin-section-icon">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Reservations Ready for Check-In
+                    </h2>
+
+                    <span>
+                        Guests arriving at the hotel
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="frontdesk-count">
+                @checkInReservations.Count()
+                <span>Reservations</span>
+            </div>
+
         </div>
 
-        <div class="card-body">
+
+        <div class="frontdesk-table-wrapper">
 
             @if (!checkInReservations.Any())
             {
-                <div class="alert alert-info mb-0">
-                    There are no reservations ready for check-in.
+                <div class="frontdesk-empty">
+
+                    <div class="frontdesk-empty-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <h3>
+                        No Check-Ins Available
+                    </h3>
+
+                    <p>
+                        There are no reservations ready for check-in.
+                    </p>
+
                 </div>
             }
             else
             {
                 <div class="table-responsive">
 
-                    <table class="table table-bordered table-hover align-middle">
+                    <table class="frontdesk-table">
 
                         <thead>
+
                             <tr>
                                 <th>Reservation</th>
                                 <th>Guest</th>
@@ -69,9 +142,10 @@
                                 <th>Check-In</th>
                                 <th>Check-Out</th>
                                 <th>Total Price</th>
-                                <th>Payment Status</th>
+                                <th>Payment</th>
                                 <th>Action</th>
                             </tr>
+
                         </thead>
 
                         <tbody>
@@ -81,15 +155,33 @@
                                 <tr>
 
                                     <td>
-                                        #@reservation.Id
+                                        <span class="reservation-number">
+                                            #@reservation.Id
+                                        </span>
                                     </td>
 
                                     <td>
-                                        @reservation.Guest?.User?.FullName
+
+                                        <div class="guest-cell">
+
+                                            <div class="guest-icon">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+
+                                            <span>
+                                                @reservation.Guest?.User?.FullName
+                                            </span>
+
+                                        </div>
+
                                     </td>
 
                                     <td>
-                                        @reservation.Room?.RoomNumber
+
+                                        <span class="room-number">
+                                            @reservation.Room?.RoomNumber
+                                        </span>
+
                                     </td>
 
                                     <td>
@@ -101,20 +193,34 @@
                                     </td>
 
                                     <td>
-                                        @reservation.TotalPrice.ToString("N2") EGP
+
+                                        <strong class="price-cell">
+                                            @reservation.TotalPrice.ToString("N2") EGP
+                                        </strong>
+
                                     </td>
 
                                     <td>
-                                        @reservation.PaymentStatus
+
+                                        <span class="payment-badge">
+                                            @reservation.PaymentStatus
+                                        </span>
+
                                     </td>
 
                                     <td>
+
                                         <a asp-controller="CheckInOut"
                                            asp-action="CheckIn"
                                            asp-route-id="@reservation.Id"
-                                           class="btn btn-success btn-sm">
+                                           class="frontdesk-checkin-btn">
+
+                                            <i class="bi bi-box-arrow-in-right"></i>
+
                                             Check In
+
                                         </a>
+
                                     </td>
 
                                 </tr>
@@ -128,34 +234,75 @@
             }
 
         </div>
+
     </div>
 
 
     <!-- ========================= -->
-    <!-- Check-Out Reservations -->
+    <!-- Check-Out -->
     <!-- ========================= -->
 
-    <div class="card shadow-sm">
+    <div class="frontdesk-section">
 
-        <div class="card-header">
-            <h4 class="mb-0">Reservations Ready for Check-Out</h4>
+        <div class="frontdesk-section-header">
+
+            <div class="frontdesk-section-title">
+
+                <div class="frontdesk-section-icon checkout-section-icon">
+                    <i class="bi bi-box-arrow-right"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Reservations Ready for Check-Out
+                    </h2>
+
+                    <span>
+                        Guests completing their stay
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="frontdesk-count">
+                @checkOutReservations.Count()
+                <span>Reservations</span>
+            </div>
+
         </div>
 
-        <div class="card-body">
+
+        <div class="frontdesk-table-wrapper">
 
             @if (!checkOutReservations.Any())
             {
-                <div class="alert alert-info mb-0">
-                    There are no guests ready for check-out.
+                <div class="frontdesk-empty">
+
+                    <div class="frontdesk-empty-icon">
+                        <i class="bi bi-calendar-x"></i>
+                    </div>
+
+                    <h3>
+                        No Check-Outs Available
+                    </h3>
+
+                    <p>
+                        There are no guests ready for check-out.
+                    </p>
+
                 </div>
             }
             else
             {
                 <div class="table-responsive">
 
-                    <table class="table table-bordered table-hover align-middle">
+                    <table class="frontdesk-table">
 
                         <thead>
+
                             <tr>
                                 <th>Reservation</th>
                                 <th>Guest</th>
@@ -163,9 +310,10 @@
                                 <th>Check-In</th>
                                 <th>Check-Out</th>
                                 <th>Total Price</th>
-                                <th>Payment Status</th>
+                                <th>Payment</th>
                                 <th>Action</th>
                             </tr>
+
                         </thead>
 
                         <tbody>
@@ -175,15 +323,33 @@
                                 <tr>
 
                                     <td>
-                                        #@reservation.Id
+                                        <span class="reservation-number">
+                                            #@reservation.Id
+                                        </span>
                                     </td>
 
                                     <td>
-                                        @reservation.Guest?.User?.FullName
+
+                                        <div class="guest-cell">
+
+                                            <div class="guest-icon">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+
+                                            <span>
+                                                @reservation.Guest?.User?.FullName
+                                            </span>
+
+                                        </div>
+
                                     </td>
 
                                     <td>
-                                        @reservation.Room?.RoomNumber
+
+                                        <span class="room-number">
+                                            @reservation.Room?.RoomNumber
+                                        </span>
+
                                     </td>
 
                                     <td>
@@ -195,20 +361,34 @@
                                     </td>
 
                                     <td>
-                                        @reservation.TotalPrice.ToString("N2") EGP
+
+                                        <strong class="price-cell">
+                                            @reservation.TotalPrice.ToString("N2") EGP
+                                        </strong>
+
                                     </td>
 
                                     <td>
-                                        @reservation.PaymentStatus
+
+                                        <span class="payment-badge">
+                                            @reservation.PaymentStatus
+                                        </span>
+
                                     </td>
 
                                     <td>
+
                                         <a asp-controller="CheckInOut"
                                            asp-action="CheckOut"
                                            asp-route-id="@reservation.Id"
-                                           class="btn btn-primary btn-sm">
+                                           class="frontdesk-checkout-btn">
+
+                                            <i class="bi bi-box-arrow-right"></i>
+
                                             Check Out
+
                                         </a>
+
                                     </td>
 
                                 </tr>
@@ -222,6 +402,7 @@
             }
 
         </div>
+
     </div>
 
 </div>

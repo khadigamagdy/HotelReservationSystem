@@ -4,91 +4,232 @@
     ViewData["Title"] = "Edit Room Type";
 }
 
-<h1>Edit Room Type</h1>
+<div class="roomtype-edit-page">
 
-<hr />
+    <div class="roomtype-edit-card">
 
-<div class="row">
-    <div class="col-md-6">
+        <!-- Header -->
+        <div class="roomtype-edit-header">
 
-        <form asp-action="Edit" method="post">
+            <div class="roomtype-edit-icon">
+                <i class="bi bi-pencil-square"></i>
+            </div>
+
+            <span class="roomtype-edit-label">
+                ROOM TYPE MANAGEMENT
+            </span>
+
+            <h1>
+                Edit Room Type
+            </h1>
+
+            <p>
+                Update the room type name, pricing, capacity
+                and description.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
+        <form asp-action="Edit"
+              method="post">
 
             <div asp-validation-summary="ModelOnly"
-                 class="text-danger"></div>
-
-            <input type="hidden" asp-for="Id" />
-
-            <!-- Name -->
-            <div class="mb-3">
-                <label asp-for="Name" class="form-label"></label>
-
-                <input asp-for="Name"
-                       class="form-control" />
-
-                <span asp-validation-for="Name"
-                      class="text-danger"></span>
+                 class="roomtype-edit-validation">
             </div>
 
-            <!-- Price -->
-            <div class="mb-3">
-                <label asp-for="BasePricePerNight"
-                       class="form-label">
-                </label>
+            <input type="hidden"
+                   asp-for="Id" />
 
-                <input asp-for="BasePricePerNight"
-                       class="form-control"
-                       type="number"
-                       step="0.01"
-                       min="0" />
 
-                <span asp-validation-for="BasePricePerNight"
-                      class="text-danger"></span>
+            <!-- Room Type Information -->
+            <div class="roomtype-edit-section">
+
+                <div class="roomtype-edit-section-title">
+
+                    <div class="roomtype-edit-section-icon">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ROOM TYPE INFORMATION
+                        </span>
+
+                        <h2>
+                            Update Details
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    <!-- Name -->
+                    <div class="col-12">
+
+                        <div class="roomtype-edit-form-group">
+
+                            <label asp-for="Name">
+                                Room Type Name
+                            </label>
+
+                            <div class="roomtype-edit-input-wrapper">
+
+                                <i class="bi bi-house-door"></i>
+
+                                <input asp-for="Name"
+                                       class="roomtype-edit-input"
+                                       placeholder="Enter room type name" />
+
+                            </div>
+
+                            <span asp-validation-for="Name"
+                                  class="roomtype-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Price -->
+                    <div class="col-md-6">
+
+                        <div class="roomtype-edit-form-group">
+
+                            <label asp-for="BasePricePerNight">
+                                Price Per Night
+                            </label>
+
+                            <div class="roomtype-edit-input-wrapper">
+
+                                <i class="bi bi-cash-stack"></i>
+
+                                <input asp-for="BasePricePerNight"
+                                       class="roomtype-edit-input"
+                                       type="number"
+                                       step="0.01"
+                                       min="0"
+                                       placeholder="Enter price per night" />
+
+                                <span class="roomtype-edit-currency">
+                                    EGP
+                                </span>
+
+                            </div>
+
+                            <span asp-validation-for="BasePricePerNight"
+                                  class="roomtype-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Capacity -->
+                    <div class="col-md-6">
+
+                        <div class="roomtype-edit-form-group">
+
+                            <label asp-for="Capacity">
+                                Guest Capacity
+                            </label>
+
+                            <div class="roomtype-edit-input-wrapper">
+
+                                <i class="bi bi-people"></i>
+
+                                <input asp-for="Capacity"
+                                       class="roomtype-edit-input"
+                                       type="number"
+                                       min="1"
+                                       max="20"
+                                       placeholder="Number of guests" />
+
+                                <span class="roomtype-edit-suffix">
+                                    Guests
+                                </span>
+
+                            </div>
+
+                            <span asp-validation-for="Capacity"
+                                  class="roomtype-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Description -->
+                    <div class="col-12">
+
+                        <div class="roomtype-edit-form-group">
+
+                            <label asp-for="Description">
+                                Description
+                            </label>
+
+                            <div class="roomtype-edit-textarea-wrapper">
+
+                                <i class="bi bi-card-text"></i>
+
+                                <textarea asp-for="Description"
+                                          class="roomtype-edit-textarea"
+                                          rows="5"
+                                          placeholder="Describe this room type..."></textarea>
+
+                            </div>
+
+                            <span asp-validation-for="Description"
+                                  class="roomtype-edit-field-error">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <!-- Capacity -->
-            <div class="mb-3">
-                <label asp-for="Capacity"
-                       class="form-label">
-                </label>
 
-                <input asp-for="Capacity"
-                       class="form-control"
-                       type="number"
-                       min="1"
-                       max="20" />
+            <!-- Actions -->
+            <div class="roomtype-edit-actions">
 
-                <span asp-validation-for="Capacity"
-                      class="text-danger"></span>
+                <button type="submit"
+                        class="roomtype-edit-save-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Save Changes
+
+                </button>
+
+
+                <a asp-action="Index"
+                   class="roomtype-edit-cancel-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
             </div>
-
-            <!-- Description -->
-            <div class="mb-3">
-                <label asp-for="Description"
-                       class="form-label">
-                </label>
-
-                <textarea asp-for="Description"
-                          class="form-control"
-                          rows="4"></textarea>
-
-                <span asp-validation-for="Description"
-                      class="text-danger"></span>
-            </div>
-
-            <button type="submit"
-                    class="btn btn-primary">
-                Save Changes
-            </button>
-
-            <a asp-action="Index"
-               class="btn btn-secondary">
-                Cancel
-            </a>
 
         </form>
 
     </div>
+
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

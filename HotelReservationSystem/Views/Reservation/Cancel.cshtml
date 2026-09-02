@@ -1,27 +1,167 @@
 @model HotelReservationSystem.Models.Entities.Reservation
+
 @{
     ViewData["Title"] = "Cancel Reservation";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Cancel Reservation #@Model.Id</h3>
+<div class="cancel-reservation-page">
 
-                <p class="text-center">
-                    Are you sure you want to cancel your reservation for
-                    Room @Model.Room.RoomNumber (@Model.CheckInDate.ToShortDateString() - @Model.CheckOutDate.ToShortDateString())?
+    <div class="cancel-reservation-card">
+
+        <div class="cancel-reservation-icon">
+            <i class="bi bi-calendar-x"></i>
+        </div>
+
+        <span class="cancel-reservation-label">
+            RESERVATION MANAGEMENT
+        </span>
+
+        <h1>
+            Cancel Reservation
+        </h1>
+
+        <p class="cancel-reservation-subtitle">
+            Are you sure you want to cancel your reservation?
+            Please review the booking details before continuing.
+        </p>
+
+
+        <!-- Reservation Details -->
+        <div class="cancel-reservation-details">
+
+            <div class="cancel-detail-item">
+
+                <div class="cancel-detail-icon">
+                    <i class="bi bi-hash"></i>
+                </div>
+
+                <div>
+                    <span>
+                        Reservation
+                    </span>
+
+                    <strong>
+                        #@Model.Id
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="cancel-detail-item">
+
+                <div class="cancel-detail-icon">
+                    <i class="bi bi-door-open"></i>
+                </div>
+
+                <div>
+                    <span>
+                        Room
+                    </span>
+
+                    <strong>
+                        @Model.Room.RoomNumber
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="cancel-detail-item">
+
+                <div class="cancel-detail-icon">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+
+                <div>
+                    <span>
+                        Check-In
+                    </span>
+
+                    <strong>
+                        @Model.CheckInDate.ToShortDateString()
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="cancel-detail-item">
+
+                <div class="cancel-detail-icon">
+                    <i class="bi bi-calendar-x"></i>
+                </div>
+
+                <div>
+                    <span>
+                        Check-Out
+                    </span>
+
+                    <strong>
+                        @Model.CheckOutDate.ToShortDateString()
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Warning -->
+        <div class="cancel-reservation-warning">
+
+            <div class="cancel-warning-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Cancellation Notice
+                </strong>
+
+                <p>
+                    Cancelling this reservation will change its status
+                    and may affect room availability.
                 </p>
 
-                <form asp-controller="Reservation" asp-action="Cancel" asp-route-id="@Model.Id" method="post">
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger">Yes, cancel my reservation</button>
-                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">No, go back</a>
-                    </div>
-                </form>
             </div>
-        </div>
-    </div>
-</div>
 
+        </div>
+
+
+        <!-- Actions -->
+        <form asp-controller="Reservation"
+              asp-action="Cancel"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            <div class="cancel-reservation-actions">
+
+                <button type="submit"
+                        class="cancel-confirm-btn">
+
+                    <i class="bi bi-x-circle"></i>
+
+                    Yes, Cancel Reservation
+
+                </button>
+
+
+                <a asp-action="Details"
+                   asp-route-id="@Model.Id"
+                   class="cancel-back-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    No, Go Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

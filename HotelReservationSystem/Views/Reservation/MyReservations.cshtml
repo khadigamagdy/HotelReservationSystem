@@ -1,61 +1,340 @@
 @model HotelReservationSystem.ViewModels.MyReservationsViewModel
+
 @{
     ViewData["Title"] = "My Reservations";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-10">
-        <h3 class="mb-4 text-center">My Reservations</h3>
+<div class="my-reservations-page">
 
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-        }
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-        }
+    <!-- Header -->
+    <div class="my-reservations-header">
 
-        @if (!Model.Reservations.Any())
-        {
-            <div class="alert alert-info text-center">You have no reservations yet.</div>
-        }
-        else
-        {
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Room</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
-                        <th>Total Price</th>
-                        <th>Payment Status</th>
-                        <th>Booking Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var reservation in Model.Reservations)
-                    {
-                        <tr>
-                            <td>@reservation.Room.RoomNumber</td>
-                            <td>@reservation.CheckInDate.ToShortDateString()</td>
-                            <td>@reservation.CheckOutDate.ToShortDateString()</td>
-                            <td>@reservation.TotalPrice.ToString("C")</td>
-                            <td>@reservation.PaymentStatus</td>
-                            <td>@reservation.BookingStatus</td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-primary">Details</a>
-                                @if (reservation.BookingStatus == HotelReservationSystem.Enums.BookingStatus.Booked)
-                                {
-                                    <a asp-action="Cancel" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-danger">Cancel</a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+        <div class="my-reservations-heading">
+
+            <span class="my-reservations-label">
+                GUEST PORTAL
+            </span>
+
+            <h1>
+                My Reservations
+            </h1>
+
+            <p>
+                View and manage all your hotel reservations
+                in one place.
+            </p>
+
+        </div>
+
+        <div class="my-reservations-header-icon">
+            <i class="bi bi-calendar2-check"></i>
+        </div>
+
     </div>
-</div>
 
+
+    <!-- Alerts -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="my-reservations-alert my-reservations-alert-success">
+
+            <div class="my-reservations-alert-icon">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="my-reservations-alert my-reservations-alert-danger">
+
+            <div class="my-reservations-alert-icon">
+                <i class="bi bi-exclamation-circle-fill"></i>
+            </div>
+
+            <span>
+                @TempData["ErrorMessage"]
+            </span>
+
+        </div>
+    }
+
+
+    @if (!Model.Reservations.Any())
+    {
+        <!-- Empty State -->
+        <div class="my-reservations-empty">
+
+            <div class="my-reservations-empty-icon">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+
+            <span class="my-reservations-empty-label">
+                NO BOOKINGS YET
+            </span>
+
+            <h2>
+                You Have No Reservations
+            </h2>
+
+            <p>
+                You haven't made any reservations yet.
+                Explore our available rooms and find the
+                perfect stay for you.
+            </p>
+
+            <a asp-controller="Room"
+               asp-action="Index"
+               class="my-reservations-browse-btn">
+
+                <i class="bi bi-door-open"></i>
+
+                Browse Rooms
+
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <!-- Reservations Header -->
+        <div class="my-reservations-list-header">
+
+            <div>
+
+                <span class="my-reservations-list-label">
+                    BOOKING HISTORY
+                </span>
+
+                <h2>
+                    Your Reservations
+                </h2>
+
+            </div>
+
+            <div class="my-reservations-count">
+
+                <strong>
+                    @Model.Reservations.Count()
+                </strong>
+
+                <span>
+                    Reservations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Reservations -->
+        <div class="my-reservations-list">
+
+            @foreach (var reservation in Model.Reservations)
+            {
+                <div class="my-reservation-card">
+
+                    <!-- Card Header -->
+                    <div class="my-reservation-card-header">
+
+                        <div class="my-reservation-room">
+
+                            <div class="my-reservation-room-icon">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    ROOM
+                                </span>
+
+                                <h3>
+                                    @reservation.Room.RoomNumber
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <span class="my-reservation-id">
+                            Reservation #@reservation.Id
+                        </span>
+
+                    </div>
+
+
+                    <!-- Card Details -->
+                    <div class="my-reservation-details">
+
+                        <div class="my-reservation-detail">
+
+                            <div class="my-reservation-detail-icon">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Check-In
+                                </span>
+
+                                <strong>
+                                    @reservation.CheckInDate.ToShortDateString()
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="my-reservation-detail">
+
+                            <div class="my-reservation-detail-icon">
+                                <i class="bi bi-calendar-x"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Check-Out
+                                </span>
+
+                                <strong>
+                                    @reservation.CheckOutDate.ToShortDateString()
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="my-reservation-detail">
+
+                            <div class="my-reservation-detail-icon">
+                                <i class="bi bi-cash-stack"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Total Price
+                                </span>
+
+                                <strong class="my-reservation-price">
+                                    @reservation.TotalPrice.ToString("C")
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+                    <div class="my-reservation-status-row">
+
+                        <div class="my-reservation-status-item">
+
+                            <span>
+                                Payment
+                            </span>
+
+                            <strong class="my-reservation-payment-status payment-@reservation.PaymentStatus">
+
+                                @if (reservation.PaymentStatus.ToString() == "Paid")
+                                {
+                                    <i class="bi bi-check-circle"></i>
+                                }
+                                else if (reservation.PaymentStatus.ToString() == "PartiallyPaid")
+                                {
+                                    <i class="bi bi-hourglass-split"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-exclamation-circle"></i>
+                                }
+
+                                @reservation.PaymentStatus
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="my-reservation-status-item">
+
+                            <span>
+                                Booking
+                            </span>
+
+                            <strong class="my-reservation-booking-status status-@reservation.BookingStatus">
+
+                                @if (reservation.BookingStatus.ToString() == "Booked")
+                                {
+                                    <i class="bi bi-calendar-check"></i>
+                                }
+                                else if (reservation.BookingStatus.ToString() == "CheckedIn")
+                                {
+                                    <i class="bi bi-person-check"></i>
+                                }
+                                else if (reservation.BookingStatus.ToString() == "CheckedOut")
+                                {
+                                    <i class="bi bi-check2-all"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-circle"></i>
+                                }
+
+                                @reservation.BookingStatus
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Actions -->
+                    <div class="my-reservation-actions">
+
+                        <a asp-action="Details"
+                           asp-route-id="@reservation.Id"
+                           class="my-reservation-details-btn">
+
+                            <i class="bi bi-eye"></i>
+
+                            View Details
+
+                        </a>
+
+
+                        @if (reservation.BookingStatus == HotelReservationSystem.Enums.BookingStatus.Booked)
+                        {
+                            <a asp-action="Cancel"
+                               asp-route-id="@reservation.Id"
+                               class="my-reservation-cancel-btn">
+
+                                <i class="bi bi-x-circle"></i>
+
+                                Cancel Reservation
+
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

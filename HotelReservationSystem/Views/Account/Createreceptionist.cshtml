@@ -1,57 +1,173 @@
 @model HotelReservationSystem.ViewModels.CreateStaffViewModel
+
 @{
     ViewData["Title"] = "Add Receptionist";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Add Receptionist</h3>
+<div class="staff-page">
 
-                @if (TempData["SuccessMessage"] != null)
-                {
-                    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-                }
+    <div class="staff-card">
 
-                <form asp-controller="Account" asp-action="CreateReceptionist" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="staff-header">
 
-                    <div class="mb-3">
-                        <label asp-for="FullName" class="form-label"></label>
-                        <input asp-for="FullName" class="form-control" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" autocomplete="username" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" class="form-control" autocomplete="new-password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Create Receptionist</button>
-                </form>
+            <div class="staff-icon">
+                <i class="bi bi-person-plus"></i>
             </div>
+
+            <span class="staff-label">
+                STAFF MANAGEMENT
+            </span>
+
+            <h1>Add Receptionist</h1>
+
+            <p>
+                Create a new receptionist account and provide access
+                to the hotel management system.
+            </p>
+
         </div>
+
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="staff-success">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>@TempData["SuccessMessage"]</span>
+            </div>
+        }
+
+
+        <form asp-controller="Account"
+              asp-action="CreateReceptionist"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="staff-validation"></div>
+
+
+            <!-- Full Name -->
+            <div class="staff-form-group">
+
+                <label asp-for="FullName">
+                    Full Name
+                </label>
+
+                <div class="staff-input-wrapper">
+                    <i class="bi bi-person"></i>
+
+                    <input asp-for="FullName"
+                           class="staff-input"
+                           placeholder="Enter receptionist full name" />
+                </div>
+
+                <span asp-validation-for="FullName"
+                      class="staff-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="staff-form-group">
+
+                <label asp-for="Email">
+                    Email Address
+                </label>
+
+                <div class="staff-input-wrapper">
+                    <i class="bi bi-envelope"></i>
+
+                    <input asp-for="Email"
+                           class="staff-input"
+                           autocomplete="username"
+                           placeholder="Enter email address" />
+                </div>
+
+                <span asp-validation-for="Email"
+                      class="staff-field-error">
+                </span>
+
+            </div>
+
+
+            <!-- Passwords -->
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="staff-form-group">
+
+                        <label asp-for="Password">
+                            Password
+                        </label>
+
+                        <div class="staff-input-wrapper">
+                            <i class="bi bi-lock"></i>
+
+                            <input asp-for="Password"
+                                   class="staff-input"
+                                   autocomplete="new-password"
+                                   placeholder="Enter password" />
+                        </div>
+
+                        <span asp-validation-for="Password"
+                              class="staff-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="staff-form-group">
+
+                        <label asp-for="ConfirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="staff-input-wrapper">
+                            <i class="bi bi-lock-fill"></i>
+
+                            <input asp-for="ConfirmPassword"
+                                   class="staff-input"
+                                   autocomplete="new-password"
+                                   placeholder="Confirm password" />
+                        </div>
+
+                        <span asp-validation-for="ConfirmPassword"
+                              class="staff-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Submit -->
+            <button type="submit"
+                    class="staff-submit-btn">
+
+                <i class="bi bi-person-check"></i>
+
+                Create Receptionist
+
+            </button>
+
+        </form>
+
     </div>
+
 </div>
 
+
 @section Scripts {
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
 
+}

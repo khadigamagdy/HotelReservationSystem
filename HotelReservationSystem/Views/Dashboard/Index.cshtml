@@ -4,262 +4,436 @@
     ViewData["Title"] = "Manager Dashboard";
 }
 
-<style>
-    .dashboard-page {
-        padding: 35px 0;
-    }
+<div class="manager-dashboard-page">
 
-    .dashboard-header {
-        background: linear-gradient(135deg, #0f172a, #1e3a8a);
-        color: white;
-        border-radius: 22px;
-        padding: 35px;
-        margin-bottom: 28px;
-        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.18);
-    }
+    <!-- Dashboard Header -->
+    <div class="manager-dashboard-header">
 
-    .dashboard-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
+        <div class="manager-dashboard-heading">
 
-    .dashboard-header p {
-        color: #cbd5e1;
-        margin: 0;
-    }
+            <span class="manager-dashboard-label">
+                MANAGEMENT OVERVIEW
+            </span>
 
-    .dashboard-card {
-        height: 100%;
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 24px;
-        transition: 0.25s;
-        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
-    }
+            <h1>
+                Manager Dashboard
+            </h1>
 
-    .dashboard-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
-    }
+            <p>
+                Monitor rooms, reservations, payments and
+                overall hotel performance from one place.
+            </p>
 
-    .card-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 18px;
-    }
+        </div>
 
-    .card-label {
-        color: #64748b;
-        font-size: 14px;
-        font-weight: 600;
-    }
+        <div class="manager-dashboard-icon">
+            <i class="bi bi-speedometer2"></i>
+        </div>
 
-    .card-icon {
-        width: 46px;
-        height: 46px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-    }
-
-    .card-value {
-        color: #0f172a;
-        font-size: 30px;
-        font-weight: 750;
-        margin: 0;
-    }
-
-    .icon-blue {
-        background: #dbeafe;
-    }
-
-    .icon-green {
-        background: #dcfce7;
-    }
-
-    .icon-red {
-        background: #fee2e2;
-    }
-
-    .icon-orange {
-        background: #ffedd5;
-    }
-
-    .icon-purple {
-        background: #f3e8ff;
-    }
-
-    .icon-yellow {
-        background: #fef9c3;
-    }
-
-    .reports-section {
-        margin-top: 35px;
-        background: white;
-        padding: 28px;
-        border-radius: 20px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
-    }
-
-    .reports-section h3 {
-        color: #0f172a;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-
-    .report-link {
-        display: block;
-        padding: 16px 18px;
-        border-radius: 14px;
-        background: #f8fafc;
-        color: #1e293b;
-        text-decoration: none;
-        font-weight: 600;
-        border: 1px solid #e2e8f0;
-        transition: 0.2s;
-    }
-
-    .report-link:hover {
-        background: #1e3a8a;
-        color: white;
-        transform: translateX(4px);
-    }
-</style>
-
-<div class="container dashboard-page">
-    <div class="dashboard-header">
-        <h1>Manager Dashboard</h1>
-        <p>
-            Monitor rooms, reservations, payments and hotel performance.
-        </p>
     </div>
 
+
+    <!-- Statistics -->
     <div class="row g-4">
+
+        <!-- Total Rooms -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Total Rooms</span>
-                    <span class="card-icon icon-blue">??</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Total Rooms
+                    </span>
+
+                    <div class="manager-stat-icon stat-blue">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.TotalRooms</p>
+
+                <div class="manager-stat-value">
+                    @Model.TotalRooms
+                </div>
+
+                <span class="manager-stat-description">
+                    Registered hotel rooms
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Available Rooms -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Available Rooms</span>
-                    <span class="card-icon icon-green">?</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Available Rooms
+                    </span>
+
+                    <div class="manager-stat-icon stat-green">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.AvailableRooms</p>
+
+                <div class="manager-stat-value">
+                    @Model.AvailableRooms
+                </div>
+
+                <span class="manager-stat-description">
+                    Ready for new guests
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Occupied Rooms -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Occupied Rooms</span>
-                    <span class="card-icon icon-red">??</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Occupied Rooms
+                    </span>
+
+                    <div class="manager-stat-icon stat-red">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.OccupiedRooms</p>
+
+                <div class="manager-stat-value">
+                    @Model.OccupiedRooms
+                </div>
+
+                <span class="manager-stat-description">
+                    Currently occupied
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Maintenance -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Maintenance</span>
-                    <span class="card-icon icon-orange">?</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Maintenance
+                    </span>
+
+                    <div class="manager-stat-icon stat-orange">
+                        <i class="bi bi-tools"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.MaintenanceRooms</p>
+
+                <div class="manager-stat-value">
+                    @Model.MaintenanceRooms
+                </div>
+
+                <span class="manager-stat-description">
+                    Rooms under maintenance
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Total Reservations -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Total Reservations</span>
-                    <span class="card-icon icon-purple">??</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Total Reservations
+                    </span>
+
+                    <div class="manager-stat-icon stat-purple">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.TotalReservations</p>
+
+                <div class="manager-stat-value">
+                    @Model.TotalReservations
+                </div>
+
+                <span class="manager-stat-description">
+                    Hotel bookings
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Checked-In Guests -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Checked-In Guests</span>
-                    <span class="card-icon icon-blue">??</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Checked-In Guests
+                    </span>
+
+                    <div class="manager-stat-icon stat-blue">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.CheckedInGuests</p>
+
+                <div class="manager-stat-value">
+                    @Model.CheckedInGuests
+                </div>
+
+                <span class="manager-stat-description">
+                    Guests currently staying
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Pending Payments -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Pending Payments</span>
-                    <span class="card-icon icon-yellow">??</span>
+
+            <div class="manager-stat-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Pending Payments
+                    </span>
+
+                    <div class="manager-stat-icon stat-yellow">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">@Model.PendingPayments</p>
+
+                <div class="manager-stat-value">
+                    @Model.PendingPayments
+                </div>
+
+                <span class="manager-stat-description">
+                    Payments awaiting completion
+                </span>
+
             </div>
+
         </div>
 
+
+        <!-- Total Revenue -->
         <div class="col-md-6 col-xl-3">
-            <div class="dashboard-card">
-                <div class="card-top">
-                    <span class="card-label">Total Revenue</span>
-                    <span class="card-icon icon-green">??</span>
+
+            <div class="manager-stat-card revenue-card">
+
+                <div class="manager-stat-top">
+
+                    <span class="manager-stat-label">
+                        Total Revenue
+                    </span>
+
+                    <div class="manager-stat-icon stat-green">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
                 </div>
-                <p class="card-value">
+
+                <div class="manager-stat-value revenue-value">
                     @Model.TotalRevenue.ToString("N2")
-                    <small class="fs-6">EGP</small>
-                </p>
+                    <small>EGP</small>
+                </div>
+
+                <span class="manager-stat-description">
+                    Total recorded revenue
+                </span>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="reports-section">
-        <h3>Reports</h3>
+
+    <!-- Reports -->
+    <div class="manager-reports-section">
+
+        <div class="manager-reports-header">
+
+            <div class="manager-reports-title">
+
+                <div class="manager-reports-icon">
+                    <i class="bi bi-bar-chart-line"></i>
+                </div>
+
+                <div>
+
+                    <span class="manager-reports-label">
+                        ANALYTICS
+                    </span>
+
+                    <h2>
+                        Reports
+                    </h2>
+
+                    <p>
+                        Access detailed hotel performance reports.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <div class="row g-3">
+
+            <!-- Reservations Report -->
             <div class="col-md-6 col-xl-3">
+
                 <a asp-controller="Reports"
                    asp-action="Reservations"
-                   class="report-link">
-                    Reservations Report ?
+                   class="manager-report-link">
+
+                    <div class="manager-report-link-icon">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+
+                    <div class="manager-report-link-content">
+
+                        <strong>
+                            Reservations Report
+                        </strong>
+
+                        <span>
+                            View booking details
+                        </span>
+
+                    </div>
+
+                    <i class="bi bi-arrow-right manager-report-arrow"></i>
+
                 </a>
+
             </div>
 
+
+            <!-- Payments Report -->
             <div class="col-md-6 col-xl-3">
+
                 <a asp-controller="Reports"
                    asp-action="Payments"
-                   class="report-link">
-                    Payments Report ?
+                   class="manager-report-link">
+
+                    <div class="manager-report-link-icon">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+
+                    <div class="manager-report-link-content">
+
+                        <strong>
+                            Payments Report
+                        </strong>
+
+                        <span>
+                            Review payment activity
+                        </span>
+
+                    </div>
+
+                    <i class="bi bi-arrow-right manager-report-arrow"></i>
+
                 </a>
+
             </div>
 
+
+            <!-- Rooms Report -->
             <div class="col-md-6 col-xl-3">
+
                 <a asp-controller="Reports"
                    asp-action="Rooms"
-                   class="report-link">
-                    Rooms Report ?
+                   class="manager-report-link">
+
+                    <div class="manager-report-link-icon">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
+                    <div class="manager-report-link-content">
+
+                        <strong>
+                            Rooms Report
+                        </strong>
+
+                        <span>
+                            Monitor room status
+                        </span>
+
+                    </div>
+
+                    <i class="bi bi-arrow-right manager-report-arrow"></i>
+
                 </a>
+
             </div>
 
+
+            <!-- Revenue Report -->
             <div class="col-md-6 col-xl-3">
+
                 <a asp-controller="Reports"
                    asp-action="Revenue"
-                   class="report-link">
-                    Revenue Report ?
+                   class="manager-report-link">
+
+                    <div class="manager-report-link-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <div class="manager-report-link-content">
+
+                        <strong>
+                            Revenue Report
+                        </strong>
+
+                        <span>
+                            Analyze hotel revenue
+                        </span>
+
+                    </div>
+
+                    <i class="bi bi-arrow-right manager-report-arrow"></i>
+
                 </a>
+
             </div>
+
         </div>
+
     </div>
+
 </div>

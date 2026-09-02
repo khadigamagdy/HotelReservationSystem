@@ -4,67 +4,284 @@
     ViewData["Title"] = "Room Details";
 }
 
-<h1>Room Details</h1>
+<div class="room-details-page">
 
-<hr />
+    <div class="room-details-card">
 
-<dl class="row">
+        <!-- Header -->
+        <div class="room-details-header">
 
-    <dt class="col-sm-3">Room Number</dt>
-    <dd class="col-sm-9">@Model.RoomNumber</dd>
+            <div class="room-details-icon">
+                <i class="bi bi-door-open"></i>
+            </div>
 
-    <dt class="col-sm-3">Floor</dt>
-    <dd class="col-sm-9">@Model.FloorNumber</dd>
+            <span class="room-details-label">
+                ROOM MANAGEMENT
+            </span>
 
-    <dt class="col-sm-3">Room Type</dt>
-    <dd class="col-sm-9">
-        @(Model.RoomType?.Name ?? "N/A")
-    </dd>
+            <h1>
+                Room @Model.RoomNumber
+            </h1>
 
-    <dt class="col-sm-3">Price Per Night</dt>
-    <dd class="col-sm-9">
-        @(Model.RoomType?.BasePricePerNight.ToString("0.00") ?? "N/A") EGP
-    </dd>
+            <p>
+                View complete room information, pricing,
+                capacity, status and available amenities.
+            </p>
 
-    <dt class="col-sm-3">Capacity</dt>
-    <dd class="col-sm-9">
-        @(Model.RoomType?.Capacity.ToString() ?? "N/A")
-    </dd>
+        </div>
 
-    <dt class="col-sm-3">Status</dt>
-    <dd class="col-sm-9">@Model.Status</dd>
+        <!-- Room Overview -->
+        <div class="room-details-section">
 
-    <dt class="col-sm-3">Amenities</dt>
-    <dd class="col-sm-9">
+            <div class="room-details-section-title">
 
-        @if (Model.RoomAmenities != null &&
-             Model.RoomAmenities.Any())
-        {
-            foreach (var roomAmenity in Model.RoomAmenities)
+                <div class="room-details-section-icon">
+                    <i class="bi bi-info-circle"></i>
+                </div>
+
+                <div>
+                    <span>
+                        ROOM INFORMATION
+                    </span>
+
+                    <h2>
+                        Room Overview
+                    </h2>
+                </div>
+
+            </div>
+
+            <div class="room-details-grid">
+
+                <!-- Room Number -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            Room Number
+                        </span>
+
+                        <strong>
+                            @Model.RoomNumber
+                        </strong>
+                    </div>
+
+                </div>
+
+                <!-- Floor -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-layers"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            Floor
+                        </span>
+
+                        <strong>
+                            @Model.FloorNumber
+                        </strong>
+                    </div>
+
+                </div>
+
+                <!-- Room Type -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-house-door"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            Room Type
+                        </span>
+
+                        <strong>
+                            @(Model.RoomType?.Name ?? "N/A")
+                        </strong>
+                    </div>
+
+                </div>
+
+                <!-- Capacity -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            Capacity
+                        </span>
+
+                        <strong>
+                            @(Model.RoomType?.Capacity.ToString() ?? "N/A")
+
+                            @if (Model.RoomType != null)
+                            {
+                                <small>Guests</small>
+                            }
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Price -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            Price Per Night
+                        </span>
+
+                        <strong class="room-details-price">
+                            @(Model.RoomType?.BasePricePerNight.ToString("0.00") ?? "N/A")
+
+                            @if (Model.RoomType != null)
+                            {
+                                <small>EGP</small>
+                            }
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Status -->
+                <div class="room-details-item">
+
+                    <div class="room-details-item-icon">
+                        <i class="bi bi-activity"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Current Status
+                        </span>
+
+                        <strong class="room-details-status status-@Model.Status">
+
+                            @if (Model.Status == HotelReservationSystem.Enums.RoomStatus.Available)
+                            {
+                                <i class="bi bi-check-circle"></i>
+                            }
+                            else if (Model.Status == HotelReservationSystem.Enums.RoomStatus.Occupied)
+                            {
+                                <i class="bi bi-person-fill"></i>
+                            }
+                            else if (Model.Status == HotelReservationSystem.Enums.RoomStatus.Maintenance)
+                            {
+                                <i class="bi bi-tools"></i>
+                            }
+
+                            @Model.Status
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Amenities -->
+        <div class="room-details-section">
+
+            <div class="room-details-section-title">
+
+                <div class="room-details-section-icon">
+                    <i class="bi bi-stars"></i>
+                </div>
+
+                <div>
+                    <span>
+                        ROOM FEATURES
+                    </span>
+
+                    <h2>
+                        Amenities
+                    </h2>
+                </div>
+
+            </div>
+
+            @if (Model.RoomAmenities != null &&
+                 Model.RoomAmenities.Any())
             {
-                <span class="badge bg-secondary me-1">
-                    @roomAmenity.Amenity.Name
-                </span>
+                <div class="room-details-amenities">
+
+                    @foreach (var roomAmenity in Model.RoomAmenities)
+                    {
+                        <div class="room-details-amenity">
+
+                            <div class="room-details-amenity-icon">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+
+                            <span>
+                                @roomAmenity.Amenity.Name
+                            </span>
+
+                        </div>
+                    }
+
+                </div>
             }
-        }
-        else
-        {
-            <span>No amenities</span>
-        }
+            else
+            {
+                <div class="room-details-no-amenities">
 
-    </dd>
+                    <i class="bi bi-info-circle"></i>
 
-</dl>
+                    <span>
+                        No amenities have been assigned to this room.
+                    </span>
 
-<div>
-    <a asp-action="Edit"
-       asp-route-id="@Model.Id"
-       class="btn btn-primary">
-        Edit
-    </a>
+                </div>
+            }
 
-    <a asp-action="Index"
-       class="btn btn-secondary">
-        Back to List
-    </a>
+        </div>
+
+        <!-- Actions -->
+        <div class="room-details-actions">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="room-details-edit-btn">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Edit Room
+
+            </a>
+
+            <a asp-action="Index"
+               class="room-details-back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to List
+
+            </a>
+
+        </div>
+
+    </div>
+
 </div>

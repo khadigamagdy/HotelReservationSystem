@@ -1,66 +1,336 @@
 @model IEnumerable<HotelReservationSystem.Models.Entities.Room>
 
-<h1>Rooms</h1>
+@{
+    ViewData["Title"] = "Rooms";
+}
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">
-        Add Room
-    </a>
-</p>
+<div class="rooms-management-page">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Room</th>
-            <th>Floor</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Amenities</th>
-            <th></th>
-        </tr>
-    </thead>
+    <!-- Header -->
+    <div class="rooms-management-header">
 
-    <tbody>
-        @foreach (var room in Model)
+        <div class="rooms-management-heading">
+
+            <span class="rooms-management-label">
+                ROOM MANAGEMENT
+            </span>
+
+            <h1>
+                Hotel Rooms
+            </h1>
+
+            <p>
+                Manage your hotel rooms, room types,
+                pricing, status and amenities.
+            </p>
+
+        </div>
+
+        <a asp-action="Create"
+           class="rooms-management-add-btn">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add Room
+
+        </a>
+
+    </div>
+
+    <!-- Rooms Table -->
+    <div class="rooms-management-table-card">
+
+        <div class="rooms-management-table-header">
+
+            <div class="rooms-management-table-title">
+
+                <div class="rooms-management-table-icon">
+                    <i class="bi bi-door-open"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        ROOM INVENTORY
+                    </span>
+
+                    <h2>
+                        All Hotel Rooms
+                    </h2>
+
+                    <p>
+                        View and manage all rooms registered in the hotel.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="rooms-management-count">
+
+                <strong>
+                    @Model.Count()
+                </strong>
+
+                <span>
+                    Rooms
+                </span>
+
+            </div>
+
+        </div>
+
+        @if (!Model.Any())
         {
-            <tr>
-                <td>@room.RoomNumber</td>
+            <div class="rooms-management-empty">
 
-                <td>@room.FloorNumber</td>
+                <div class="rooms-management-empty-icon">
+                    <i class="bi bi-door-closed"></i>
+                </div>
 
-                <td>@room.RoomType.Name</td>
+                <span>
+                    NO ROOMS YET
+                </span>
 
-                <td>
-                    @room.RoomType.BasePricePerNight EGP
-                </td>
+                <h3>
+                    No Rooms Found
+                </h3>
 
-                <td>@room.Status</td>
+                <p>
+                    There are currently no rooms registered
+                    in the system.
+                </p>
 
-                <td>
-                    @foreach (var ra in room.RoomAmenities)
-                    {
-                        <span>@ra.Amenity.Name</span>
-                    }
-                </td>
+                <a asp-action="Create"
+                   class="rooms-management-empty-btn">
 
-                <td>
-                    <a asp-action="Details"
-                       asp-route-id="@room.Id">
-                        Details
-                    </a>
+                    <i class="bi bi-plus-lg"></i>
 
-                    <a asp-action="Edit"
-                       asp-route-id="@room.Id">
-                        Edit
-                    </a>
+                    Add Your First Room
 
-                    <a asp-action="Delete"
-                       asp-route-id="@room.Id">
-                        Delete
-                    </a>
-                </td>
-            </tr>
+                </a>
+
+            </div>
         }
-    </tbody>
-</table>
+        else
+        {
+            <div class="table-responsive">
+
+                <table class="rooms-management-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Room
+                            </th>
+
+                            <th>
+                                Floor
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Price / Night
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Amenities
+                            </th>
+
+                            <th class="text-end">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var room in Model)
+                        {
+                            <tr>
+
+                                <!-- Room -->
+                                <td>
+
+                                    <div class="rooms-management-room">
+
+                                        <div class="rooms-management-room-icon">
+                                            <i class="bi bi-door-open"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <span>
+                                                ROOM
+                                            </span>
+
+                                            <strong>
+                                                @room.RoomNumber
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <!-- Floor -->
+                                <td>
+
+                                    <span class="rooms-management-floor">
+
+                                        <i class="bi bi-layers"></i>
+
+                                        @room.FloorNumber
+
+                                    </span>
+
+                                </td>
+
+                                <!-- Type -->
+                                <td>
+
+                                    <div class="rooms-management-type">
+
+                                        <i class="bi bi-house-door"></i>
+
+                                        <span>
+                                            @room.RoomType.Name
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                                <!-- Price -->
+                                <td>
+
+                                    <strong class="rooms-management-price">
+
+                                        @room.RoomType.BasePricePerNight.ToString("N2")
+
+                                        <small>
+                                            EGP
+                                        </small>
+
+                                    </strong>
+
+                                </td>
+
+                                <!-- Status -->
+                                <td>
+
+                                    <span class="rooms-management-status status-@room.Status">
+
+                                        @if (room.Status == HotelReservationSystem.Enums.RoomStatus.Available)
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+                                        }
+                                        else if (room.Status == HotelReservationSystem.Enums.RoomStatus.Occupied)
+                                        {
+                                            <i class="bi bi-person-fill"></i>
+                                        }
+                                        else if (room.Status == HotelReservationSystem.Enums.RoomStatus.Maintenance)
+                                        {
+                                            <i class="bi bi-tools"></i>
+                                        }
+
+                                        @room.Status
+
+                                    </span>
+
+                                </td>
+
+                                <!-- Amenities -->
+                                <td>
+
+                                    @if (room.RoomAmenities != null &&
+                                         room.RoomAmenities.Any())
+                                    {
+                                        <div class="rooms-management-amenities">
+
+                                            @foreach (var ra in room.RoomAmenities)
+                                            {
+                                                <span class="rooms-management-amenity">
+
+                                                    <i class="bi bi-stars"></i>
+
+                                                    @ra.Amenity.Name
+
+                                                </span>
+                                            }
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="rooms-management-no-amenities">
+                                            No amenities
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Actions -->
+                                <td>
+
+                                    <div class="rooms-management-actions">
+
+                                        <a asp-action="Details"
+                                           asp-route-id="@room.Id"
+                                           class="rooms-management-details-btn">
+
+                                            <i class="bi bi-eye"></i>
+
+                                            Details
+
+                                        </a>
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@room.Id"
+                                           class="rooms-management-edit-btn">
+
+                                            <i class="bi bi-pencil-square"></i>
+
+                                            Edit
+
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@room.Id"
+                                           class="rooms-management-delete-btn">
+
+                                            <i class="bi bi-trash3"></i>
+
+                                            Delete
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</div>

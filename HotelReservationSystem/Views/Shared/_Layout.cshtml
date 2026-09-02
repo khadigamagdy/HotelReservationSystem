@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8" />
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
 
     <title>
-        @ViewData["Title"] - Hotel Reservation System
+        @ViewData["Title"] - Luxora Hotel
     </title>
 
     <script type="importmap"></script>
@@ -24,110 +26,35 @@
           href="~/HotelReservationSystem.styles.css"
           asp-append-version="true" />
 
-    <style>
-        body {
-            background: #f8fafc;
-            color: #0f172a;
-        }
-
-        .hotel-navbar {
-            background: #0f172a;
-            min-height: 70px;
-            box-shadow: 0 6px 22px rgba(15, 23, 42, 0.18);
-        }
-
-            .hotel-navbar .navbar-brand {
-                color: white;
-                font-size: 21px;
-                font-weight: 750;
-            }
-
-                .hotel-navbar .navbar-brand:hover {
-                    color: #dbeafe;
-                }
-
-            .hotel-navbar .nav-link {
-                color: #cbd5e1;
-                font-weight: 550;
-                border-radius: 9px;
-                padding: 9px 12px;
-            }
-
-                .hotel-navbar .nav-link:hover {
-                    color: white;
-                    background: rgba(255, 255, 255, 0.09);
-                }
-
-            .hotel-navbar .navbar-toggler {
-                border-color: rgba(255, 255, 255, 0.4);
-            }
-
-            .hotel-navbar .navbar-toggler-icon {
-                filter: invert(1);
-            }
-
-        .user-name {
-            color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-        }
-
-        .logout-button {
-            color: white;
-            background: #dc2626;
-            border: 0;
-            border-radius: 9px;
-            padding: 9px 15px;
-            font-weight: 600;
-        }
-
-            .logout-button:hover {
-                background: #b91c1c;
-            }
-
-        .login-link {
-            color: white;
-            text-decoration: none;
-            border: 1px solid #64748b;
-            border-radius: 9px;
-            padding: 8px 15px;
-        }
-
-        .register-link {
-            color: white;
-            background: #2563eb;
-            text-decoration: none;
-            border-radius: 9px;
-            padding: 9px 15px;
-        }
-
-            .login-link:hover,
-            .register-link:hover {
-                color: white;
-                opacity: 0.9;
-            }
-
-        .hotel-footer {
-            margin-top: 50px;
-            padding: 24px 0;
-            color: #64748b;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-        }
-    </style>
 </head>
 
+
 <body>
+
+    <!-- Navigation -->
     <header>
+
         <nav class="navbar navbar-expand-lg hotel-navbar">
+
             <div class="container">
-                <a class="navbar-brand"
+
+                <!-- Brand -->
+                <a class="navbar-brand hotel-brand"
                    asp-controller="Home"
                    asp-action="Index">
-                    Hotel Reservation
+
+                    <span class="hotel-brand-icon">
+                        <i class="bi bi-buildings"></i>
+                    </span>
+
+                    <span>
+                        Luxora Hotel
+                    </span>
+
                 </a>
 
+
+                <!-- Mobile Toggle -->
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -137,90 +64,181 @@
                         aria-label="Toggle navigation">
 
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
 
+
+                <!-- Navigation Links -->
                 <div id="mainNavbar"
                      class="collapse navbar-collapse">
 
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 hotel-nav-links">
+
+                        <!-- Home -->
                         <li class="nav-item">
+
                             <a class="nav-link"
                                asp-controller="Home"
                                asp-action="Index">
+
+                                <i class="bi bi-house-door"></i>
+
                                 Home
+
                             </a>
+
                         </li>
 
+
+                        <!-- Manager Navigation -->
                         @if (User.IsInRole("Manager"))
                         {
+
+                            <!-- Dashboard -->
                             <li class="nav-item">
+
                                 <a class="nav-link"
                                    asp-controller="Dashboard"
                                    asp-action="Index">
+
+                                    <i class="bi bi-speedometer2"></i>
+
                                     Dashboard
+
                                 </a>
+
                             </li>
 
+
+                            <!-- Reports -->
                             <li class="nav-item dropdown">
+
                                 <a class="nav-link dropdown-toggle"
                                    href="#"
                                    role="button"
                                    data-bs-toggle="dropdown"
                                    aria-expanded="false">
+
+                                    <i class="bi bi-bar-chart-line"></i>
+
                                     Reports
+
                                 </a>
 
-                                <ul class="dropdown-menu">
+
+                                <ul class="dropdown-menu hotel-dropdown-menu">
+
                                     <li>
+
                                         <a class="dropdown-item"
                                            asp-controller="Reports"
                                            asp-action="Reservations">
+
+                                            <i class="bi bi-calendar2-check"></i>
+
                                             Reservations
+
                                         </a>
+
                                     </li>
 
+
                                     <li>
+
                                         <a class="dropdown-item"
                                            asp-controller="Reports"
                                            asp-action="Payments">
+
+                                            <i class="bi bi-credit-card"></i>
+
                                             Payments
+
                                         </a>
+
                                     </li>
 
+
                                     <li>
+
                                         <a class="dropdown-item"
                                            asp-controller="Reports"
                                            asp-action="Rooms">
+
+                                            <i class="bi bi-door-open"></i>
+
                                             Rooms
+
                                         </a>
+
                                     </li>
 
+
                                     <li>
+
                                         <a class="dropdown-item"
                                            asp-controller="Reports"
                                            asp-action="Revenue">
+
+                                            <i class="bi bi-graph-up-arrow"></i>
+
                                             Revenue
+
                                         </a>
+
                                     </li>
+
                                 </ul>
+
                             </li>
 
+
+                            <!-- Users -->
                             <li class="nav-item">
+
                                 <a class="nav-link"
                                    asp-controller="UserManagement"
                                    asp-action="Index">
+
+                                    <i class="bi bi-people"></i>
+
                                     Users
+
                                 </a>
+
                             </li>
+
                         }
+
                     </ul>
 
-                    <div class="d-flex align-items-center gap-2">
+
+                    <!-- Account Area -->
+                    <div class="hotel-account-area">
+
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <span class="user-name">
-                                Welcome, @User.Identity.Name
-                            </span>
+
+                            <div class="hotel-user-info">
+
+                                <div class="hotel-user-icon">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+
+                                <div class="hotel-user-text">
+
+                                    <span>
+                                        Welcome
+                                    </span>
+
+                                    <strong>
+                                        @User.Identity.Name
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
 
                             <form asp-controller="Account"
                                   asp-action="Logout"
@@ -230,40 +248,105 @@
 
                                 <button type="submit"
                                         class="logout-button">
+
+                                    <i class="bi bi-box-arrow-right"></i>
+
                                     Logout
+
                                 </button>
+
                             </form>
+
                         }
                         else
                         {
+
                             <a asp-controller="Account"
                                asp-action="Login"
                                class="login-link">
+
+                                <i class="bi bi-box-arrow-in-right"></i>
+
                                 Login
+
                             </a>
+
 
                             <a asp-controller="Account"
                                asp-action="Register"
                                class="register-link">
+
+                                <i class="bi bi-person-plus"></i>
+
                                 Register
+
                             </a>
+
                         }
+
                     </div>
+
                 </div>
+
             </div>
+
         </nav>
+
     </header>
 
-    <main role="main">
+
+    <!-- Main Content -->
+    <main role="main"
+          class="hotel-main-content">
+
         @RenderBody()
+
     </main>
 
+
+    <!-- Footer -->
     <footer class="hotel-footer">
-        <div class="container text-center">
-            &copy; 2026 - Hotel Reservation System
+
+        <div class="container">
+
+            <div class="hotel-footer-content">
+
+                <div class="hotel-footer-brand">
+
+                    <div class="hotel-footer-logo">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Luxora Hotel
+                        </strong>
+
+                        <span>
+                            Experience Comfort. Stay Extraordinary.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hotel-footer-copy">
+
+                    &copy; 2026 Luxora Hotel.
+                    All rights reserved.
+
+                </div>
+
+            </div>
+
         </div>
+
     </footer>
 
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -273,5 +356,7 @@
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
+
 </html>

@@ -7,215 +7,361 @@
     decimal remainingAmount = ViewBag.RemainingAmount ?? 0m;
 }
 
-<div class="container mt-4">
+<div class="checkout-page">
 
-    <div class="row justify-content-center">
+    <div class="checkout-card">
 
-        <div class="col-md-8">
+        <!-- Header -->
+        <div class="checkout-header">
 
-            <div class="card shadow-sm">
+            <div class="checkout-icon">
+                <i class="bi bi-box-arrow-right"></i>
+            </div>
 
-                <div class="card-header">
-                    <h3 class="mb-0">Guest Check-Out</h3>
+            <span class="checkout-label">
+                FRONT DESK
+            </span>
+
+            <h1>Guest Check-Out</h1>
+
+            <p>
+                Review the reservation and payment details before
+                completing the guest's check-out.
+            </p>
+
+        </div>
+
+
+        <!-- Reservation Information -->
+        <div class="checkout-section">
+
+            <div class="checkout-section-title">
+
+                <div class="checkout-section-icon">
+                    <i class="bi bi-calendar-check"></i>
                 </div>
 
-                <div class="card-body">
+                <div>
+                    <h3>Reservation Information</h3>
 
-                    <div class="alert alert-info">
-                        Please review the reservation and payment details before completing check-out.
-                    </div>
+                    <span>
+                        Guest and room details
+                    </span>
+                </div>
 
-                    <h5 class="mb-3">Reservation Information</h5>
+            </div>
 
-                    <div class="row mb-3">
 
-                        <div class="col-md-6">
-                            <strong>Reservation ID</strong>
-                            <p>#@Model.Id</p>
-                        </div>
+            <div class="reservation-details-grid">
 
-                        <div class="col-md-6">
-                            <strong>Guest Name</strong>
-                            <p>
-                                @Model.Guest?.User?.FullName
-                            </p>
-                        </div>
+                <!-- Reservation ID -->
+                <div class="reservation-detail">
 
-                    </div>
+                    <span>
+                        Reservation ID
+                    </span>
 
-                    <div class="row mb-3">
+                    <strong>
+                        #@Model.Id
+                    </strong>
 
-                        <div class="col-md-6">
-                            <strong>Room Number</strong>
-                            <p>
-                                @Model.Room?.RoomNumber
-                            </p>
-                        </div>
+                </div>
 
-                        <div class="col-md-6">
-                            <strong>Room Type</strong>
-                            <p>
-                                @Model.Room?.RoomType?.Name
-                            </p>
-                        </div>
 
-                    </div>
+                <!-- Guest -->
+                <div class="reservation-detail">
 
-                    <div class="row mb-4">
+                    <span>
+                        Guest Name
+                    </span>
 
-                        <div class="col-md-6">
-                            <strong>Check-In Date</strong>
-                            <p>
-                                @Model.CheckInDate.ToString("dd/MM/yyyy")
-                            </p>
-                        </div>
+                    <strong>
+                        @Model.Guest?.User?.FullName
+                    </strong>
 
-                        <div class="col-md-6">
-                            <strong>Check-Out Date</strong>
-                            <p>
-                                @Model.CheckOutDate.ToString("dd/MM/yyyy")
-                            </p>
-                        </div>
+                </div>
 
-                    </div>
 
-                    <h5 class="mb-3">Payment Information</h5>
+                <!-- Room -->
+                <div class="reservation-detail">
 
-                    <div class="row mb-3">
+                    <span>
+                        Room Number
+                    </span>
 
-                        <div class="col-md-4">
-                            <strong>Total Price</strong>
-                            <p>
-                                @Model.TotalPrice.ToString("N2") EGP
-                            </p>
-                        </div>
+                    <strong>
+                        @Model.Room?.RoomNumber
+                    </strong>
 
-                        <div class="col-md-4">
-                            <strong>Total Paid</strong>
-                            <p>
-                                @totalPaid.ToString("N2") EGP
-                            </p>
-                        </div>
+                </div>
 
-                        <div class="col-md-4">
-                            <strong>Remaining</strong>
-                            <p>
-                                @remainingAmount.ToString("N2") EGP
-                            </p>
-                        </div>
 
-                    </div>
+                <!-- Room Type -->
+                <div class="reservation-detail">
 
-                    @if (remainingAmount > 0)
-                    {
-                        <div class="alert alert-danger">
+                    <span>
+                        Room Type
+                    </span>
 
-                            <strong>Payment Required</strong>
+                    <strong>
+                        @Model.Room?.RoomType?.Name
+                    </strong>
 
-                            <br />
+                </div>
 
-                            The guest still has
-                            <strong>
-                                @remainingAmount.ToString("N2") EGP
-                            </strong>
-                            remaining.
 
-                            <br />
+                <!-- Check-In -->
+                <div class="reservation-detail">
 
-                            Please record the remaining payment before completing check-out.
+                    <span>
+                        Check-In Date
+                    </span>
 
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="alert alert-success">
+                    <strong>
+                        @Model.CheckInDate.ToString("dd/MM/yyyy")
+                    </strong>
 
-                            <strong>Payment Completed</strong>
+                </div>
 
-                            <br />
 
-                            The reservation has been fully paid.
-                            The guest can now be checked out.
+                <!-- Check-Out -->
+                <div class="reservation-detail">
 
-                        </div>
-                    }
+                    <span>
+                        Check-Out Date
+                    </span>
 
-                    @if (remainingAmount <= 0)
-                    {
-                        <div class="alert alert-warning">
-
-                            <strong>Important:</strong>
-
-                            <ul class="mb-0 mt-2">
-
-                                <li>
-                                    Reservation will be marked as
-                                    <strong>Checked Out</strong>.
-                                </li>
-
-                                <li>
-                                    Room will be marked as
-                                    <strong>Available</strong>.
-                                </li>
-
-                                <li>
-                                    The receptionist who completed the
-                                    check-out will be recorded.
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                        <form asp-controller="CheckInOut"
-                              asp-action="CheckOut"
-                              asp-route-id="@Model.Id"
-                              method="post">
-
-                            @Html.AntiForgeryToken()
-
-                            <div class="d-flex gap-2">
-
-                                <button type="submit"
-                                        class="btn btn-primary">
-                                    Confirm Check-Out
-                                </button>
-
-                                <a asp-controller="CheckInOut"
-                                   asp-action="Reservations"
-                                   class="btn btn-secondary">
-                                    Cancel
-                                </a>
-
-                            </div>
-
-                        </form>
-                    }
-                    else
-                    {
-                        <div class="d-flex gap-2">
-
-                            <a asp-controller="Payments"
-                               asp-action="Create"
-                               asp-route-reservationId="@Model.Id"
-                               class="btn btn-success">
-                                Add Payment
-                            </a>
-
-                            <a asp-controller="CheckInOut"
-                               asp-action="Reservations"
-                               class="btn btn-secondary">
-                                Back
-                            </a>
-
-                        </div>
-                    }
+                    <strong>
+                        @Model.CheckOutDate.ToString("dd/MM/yyyy")
+                    </strong>
 
                 </div>
 
             </div>
 
         </div>
+
+
+        <!-- Payment Information -->
+        <div class="checkout-section">
+
+            <div class="checkout-section-title">
+
+                <div class="checkout-section-icon">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+
+                <div>
+                    <h3>Payment Information</h3>
+
+                    <span>
+                        Review the reservation payment status
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="payment-summary-grid">
+
+                <!-- Total Price -->
+                <div class="payment-summary-item">
+
+                    <span>
+                        Total Price
+                    </span>
+
+                    <strong>
+                        @Model.TotalPrice.ToString("N2") EGP
+                    </strong>
+
+                </div>
+
+
+                <!-- Total Paid -->
+                <div class="payment-summary-item">
+
+                    <span>
+                        Total Paid
+                    </span>
+
+                    <strong class="paid-value">
+                        @totalPaid.ToString("N2") EGP
+                    </strong>
+
+                </div>
+
+
+                <!-- Remaining -->
+                <div class="payment-summary-item">
+
+                    <span>
+                        Remaining
+                    </span>
+
+                    <strong class="remaining-value">
+                        @remainingAmount.ToString("N2") EGP
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Payment Status -->
+        @if (remainingAmount > 0)
+        {
+            <div class="checkout-alert checkout-alert-danger">
+
+                <div class="checkout-alert-icon">
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Payment Required
+                    </strong>
+
+                    <p>
+                        The guest still has
+                        <strong>
+                            @remainingAmount.ToString("N2") EGP
+                        </strong>
+                        remaining.
+                        Please record the remaining payment before
+                        completing check-out.
+                    </p>
+
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="checkout-alert checkout-alert-success">
+
+                <div class="checkout-alert-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Payment Completed
+                    </strong>
+
+                    <p>
+                        The reservation has been fully paid.
+                        The guest can now be checked out.
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+
+        <!-- Check-Out Confirmation -->
+        @if (remainingAmount <= 0)
+        {
+            <div class="checkout-warning">
+
+                <div class="checkout-warning-header">
+
+                    <i class="bi bi-info-circle"></i>
+
+                    <strong>
+                        Check-Out Confirmation
+                    </strong>
+
+                </div>
+
+                <ul>
+
+                    <li>
+                        Reservation will be marked as
+                        <strong>Checked Out</strong>.
+                    </li>
+
+                    <li>
+                        Room will be marked as
+                        <strong>Available</strong>.
+                    </li>
+
+                    <li>
+                        The receptionist who completed the
+                        check-out will be recorded.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Actions -->
+            <form asp-controller="CheckInOut"
+                  asp-action="CheckOut"
+                  asp-route-id="@Model.Id"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div class="checkout-actions">
+
+                    <button type="submit"
+                            class="checkout-confirm-btn">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Confirm Check-Out
+
+                    </button>
+
+                    <a asp-controller="CheckInOut"
+                       asp-action="Reservations"
+                       class="checkout-cancel-btn">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+        }
+        else
+        {
+            <!-- Payment Required Actions -->
+            <div class="checkout-payment-actions">
+
+                <a asp-controller="Payments"
+                   asp-action="Create"
+                   asp-route-reservationId="@Model.Id"
+                   class="checkout-payment-btn">
+
+                    <i class="bi bi-credit-card"></i>
+
+                    Add Payment
+
+                </a>
+
+                <a asp-controller="CheckInOut"
+                   asp-action="Reservations"
+                   class="checkout-cancel-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back
+
+                </a>
+
+            </div>
+        }
 
     </div>
 

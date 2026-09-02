@@ -2,62 +2,108 @@
     ViewData["Title"] = "Check-Out Completed";
 }
 
-<div class="container mt-5">
+<div class="checkout-completed-page">
 
-    <div class="row justify-content-center">
+    <div class="checkout-completed-card">
 
-        <div class="col-md-7">
+        <!-- Success Icon -->
+        <div class="completed-icon">
+            <i class="bi bi-check-lg"></i>
+        </div>
 
-            <div class="card shadow-sm text-center">
 
-                <div class="card-body p-5">
+        <!-- Header -->
+        <span class="completed-label">
+            FRONT DESK
+        </span>
 
-                    <div class="mb-4">
-                        <h1 class="display-6">
-                            Check-Out Completed
-                        </h1>
-                    </div>
+        <h1>
+            Check-Out Completed
+        </h1>
 
-                    <div class="alert alert-success">
+        <p class="completed-subtitle">
+            The guest has been successfully checked out
+            and the reservation has been completed.
+        </p>
 
-                        <h4 class="alert-heading">
-                            Successfully Checked Out
-                        </h4>
 
-                        <p class="mb-0">
-                            The guest has been successfully checked out.
-                        </p>
+        <!-- Success Message -->
+        <div class="completed-success-box">
 
-                    </div>
+            <div class="completed-success-icon">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
 
-                    <p class="text-muted">
-                        Reservation
-                        <strong>
-                            #@ViewBag.ReservationId
-                        </strong>
-                        has been completed successfully.
-                    </p>
+            <div>
 
-                    <p class="text-muted">
-                        The room has been marked as
-                        <strong>Available</strong>.
-                    </p>
+                <strong>
+                    Successfully Checked Out
+                </strong>
 
-                    <div class="mt-4">
-
-                        <a asp-controller="CheckInOut"
-                           asp-action="Reservations"
-                           class="btn btn-primary">
-                            Back to Check-In / Check-Out
-                        </a>
-
-                    </div>
-
-                </div>
+                <p>
+                    The guest has been successfully checked out.
+                </p>
 
             </div>
 
         </div>
+
+
+        <!-- Reservation Details -->
+        <div class="completed-details">
+
+            <div class="completed-detail">
+
+                <span>
+                    Reservation
+                </span>
+
+                <strong>
+                    #@ViewBag.ReservationId
+                </strong>
+
+            </div>
+
+
+            <div class="completed-detail">
+
+                <span>
+                    Room Status
+                </span>
+
+                <strong class="available-status">
+                    <i class="bi bi-check-circle"></i>
+                    Available
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Confirmation -->
+        <div class="completed-message">
+
+            <i class="bi bi-info-circle"></i>
+
+            <span>
+                The room has been successfully marked as
+                <strong>Available</strong> for the next guest.
+            </span>
+
+        </div>
+
+
+        <!-- Action -->
+        <a asp-controller="CheckInOut"
+           asp-action="Reservations"
+           class="completed-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Check-In / Check-Out
+
+        </a>
 
     </div>
 

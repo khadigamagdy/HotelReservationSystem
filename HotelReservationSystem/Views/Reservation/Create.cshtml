@@ -1,43 +1,237 @@
 @model HotelReservationSystem.ViewModels.CreateReservationViewModel
+
 @{
     ViewData["Title"] = "Confirm Reservation";
 }
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="card-title text-center mb-4">Confirm Your Reservation</h3>
+<div class="confirm-reservation-page">
 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="confirm-reservation-card">
 
-                <dl class="row">
-                    <dt class="col-sm-5">Room</dt>
-                    <dd class="col-sm-7">@Model.RoomNumber (@Model.RoomTypeName)</dd>
+        <!-- Header -->
+        <div class="confirm-reservation-header">
 
-                    <dt class="col-sm-5">Price per night</dt>
-                    <dd class="col-sm-7">@Model.BasePricePerNight.ToString("C")</dd>
-
-                    <dt class="col-sm-5">Check-in</dt>
-                    <dd class="col-sm-7">@Model.CheckInDate.ToShortDateString()</dd>
-
-                    <dt class="col-sm-5">Check-out</dt>
-                    <dd class="col-sm-7">@Model.CheckOutDate.ToShortDateString()</dd>
-                </dl>
-
-                <form asp-controller="Reservation" asp-action="Create" method="post">
-                    <input type="hidden" asp-for="RoomId" />
-                    <input type="hidden" asp-for="RoomNumber" />
-                    <input type="hidden" asp-for="RoomTypeName" />
-                    <input type="hidden" asp-for="BasePricePerNight" />
-                    <input type="hidden" asp-for="CheckInDate" />
-                    <input type="hidden" asp-for="CheckOutDate" />
-
-                    <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
-                </form>
+            <div class="confirm-reservation-icon">
+                <i class="bi bi-calendar-check"></i>
             </div>
+
+            <span class="confirm-reservation-label">
+                LUXORA HOTEL
+            </span>
+
+            <h1>
+                Confirm Your Reservation
+            </h1>
+
+            <p>
+                Review your reservation details carefully
+                before confirming your booking.
+            </p>
+
         </div>
+
+
+        <!-- Validation -->
+        <div asp-validation-summary="ModelOnly"
+             class="confirm-reservation-validation">
+        </div>
+
+
+        <!-- Reservation Summary -->
+        <div class="confirm-reservation-summary">
+
+            <div class="confirm-summary-header">
+
+                <div class="confirm-summary-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        RESERVATION SUMMARY
+                    </span>
+
+                    <h2>
+                        Your Booking Details
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="confirm-details-grid">
+
+                <!-- Room -->
+                <div class="confirm-detail-item">
+
+                    <div class="confirm-detail-icon">
+                        <i class="bi bi-door-open"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Room
+                        </span>
+
+                        <strong>
+                            @Model.RoomNumber
+                        </strong>
+
+                        <small>
+                            @Model.RoomTypeName
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Price -->
+                <div class="confirm-detail-item">
+
+                    <div class="confirm-detail-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Price Per Night
+                        </span>
+
+                        <strong class="confirm-price">
+                            @Model.BasePricePerNight.ToString("C")
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Check-In -->
+                <div class="confirm-detail-item">
+
+                    <div class="confirm-detail-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Check-In
+                        </span>
+
+                        <strong>
+                            @Model.CheckInDate.ToShortDateString()
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Check-Out -->
+                <div class="confirm-detail-item">
+
+                    <div class="confirm-detail-icon">
+                        <i class="bi bi-calendar-x"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Check-Out
+                        </span>
+
+                        <strong>
+                            @Model.CheckOutDate.ToShortDateString()
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Information -->
+        <div class="confirm-reservation-info">
+
+            <div class="confirm-info-icon">
+                <i class="bi bi-info-circle"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Before You Confirm
+                </strong>
+
+                <p>
+                    Please make sure your room and stay dates
+                    are correct. Once confirmed, your reservation
+                    will be created in the hotel system.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Booking Form -->
+        <form asp-controller="Reservation"
+              asp-action="Create"
+              method="post">
+
+            <input type="hidden"
+                   asp-for="RoomId" />
+
+            <input type="hidden"
+                   asp-for="RoomNumber" />
+
+            <input type="hidden"
+                   asp-for="RoomTypeName" />
+
+            <input type="hidden"
+                   asp-for="BasePricePerNight" />
+
+            <input type="hidden"
+                   asp-for="CheckInDate" />
+
+            <input type="hidden"
+                   asp-for="CheckOutDate" />
+
+
+            <div class="confirm-reservation-actions">
+
+                <button type="submit"
+                        class="confirm-booking-btn">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Confirm Booking
+
+                </button>
+
+                <a asp-controller="Room"
+                   asp-action="AvailableRooms"
+                   class="confirm-back-btn">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back to Rooms
+
+                </a>
+
+            </div>
+
+        </form>
+
     </div>
+
 </div>
-
-
