@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Check-Out Completed";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-sm text-center">
+
+                <div class="card-body p-5">
+
+                    <div class="mb-4">
+                        <h1 class="display-6">
+                            Check-Out Completed
+                        </h1>
+                    </div>
+
+                    <div class="alert alert-success">
+
+                        <h4 class="alert-heading">
+                            Successfully Checked Out
+                        </h4>
+
+                        <p class="mb-0">
+                            The guest has been successfully checked out.
+                        </p>
+
+                    </div>
+
+                    <p class="text-muted">
+                        Reservation
+                        <strong>
+                            #@ViewBag.ReservationId
+                        </strong>
+                        has been completed successfully.
+                    </p>
+
+                    <p class="text-muted">
+                        The room has been marked as
+                        <strong>Available</strong>.
+                    </p>
+
+                    <div class="mt-4">
+
+                        <a asp-controller="CheckInOut"
+                           asp-action="Reservations"
+                           class="btn btn-primary">
+                            Back to Check-In / Check-Out
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

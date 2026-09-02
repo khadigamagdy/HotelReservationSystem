@@ -1,0 +1,134 @@
+﻿@model HotelReservationSystem.Models.Reservation
+
+@{
+    ViewData["Title"] = "Check-In Guest";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+                    <h3 class="mb-0">Guest Check-In</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-info">
+                        Please review the reservation details before confirming check-in.
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+                            <strong>Reservation ID</strong>
+                            <p>#@Model.Id</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Guest Name</strong>
+                            <p>
+                                @Model.Guest?.User?.FullName
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+                            <strong>Room Number</strong>
+                            <p>
+                                @Model.Room?.RoomNumber
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Room Type</strong>
+                            <p>
+                                @Model.Room?.RoomType?.Name
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+                            <strong>Check-In Date</strong>
+                            <p>
+                                @Model.CheckInDate.ToString("dd/MM/yyyy")
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Check-Out Date</strong>
+                            <p>
+                                @Model.CheckOutDate.ToString("dd/MM/yyyy")
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-4">
+
+                        <div class="col-md-6">
+                            <strong>Total Price</strong>
+                            <p>
+                                @Model.TotalPrice.ToString("N2") EGP
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Payment Status</strong>
+                            <p>
+                                @Model.PaymentStatus
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>Important:</strong>
+                        Confirming check-in will mark the reservation as
+                        <strong>Checked In</strong> and the room as
+                        <strong>Occupied</strong>.
+                    </div>
+
+                    <form asp-controller="CheckInOut"
+                          asp-action="CheckIn"
+                          asp-route-id="@Model.Id"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-success">
+                                Confirm Check-In
+                            </button>
+
+                            <a asp-controller="CheckInOut"
+                               asp-action="Reservations"
+                               class="btn btn-secondary">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
