@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotelReservationSystem.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     public class AmenitiesController : Controller
     {
         private readonly IAmenityRepository _repository;
@@ -21,7 +21,7 @@ namespace HotelReservationSystem.Controllers
             return View(_repository.GetAll());
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Create()
         {
             return View();
@@ -29,7 +29,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Create(Amenity amenity)
         {
             if (!ModelState.IsValid)
@@ -41,7 +41,7 @@ namespace HotelReservationSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Edit(int id)
         {
             var amenity = _repository.GetById(id);
@@ -54,7 +54,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Edit(Amenity amenity)
         {
             if (!ModelState.IsValid)
@@ -66,7 +66,7 @@ namespace HotelReservationSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Delete(int id)
         {
             var amenity = _repository.GetById(id);
@@ -79,7 +79,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult DeleteConfirmed(int id)
         {
             var amenity = _repository.GetById(id);

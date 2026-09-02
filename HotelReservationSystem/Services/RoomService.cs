@@ -62,9 +62,9 @@ namespace HotelReservationSystem.Services
         }
 
         public bool Update(
-            Room room,
-            List<int> amenityIds,
-            int userId)
+    Room room,
+    List<int> amenityIds,
+    int userId)
         {
             var existingRoom = _roomRepository.GetById(room.Id);
 
@@ -86,20 +86,20 @@ namespace HotelReservationSystem.Services
             existingRoom.LastModifiedByUserId = userId;
             existingRoom.LastModifiedAt = DateTime.UtcNow;
 
-            _context.RoomAmenities.RemoveRange(
-                existingRoom.RoomAmenities);
+            var oldAmenities = existingRoom.RoomAmenities.ToList();
+
+            _context.RoomAmenities.RemoveRange(oldAmenities);
 
             foreach (var amenityId in amenityIds.Distinct())
             {
                 _context.RoomAmenities.Add(new RoomAmenity
                 {
-                    RoomId = room.Id,
+                    RoomId = existingRoom.Id,
                     AmenityId = amenityId
                 });
             }
 
-            _roomRepository.Update(existingRoom);
-            _roomRepository.Save();
+            _context.SaveChanges();
 
             return true;
         }

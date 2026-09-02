@@ -1,4 +1,5 @@
 using HotelReservationSystem.Data;
+using HotelReservationSystem.Enums;
 using HotelReservationSystem.Interfaces;
 using HotelReservationSystem.Models;
 using HotelReservationSystem.Models.Entities;
@@ -7,6 +8,10 @@ using HotelReservationSystem.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+//using HotelReservationSystem.Data;
+//using HotelReservationSystem.Models.Entities;
+//using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +46,34 @@ builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
 
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<HotelDbContext>();
+
+    if (!context.Users.Any(u => u.Role == UserRole.Manager))
+    {
+        var passwordHasher = new PasswordHasher<User>();
+
+        var manager = new User
+        {
+            FullName = "Hotel Manager",
+            Email = "manager@hotel.com",
+            Role = UserRole.Manager,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        manager.PasswordHash = passwordHasher.HashPassword(
+            manager,
+            "Manager@123"
+        );
+
+        context.Users.Add(manager);
+        context.SaveChanges();
+    }
+}
 
 if (!app.Environment.IsDevelopment())
 {

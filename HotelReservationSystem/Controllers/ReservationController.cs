@@ -7,12 +7,12 @@ using System.Security.Claims;
 namespace HotelReservationSystem.Controllers
 {
     [Authorize(Roles = "Guest")]
-    public class ReservationsController : Controller
+    public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
         private readonly IGuestRepository _guestRepository;
 
-        public ReservationsController(IReservationService reservationService, IGuestRepository guestRepository)
+        public ReservationController(IReservationService reservationService, IGuestRepository guestRepository)
         {
             _reservationService = reservationService;
             _guestRepository = guestRepository;

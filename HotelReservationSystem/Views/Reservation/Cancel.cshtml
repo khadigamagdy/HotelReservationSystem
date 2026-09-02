@@ -14,7 +14,7 @@
                     Room @Model.Room.RoomNumber (@Model.CheckInDate.ToShortDateString() - @Model.CheckOutDate.ToShortDateString())?
                 </p>
 
-                <form asp-controller="Reservations" asp-action="Cancel" asp-route-id="@Model.Id" method="post">
+                <form asp-controller="Reservation" asp-action="Cancel" asp-route-id="@Model.Id" method="post">
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-danger">Yes, cancel my reservation</button>
                         <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">No, go back</a>

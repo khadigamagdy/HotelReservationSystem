@@ -54,6 +54,29 @@ namespace HotelReservationSystem.Services
             return AuthResult.Ok(user);
         }
 
+        public async Task<AuthResult> RegisterReceptionistAsync(CreateStaffViewModel model, int createdByUserId)
+        {
+            if (await _userRepository.EmailExistsAsync(model.Email))
+                return AuthResult.Fail("This email is already registered.");
+
+            var user = new User
+            {
+                FullName = model.FullName,
+                Email = model.Email,
+                Role = UserRole.Receptionist,
+                CreatedByUserId = createdByUserId,   // ties it back to the Manager who created it
+                CreatedAt = DateTime.UtcNow
+            };
+
+            user.PasswordHash = _passwordHasher.HashPassword(user, model.Password);
+
+            await _userRepository.AddAsync(user);
+            await _userRepository.SaveChangesAsync();
+
+            return AuthResult.Ok(user);
+        }
+
+
         public async Task<User?> ValidateCredentialsAsync(LoginViewModel model)
         {
             var user = await _userRepository.GetByEmailAsync(model.Email);

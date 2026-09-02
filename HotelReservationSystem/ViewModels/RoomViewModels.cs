@@ -2,7 +2,7 @@
 using HotelReservationSystem.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelReservationSystem.Models.ViewModels
+namespace HotelReservationSystem.ViewModels
 {
     public class RoomCreateViewModel
     {

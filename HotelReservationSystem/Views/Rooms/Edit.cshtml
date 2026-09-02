@@ -1,4 +1,4 @@
-﻿@model HotelReservationSystem.Models.Entities.Room
+﻿@model HotelReservationSystem.ViewModels.RoomEditViewModel
 
 @{
     ViewData["Title"] = "Edit Room";
@@ -6,45 +6,110 @@
 
 <h1>Edit Room</h1>
 
-<h4>Room</h4>
 <hr />
 
 <div class="row">
     <div class="col-md-6">
 
-        ```
         <form asp-action="Edit" method="post">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"></div>
 
             <input type="hidden" asp-for="Id" />
 
-            <div class="form-group mb-3">
-                <label asp-for="RoomNumber" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="RoomNumber" class="form-label"></label>
                 <input asp-for="RoomNumber" class="form-control" />
-                <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                <span asp-validation-for="RoomNumber"
+                      class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="FloorNumber" class="form-label"></label>
+                <input asp-for="FloorNumber"
+                       class="form-control"
+                       type="number" />
+                <span asp-validation-for="FloorNumber"
+                      class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <div class="mb-3">
+                <label asp-for="RoomTypeId" class="form-label">
+                    Room Type
+                </label>
+
+                <select asp-for="RoomTypeId"
+                        class="form-select">
+
+                    <option value="">-- Select Room Type --</option>
+
+                    @foreach (var type in Model.RoomTypes)
+                    {
+                        <option value="@type.Id">
+                            @type.Name
+                        </option>
+                    }
+
+                </select>
+
+                <span asp-validation-for="RoomTypeId"
+                      class="text-danger"></span>
             </div>
+
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"></label>
+
+                <select asp-for="Status"
+                        class="form-select">
+
+                    @foreach (var status in Enum.GetValues<HotelReservationSystem.Enums.RoomStatus>())
+                    {
+                        <option value="@status">
+                            @status
+                        </option>
+                    }
+
+                </select>
+
+                <span asp-validation-for="Status"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Amenities</label>
+
+                @foreach (var amenity in Model.Amenities)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="AmenityIds"
+                               value="@amenity.Id"
+                        @(Model.AmenityIds.Contains(amenity.Id) ? "checked" : "") />
+
+                        <label class="form-check-label">
+                            @amenity.Name
+                        </label>
+                    </div>
+                }
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Save Changes
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Cancel
+            </a>
 
         </form>
 
     </div>
-    ```
-
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

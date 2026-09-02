@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelReservationSystem.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class RoomTypesController : Controller
     {
         private readonly IRoomTypeService _service;
@@ -21,7 +21,7 @@ namespace HotelReservationSystem.Controllers
             return View(roomTypes);
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Create()
         {
             return View();
@@ -29,7 +29,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Create(RoomType roomType)
         {
             if (!ModelState.IsValid)
@@ -40,7 +40,7 @@ namespace HotelReservationSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Edit(int id)
         {
             var roomType = _service.GetById(id);
@@ -53,7 +53,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Edit(RoomType roomType)
         {
             if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace HotelReservationSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult Delete(int id)
         {
             var roomType = _service.GetById(id);
@@ -77,7 +77,7 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult DeleteConfirmed(int id)
         {
             _service.Delete(id);

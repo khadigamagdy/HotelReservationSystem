@@ -1,14 +1,14 @@
 ﻿using HotelReservationSystem.Data;
 using HotelReservationSystem.Models.Entities;
 using HotelReservationSystem.Interfaces;
-using HotelReservationSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HotelReservationSystem.ViewModels;
 
 namespace HotelReservationSystem.Controllers
 {
     
-        //[Authorize]
+        [Authorize]
         public class RoomsController : Controller
         {
             private readonly IRoomService _roomService;
@@ -39,7 +39,7 @@ namespace HotelReservationSystem.Controllers
                 return View(room);
             }
 
-            //[Authorize(Roles = "Manager")]
+            [Authorize(Roles = "Manager")]
             public IActionResult Create()
             {
                 var vm = new RoomCreateViewModel
@@ -53,7 +53,7 @@ namespace HotelReservationSystem.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            //[Authorize(Roles = "Manager")]
+            [Authorize(Roles = "Manager")]
             public IActionResult Create(RoomCreateViewModel vm)
             {
                 if (!ModelState.IsValid)
@@ -64,10 +64,17 @@ namespace HotelReservationSystem.Controllers
                     return View(vm);
                 }
 
-                // Temporary until Member 1 finishes authentication.
-                int userId = 1;
+            // Temporary until Member 1 finishes authentication.
+            //int userId = 1;
 
-                var room = new Room
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var room = new Room
                 {
                     RoomNumber = vm.RoomNumber,
                     FloorNumber = vm.FloorNumber,
@@ -94,8 +101,8 @@ namespace HotelReservationSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            //[Authorize(Roles = "Manager")]
-            public IActionResult Edit(int id)
+            [Authorize(Roles = "Manager")]
+        public IActionResult Edit(int id)
             {
                 var room = _roomService.GetById(id);
 
@@ -122,8 +129,8 @@ namespace HotelReservationSystem.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            //[Authorize(Roles = "Manager")]
-            public IActionResult Edit(RoomEditViewModel vm)
+            [Authorize(Roles = "Manager")]
+        public IActionResult Edit(RoomEditViewModel vm)
             {
                 if (!ModelState.IsValid)
                 {
@@ -133,9 +140,16 @@ namespace HotelReservationSystem.Controllers
                     return View(vm);
                 }
 
-                int userId = 1;
+            var userIdClaim = User.FindFirst(
+                System.Security.Claims.ClaimTypes.NameIdentifier);
 
-                var room = new Room
+            if (userIdClaim == null)
+                return Unauthorized();
+
+            int userId = int.Parse(userIdClaim.Value);
+
+
+            var room = new Room
                 {
                     Id = vm.Id,
                     RoomNumber = vm.RoomNumber,

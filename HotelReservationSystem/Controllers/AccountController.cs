@@ -106,6 +106,36 @@ namespace HotelReservationSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult AccessDenied() => View();
+        public IActionResult AccessDenied() => View(AccessDenied);
+
+        [HttpGet]
+        [Authorize(Roles = "Manager")]
+        public IActionResult CreateReceptionist() => View();
+
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateReceptionist(CreateStaffViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var managerId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var result = await _authService.RegisterReceptionistAsync(model, managerId);
+
+            if (!result.Success)
+            {
+                ModelState.AddModelError(string.Empty, result.ErrorMessage!);
+                return View(model);
+            }
+
+            TempData["SuccessMessage"] = "Receptionist account created.";
+            return RedirectToAction(nameof(CreateReceptionist));
+        }
+
+
+
+
     }
+
 }

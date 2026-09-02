@@ -8,5 +8,6 @@ namespace HotelReservationSystem.Interfaces
     {
         Task<AuthResult> RegisterGuestAsync(RegisterViewModel model);
         Task<User?> ValidateCredentialsAsync(LoginViewModel model);
+        Task<AuthResult> RegisterReceptionistAsync(CreateStaffViewModel model, int createdByUserId);
     }
 }

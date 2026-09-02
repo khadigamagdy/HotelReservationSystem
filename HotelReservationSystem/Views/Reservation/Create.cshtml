@@ -25,7 +25,7 @@
                     <dd class="col-sm-7">@Model.CheckOutDate.ToShortDateString()</dd>
                 </dl>
 
-                <form asp-controller="Reservations" asp-action="Create" method="post">
+                <form asp-controller="Reservation" asp-action="Create" method="post">
                     <input type="hidden" asp-for="RoomId" />
                     <input type="hidden" asp-for="RoomNumber" />
                     <input type="hidden" asp-for="RoomTypeName" />
