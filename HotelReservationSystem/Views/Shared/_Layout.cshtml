@@ -90,6 +90,24 @@
 
                         </li>
 
+                        <!-- Rooms (hidden for Guests) -->
+                        @if (!User.IsInRole("Guest"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Rooms"
+                                   asp-action="Index">
+
+                                    <i class="bi bi-door-open"></i>
+
+                                    Rooms
+
+                                </a>
+
+                            </li>
+                        }
+
 
                         <!-- Manager Navigation -->
                         @if (User.IsInRole("Manager"))
@@ -208,6 +226,41 @@
 
                             </li>
 
+                        }
+
+                        <!-- Guest-specific links -->
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            if (User.IsInRole("Guest"))
+                            {
+                                <li class="nav-item">
+
+                                    <a class="nav-link"
+                                       asp-controller="Reservation"
+                                       asp-action="Search">
+
+                                        <i class="bi bi-plus-circle"></i>
+
+                                        Create Reservation
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a class="nav-link"
+                                       asp-controller="Reservation"
+                                       asp-action="MyReservations">
+
+                                        <i class="bi bi-calendar-check"></i>
+
+                                        My Reservations
+
+                                    </a>
+
+                                </li>
+                            }
                         }
 
                     </ul>
