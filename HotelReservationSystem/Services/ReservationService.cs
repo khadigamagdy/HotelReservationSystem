@@ -91,6 +91,12 @@ namespace HotelReservationSystem.Services
                 reservation.BookingStatus == BookingStatus.CheckedOut)
                 return ReservationResult.Fail("This reservation cannot be cancelled after check-in.");
 
+            // Prevent cancellations within 24 hours of check-in (including the day before)
+            var today = DateTime.UtcNow.Date;
+            var cutoff = reservation.CheckInDate.Date.AddDays(-1);
+            if (today >= cutoff)
+                return ReservationResult.Fail("Reservations cannot be cancelled within 24 hours of check-in.");
+
             reservation.BookingStatus = BookingStatus.Cancelled;
             await _reservationRepository.SaveChangesAsync();
 
